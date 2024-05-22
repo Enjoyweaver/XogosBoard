@@ -4,10 +4,9 @@ import { ComponentProps, ReactNode } from "react";
 import { auth } from "@/auth";
 import { DASHBOARD_URL } from "@/constants";
 import { MarketingLayout } from "@/layouts/Marketing";
-// import { LinkButton } from "@/primitives/Button";
+import { LinkButton } from "@/primitives/Button";
 import { Container } from "@/primitives/Container";
 import styles from "./page.module.css";
-import Link from "next/link";
 
 interface FeatureProps extends Omit<ComponentProps<"div">, "title"> {
   description: ReactNode;
@@ -35,18 +34,17 @@ export default async function Index() {
     <MarketingLayout>
       <Container className={styles.section}>
         <div className={styles.heroInfo}>
-          <h1 className={styles.heroTitle}>
-            Xogos Gaming <br></br>Board of Directors
-          </h1>
+          <h1 className={styles.heroTitle}>Xogos Gaming</h1>
+          <h1 className={styles.heroTitle2}>Board of Directors</h1>
           <p className={styles.heroLead}>
             Where the board of directors collaborate and share relevant
             information with the public.
           </p>
         </div>
         <div className={styles.heroActions}>
-          <Link href="/boardmembers" target="_blank">
+          <LinkButton href="/boardmembers" target="_blank">
             Meet the Board of Directors
-          </Link>
+          </LinkButton>
         </div>
       </Container>
       <Container className={styles.section}>
