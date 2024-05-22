@@ -110,6 +110,9 @@ dependencies:
   y-prosemirror:
     specifier: ^1.2.5
     version: 1.2.5(prosemirror-model@1.21.0)(prosemirror-state@1.4.3)(prosemirror-view@1.33.6)(y-protocols@1.0.6)(yjs@13.6.15)
+  y-protocols:
+    specifier: ^1.0.6
+    version: 1.0.6(yjs@13.6.15)
   yjs:
     specifier: ^13.6.11
     version: 13.6.15
