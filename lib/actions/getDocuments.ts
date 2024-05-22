@@ -43,6 +43,8 @@ export async function getDocuments({
   limit = 20,
 }: GetDocumentsProps) {
   // Build getRooms arguments
+  const metadata: RoomInfo["metadata"] = {};
+
   let getRoomsOptions: Parameters<typeof liveblocks.getRooms>[0] = {
     limit,
     metadata: {}, // Initialize an empty object
