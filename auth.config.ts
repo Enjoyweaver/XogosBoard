@@ -1,6 +1,5 @@
 import type { NextAuthConfig } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import Auth0Provider from "next-auth/providers/auth0";
 
 export const authConfig: NextAuthConfig = {
   // import CredentialsProvider from "next-auth/providers/credentials";

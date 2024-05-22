@@ -33,4 +33,32 @@ export const groups: Group[] = [
     id: "compliance & regulations committee",
     name: "Compliance & Regulations Committee",
   },
+  {
+    id: "michaels notes",
+    name: "Michael's Notes",
+  },
+  {
+    id: "zacks notes",
+    name: "Zack's Notes",
+  },
+  {
+    id: "bradens notes",
+    name: "Braden's Notes",
+  },
+  {
+    id: "terrences notes",
+    name: "Terrance's Notes",
+  },
+  {
+    id: "kevins notes",
+    name: "Kevin's Notes",
+  },
+  {
+    id: "mckaylas notes",
+    name: "McKayla's Notes",
+  },
+  {
+    id: "matts notes",
+    name: "Matt's Notes",
+  },
 ];
