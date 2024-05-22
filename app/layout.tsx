@@ -23,10 +23,6 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="en">
-      <head>
-        <title>Xogos Board</title>
-        <link rel="icon" href="/app/logo.jpg" type="image/jpeg" />
-      </head>
       <body className={inter.className}>
         <Providers session={session}>{children}</Providers>
       </body>
