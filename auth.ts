@@ -7,7 +7,7 @@ import { getUser } from "@/lib/database/getUser";
 // `create-liveblocks-app` generates a value for you, but there's a
 // fallback value in case you don't use the installer.
 export const NEXTAUTH_SECRET =
-  process.env.NEXTAUTH_SECRET || "TVwwp1UAVS6B2lEj017rtVwVRK0uHkRG+2R1SpfJWzA=";
+  process.env.NEXTAUTH_SECRET || "p49RDzU36fidumaF7imGnzyhRSPWoffNjDOleU77SM4=";
 
 export const {
   handlers: { GET, POST },

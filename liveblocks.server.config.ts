@@ -31,6 +31,20 @@ Follow the full starter kit guide on https://liveblocks.io/docs/guides/nextjs-st
 (async () => {
   const providers = await getProviders();
 
+  if (providers?.google) {
+    if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+      console.log(`Your Google secrets are missing from .env.local
+
+Example .env.local file:
+GOOGLE_CLIENT_ID=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+GOOGLE_CLIENT_SECRET=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+Follow the full starter kit guide to learn how to get them:
+https://liveblocks.io/docs/guides/nextjs-starter-kit#google-authentication
+      `);
+    }
+  }
+
   if (providers?.github) {
     if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
       console.log(`Your GitHub secrets are missing from .env.local

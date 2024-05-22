@@ -6,59 +6,59 @@ import { Group } from "@/types";
  */
 export const groups: Group[] = [
   {
-    id: "board member",
+    id: "board_member",
     name: "Board Member",
   },
   {
-    id: "advisory board",
+    id: "advisory_board",
     name: "Advisory Board",
   },
   {
-    id: "communications committee",
+    id: "communications_committee",
     name: "Communications Committee",
   },
   {
-    id: "audit committee",
+    id: "audit_committee",
     name: "Audit Committee",
   },
   {
-    id: "education committee",
+    id: "education_committee",
     name: "Education Committee",
   },
   {
-    id: "fundraising committee",
+    id: "fundraising_committee",
     name: "Fundraising Committee",
   },
   {
-    id: "compliance & regulations committee",
+    id: "compliance_&_regulations_committee",
     name: "Compliance & Regulations Committee",
   },
   {
-    id: "michaels notes",
+    id: "michaels_notes",
     name: "Michael's Notes",
   },
   {
-    id: "zacks notes",
+    id: "zacks_notes",
     name: "Zack's Notes",
   },
   {
-    id: "bradens notes",
+    id: "bradens_notes",
     name: "Braden's Notes",
   },
   {
-    id: "terrences notes",
+    id: "terrences_notes",
     name: "Terrance's Notes",
   },
   {
-    id: "kevins notes",
+    id: "kevins_notes",
     name: "Kevin's Notes",
   },
   {
-    id: "mckaylas notes",
+    id: "mckaylas_notes",
     name: "McKayla's Notes",
   },
   {
-    id: "matts notes",
+    id: "matts_notes",
     name: "Matt's Notes",
   },
 ];
