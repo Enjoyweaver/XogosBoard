@@ -43,16 +43,17 @@ export async function getDocuments({
   limit = 20,
 }: GetDocumentsProps) {
   // Build getRooms arguments
-  const metadata: RoomInfo["metadata"] = {};
-
-  if (documentType) {
-    metadata["type"] = documentType;
-  }
-
   let getRoomsOptions: Parameters<typeof liveblocks.getRooms>[0] = {
     limit,
-    metadata,
+    metadata: {}, // Initialize an empty object
   };
+
+  // Only add metadata if documentType is provided
+  if (documentType) {
+    getRoomsOptions.metadata = {
+      type: documentType,
+    };
+  }
 
   const draftGroupName = getDraftsGroupName(userId || "");
 
