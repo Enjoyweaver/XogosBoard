@@ -4,6 +4,8 @@ module.exports = {
     node: true,
   },
   extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
@@ -31,7 +33,7 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "react/no-unescaped-entities": "off",
-    "@next/next/no-page-custom-font": "off",
+    "@next/next/no-page-custom-font": "off", // Disable Next.js custom font rule
     "sort-imports": ["error", { ignoreDeclarationSort: true }],
     "import/default": "off",
     "import/export": "warn",
