@@ -68,7 +68,7 @@ export default async function Index() {
                 in addition to being a form of payment.
               </>
             }
-            title="Cryptocurrency"
+            title="Integrating Cryptocurrency"
           />
           <Feature
             description={
@@ -96,20 +96,21 @@ export default async function Index() {
           <Feature
             description={
               <>
-                Integrating cryptocurrency into our platform in several aspects,
-                in addition to being a form of payment.
+                Utlizing cryptocurrency in ways that advance our understanding
+                and comprehension of the technology, while onboarding more
+                users.
               </>
             }
-            title="Cryptocurrency"
+            title="Cryptocurrency Adoption"
           />
           <Feature
             description={
               <>
-                Understanding legal and regulatory compliance, and ensuring our
-                practices are not only compliant, but lead by example.
+                Creating a product that allows us to advocate for cryptocurrency
+                adoption, and especially within the education sector.
               </>
             }
-            title="Legal and Regulatory Compliance"
+            title="Education and Crypto Lobbying"
           />
         </div>
       </Container>

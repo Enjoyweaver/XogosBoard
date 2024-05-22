@@ -39,12 +39,6 @@ const BoardMembers: React.FC = () => {
             operations, ensuring compliance with statutory obligations, and
             advising on legal matters to protect the company’s interests.
           </p>
-          <p>Role: Legal</p>
-          <p>
-            Responsibilities: Oversees all legal aspects of the company’s
-            operations, ensures compliance with statutory obligations, and
-            advises on legal matters to protect the company’s interests.
-          </p>
         </div>
         <div className={styles.memberImage}>
           <img src="/app/icon.jpg" alt="Legal - Braden Perry" />
@@ -59,13 +53,6 @@ const BoardMembers: React.FC = () => {
             transactions within the gaming platforms, and cryptocurrency
             disbursements outside the platform, ensuring security and compliance
             with financial regulations.
-          </p>
-          <p>Role: Crypto & Exchanges</p>
-          <p>
-            Responsibilities: Oversees the integration and management of digital
-            currency transactions within the gaming platforms, and
-            cryptocurrency disbursements outside the platform, ensuring security
-            and compliance with financial regulations.
           </p>
         </div>
         <div className={styles.memberImage}>
@@ -82,13 +69,6 @@ const BoardMembers: React.FC = () => {
             budgeting, and auditing. Sets financial projections and
             expectations.
           </p>
-          <p>Role: Accounting</p>
-          <p>
-            Responsibilities: Oversees the financial oversight of the company,
-            ensures accuracy in financial reports, advises the board on
-            financial planning, budgeting, and auditing. Sets financial
-            projections and expectations.
-          </p>
         </div>
         <div className={styles.memberImage}>
           <img src="/app/icon.jpg" alt="Accounting - Kevin Stursberg" />
@@ -103,13 +83,6 @@ const BoardMembers: React.FC = () => {
             insights into company operations, market conditions, and business
             strategies. Responsible for the day-to-day management of the company
             and executing the board’s vision and strategies.
-          </p>
-          <p>Role: External Relations and CEO</p>
-          <p>
-            Responsibilities: Holds a board seat and attends board meetings to
-            provide insights into company operations, market conditions, and
-            business strategies. Responsible for the day-to-day management of
-            the company and executing the board’s vision and strategies.
           </p>
         </div>
         <div className={styles.memberImage}>
@@ -129,13 +102,6 @@ const BoardMembers: React.FC = () => {
             and corresponding international bodies, as applicable to Xogos
             Gaming and advises accordingly.
           </p>
-          <p>Role: Compliance and Regulation</p>
-          <p>
-            Responsibilities: Oversees regulations set forth by the U.S.
-            Securities and Exchange Commission (SEC), the Financial Crimes
-            Enforcement Network (FinCEN), and corresponding international
-            bodies, as applicable to Xogos Gaming and advises accordingly.
-          </p>
         </div>
         <div className={styles.memberImage}>
           <img
@@ -152,12 +118,6 @@ const BoardMembers: React.FC = () => {
             Creates, oversees, and executes the strategy that advances the
             education of Xogos Gaming for the students, teachers, and also
             within the cryptocurrency industry.
-          </p>
-          <p>Role: Education</p>
-          <p>
-            Responsibilities: Creates, oversees, and executes the strategy that
-            advances the education of Xogos Gaming for the students, teachers,
-            and also within the cryptocurrency industry.
           </p>
         </div>
         <div className={styles.memberImage}>
