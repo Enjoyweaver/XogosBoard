@@ -10,7 +10,7 @@
 }
 
 .heroTitle {
-  max-width: 400px;
+  max-width: 500px;
   margin-bottom: var(--space-9);
   font-size: var(--size-4xl);
   font-weight: 800;

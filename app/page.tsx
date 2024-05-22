@@ -36,11 +36,11 @@ export default async function Index() {
       <Container className={styles.section}>
         <div className={styles.heroInfo}>
           <h1 className={styles.heroTitle}>
-            Kickstart your collaborative&nbsp;app
+            Xogos Gaming <br></br>Board of Directors
           </h1>
           <p className={styles.heroLead}>
-            Use the Liveblocks Starter Kit to build your document-based
-            collaborative app in&nbsp;minutes.
+            Where the board of directors collaborates and shares relevant
+            information with the public.
           </p>
         </div>
         <div className={styles.heroActions}>

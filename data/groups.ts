@@ -6,15 +6,31 @@ import { Group } from "@/types";
  */
 export const groups: Group[] = [
   {
-    id: "product",
-    name: "Product",
+    id: "board member",
+    name: "Board Member",
   },
   {
-    id: "engineering",
-    name: "Engineering",
+    id: "advisory board",
+    name: "Advisory Board",
   },
   {
-    id: "design",
-    name: "Design",
+    id: "communications committee",
+    name: "Communications Committee",
+  },
+  {
+    id: "audit committee",
+    name: "Audit Committee",
+  },
+  {
+    id: "education committee",
+    name: "Education Committee",
+  },
+  {
+    id: "fundraising committee",
+    name: "Fundraising Committee",
+  },
+  {
+    id: "compliance & regulations committee",
+    name: "Compliance & Regulations Committee",
   },
 ];
