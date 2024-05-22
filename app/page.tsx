@@ -7,6 +7,7 @@ import { MarketingLayout } from "@/layouts/Marketing";
 import { LinkButton } from "@/primitives/Button";
 import { Container } from "@/primitives/Container";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 interface FeatureProps extends Omit<ComponentProps<"div">, "title"> {
   description: ReactNode;
@@ -38,16 +39,12 @@ export default async function Index() {
             Xogos Gaming <br></br>Board of Directors
           </h1>
           <p className={styles.heroLead}>
-            Where the board of directors collaborates and shares relevant
+            Where the board of directors collaborate and share relevant
             information with the public.
           </p>
         </div>
         <div className={styles.heroActions}>
-          <LinkButton
-            href="https://liveblocks.io/docs/guides/nextjs-starter-kit"
-            target="_blank"
-            variant="secondary"
-          >
+          <LinkButton href="/boardmembers" target="_blank" variant="secondary">
             Meet the Board of Directors
           </LinkButton>
         </div>
@@ -58,7 +55,8 @@ export default async function Index() {
           <Feature
             description={
               <>
-                Create educational aids in the form of tools, guides, and games.
+                Create educational content in the form of tools, guides, and
+                games.
               </>
             }
             title="Education"
@@ -66,46 +64,52 @@ export default async function Index() {
           <Feature
             description={
               <>
-                Best practices followed, using a mixture of SSR and custom API
-                endpoints. Modify documents from both client and server.
+                Integrating cryptocurrency into our platform in several aspects,
+                in addition to being a form of payment.
               </>
             }
-            title="Next.js"
+            title="Cryptocurrency"
           />
           <Feature
             description={
               <>
-                Adjust our reusable interface & design system to fit your needs.
+                Understanding legal and regulatory compliance, and ensuring our
+                practices are not only compliant, but lead by example.
               </>
             }
-            title="User Interface"
+            title="Legal and Regulatory Compliance"
+          />
+        </div>
+      </Container>
+      <Container className={styles.section}>
+        <h2 className={styles.sectionTitle}>Current and Future Initiatives</h2>
+        <div className={styles.featuresGrid}>
+          <Feature
+            description={
+              <>
+                Provide digital games that combine blockchain technology that
+                pick up where the teach left off.
+              </>
+            }
+            title="Education Games"
           />
           <Feature
             description={
               <>
-                All custom client and server functions are fully typed, and easy
-                to update.
+                Integrating cryptocurrency into our platform in several aspects,
+                in addition to being a form of payment.
               </>
             }
-            title="TypeScript"
+            title="Cryptocurrency"
           />
           <Feature
             description={
               <>
-                Complete authentication, compatible with any NextAuth provider,
-                including GitHub, Google, Auth0, and many more.
+                Understanding legal and regulatory compliance, and ensuring our
+                practices are not only compliant, but lead by example.
               </>
             }
-            title="NextAuth.js"
-          />
-          <Feature
-            description={
-              <>
-                See data update live using the SWR (state-while-revalidate)
-                library.
-              </>
-            }
-            title="SWR"
+            title="Legal and Regulatory Compliance"
           />
         </div>
       </Container>

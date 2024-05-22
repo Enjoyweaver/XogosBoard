@@ -10,6 +10,10 @@ export const groups: Group[] = [
     name: "Board Member",
   },
   {
+    id: "historical_agendas",
+    name: "Historical Agendas",
+  },
+  {
     id: "advisory_board",
     name: "Advisory Board",
   },
