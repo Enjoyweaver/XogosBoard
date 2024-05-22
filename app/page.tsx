@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { redirect } from "next/navigation";
 import { ComponentProps, ReactNode } from "react";
-import { auth, signIn } from "@/auth";
+import { auth } from "@/auth";
 import { DASHBOARD_URL } from "@/constants";
 import { MarketingLayout } from "@/layouts/Marketing";
 import { LinkButton } from "@/primitives/Button";
