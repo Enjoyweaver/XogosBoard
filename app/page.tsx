@@ -4,7 +4,7 @@ import { ComponentProps, ReactNode } from "react";
 import { auth } from "@/auth";
 import { DASHBOARD_URL } from "@/constants";
 import { MarketingLayout } from "@/layouts/Marketing";
-import { LinkButton } from "@/primitives/Button";
+// import { LinkButton } from "@/primitives/Button";
 import { Container } from "@/primitives/Container";
 import styles from "./page.module.css";
 import Link from "next/link";
@@ -44,9 +44,9 @@ export default async function Index() {
           </p>
         </div>
         <div className={styles.heroActions}>
-          <LinkButton href="/boardmembers" target="_blank" variant="secondary">
+          <Link href="/boardmembers" target="_blank">
             Meet the Board of Directors
-          </LinkButton>
+          </Link>
         </div>
       </Container>
       <Container className={styles.section}>
