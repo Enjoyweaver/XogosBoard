@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { ComponentProps } from "react";
 import styles from "./Logo.module.css";
 import Image from "next/image";
-import icon from "@/app/banner.jpg"; // Make sure the path is correct
+import icon from "@/app/icon.jpg"; // Make sure the path is correct
 
 export function Logo({ className, ...props }: ComponentProps<"div">) {
   return (

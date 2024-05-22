@@ -25,7 +25,7 @@ export default async function RootLayout({
     <html lang="en">
       <head>
         <title>Xogos Board</title>
-        <link rel="icon" href="/app/icon.jpg" type="image/jpeg" />
+        <link rel="icon" href="/app/logo.jpg" type="image/jpeg" />
       </head>
       <body className={inter.className}>
         <Providers session={session}>{children}</Providers>
