@@ -57,11 +57,11 @@
 
 .header2 .role {
   font-weight: bold;
-  color: #333;
+  color: var(--color-text);
 }
 
 .header2 .name {
-  font-weight: normal;
+  font-weight: bold;
   color: #777;
 }
 
