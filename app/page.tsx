@@ -42,7 +42,7 @@ export default async function Index() {
           </p>
         </div>
         <div className={styles.heroActions}>
-          <LinkButton href="/boardmembers" target="_blank">
+          <LinkButton href="/boardmembers">
             Meet the Board of Directors
           </LinkButton>
         </div>
