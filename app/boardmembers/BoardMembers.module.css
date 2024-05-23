@@ -49,6 +49,16 @@
   color: #444;
 }
 
+.header2 .role {
+  font-weight: bold;
+  color: #333;
+}
+
+.header2 .name {
+  font-weight: normal;
+  color: #777;
+}
+
 .p {
   margin-bottom: 10px;
   font-size: 1rem;

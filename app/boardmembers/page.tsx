@@ -11,7 +11,10 @@ const BoardMembers: React.FC = () => {
         {/* President */}
         <div className={styles.member}>
           <div className={styles.memberInfo}>
-            <h3 className={styles.header2}>President - Michael Weaver</h3>
+            <h3 className={styles.header2}>
+              <span className={styles.role}>President</span> -{" "}
+              <span className={styles.name}>Michael Weaver</span>
+            </h3>
             <p>
               The President leads the board in carrying out its strategy,
               presides over meetings, set meeting agendas in collaboration with
@@ -20,7 +23,10 @@ const BoardMembers: React.FC = () => {
               the board and the CEO of Xogos Gaming.
             </p>
             <br></br>
-            <p>Role: Insurance and Liabilities</p>
+            <h3 className={styles.header2}>
+              <span className={styles.role}> Role</span> -{" "}
+              <span className={styles.name}>Insurance and Risk</span>
+            </h3>
             <p>
               Responsibilities: Oversees risks associated with the company’s
               operations, ensuring appropriate insurance coverage is maintained
@@ -36,7 +42,8 @@ const BoardMembers: React.FC = () => {
         <div className={styles.member}>
           <div className={styles.memberInfo}>
             <h3 className={styles.header2}>
-              External Relations and CEO - Zack Edwards (CEO)
+              <span className={styles.role}> CEO</span> -{" "}
+              <span className={styles.name}>Zack Edwards (CEO)</span>
             </h3>
             <p>
               The CEO holds a board seat and attends board meetings to provide
@@ -46,16 +53,16 @@ const BoardMembers: React.FC = () => {
             </p>
           </div>
           <div className={styles.memberImage}>
-            <img
-              src="/icon.jpg"
-              alt="External Relations and CEO - Zack Edwards (CEO)"
-            />
+            <img src="/icon.jpg" alt=" CEO - Zack Edwards (CEO)" />
           </div>
         </div>
         {/* Legal */}
         <div className={styles.member}>
           <div className={styles.memberInfo}>
-            <h3 className={styles.header2}>Legal - Braden Perry</h3>
+            <h3 className={styles.header2}>
+              <span className={styles.role}>Legal</span> -{" "}
+              <span className={styles.name}>Braden Perry</span>
+            </h3>
             <p>
               Responsible for overseeing all legal aspects of the company’s
               operations, ensuring compliance with statutory obligations, and
@@ -71,7 +78,8 @@ const BoardMembers: React.FC = () => {
         <div className={styles.member}>
           <div className={styles.memberInfo}>
             <h3 className={styles.header2}>
-              Crypto & Exchanges - Matt La Rose
+              <span className={styles.role}>Crypto & Exchanges</span> -{" "}
+              <span className={styles.name}>Matt La Rose</span>
             </h3>
             <p>
               Oversees the integration and management of digital currency
@@ -88,7 +96,10 @@ const BoardMembers: React.FC = () => {
         {/* Accounting */}
         <div className={styles.member}>
           <div className={styles.memberInfo}>
-            <h3 className={styles.header2}>Accounting - Kevin Stursberg</h3>
+            <h3 className={styles.header2}>
+              <span className={styles.role}>Accounting</span> -{" "}
+              <span className={styles.name}>Kevin Stursberg</span>
+            </h3>
             <p>
               Oversees the financial oversight of the company, ensures accuracy
               in financial reports, and advises the board on financial planning,
@@ -105,7 +116,8 @@ const BoardMembers: React.FC = () => {
         <div className={styles.member}>
           <div className={styles.memberInfo}>
             <h3 className={styles.header2}>
-              Compliance and Regulation – Terrance Gatsby
+              <span className={styles.role}>Compliance and Regulation</span> –{" "}
+              <span className={styles.name}>Terrance Gatsby</span>
             </h3>
             <p>
               Oversees regulations set forth by the U.S. Securities and Exchange
@@ -125,7 +137,10 @@ const BoardMembers: React.FC = () => {
         {/* Education */}
         <div className={styles.member}>
           <div className={styles.memberInfo}>
-            <h3 className={styles.header2}>Education – McKayla</h3>
+            <h3 className={styles.header2}>
+              <span className={styles.role}>Education</span> –{" "}
+              <span className={styles.name}>McKayla</span>
+            </h3>
             <p>
               Creates, oversees, and executes the strategy that advances the
               education of Xogos Gaming for the students, teachers, and also
