@@ -7,7 +7,16 @@ const BoardMembers: React.FC = () => {
     <MarketingLayout>
       <div className={styles.boardMembers}>
         <h2 className={styles.header}>Board of Directors</h2>
-
+        <p className={styles.content}>
+          The Xogos Gaming Board of Directors is composed of 7 roles that each
+          serve a purpose in order to comprehensively bring expertise and
+          guidance to the company. Those roles are Insurance and Risk, CEO,
+          Legal, Crypto & Exchanges, Accounting, Compliance & Regulation, and
+          Education. Each role is filled by a member of the board who has the
+          expertise and experience for their role and understands they have not
+          only the ability, but are encouraged to make decisions that actively
+          advance Xogos Gaming and the industries it is in.
+        </p>
         {/* President */}
         <div className={styles.member}>
           <div className={styles.memberInfo}>
@@ -33,11 +42,26 @@ const BoardMembers: React.FC = () => {
               and liabilities are managed in compliance with legal and
               regulatory standards.
             </p>
+            <div className={styles.socialLinks}>
+              <a
+                href="https://twitter.com/enjoy_weaver"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.hiddenLink}
+              >
+                <img
+                  src="/twitter-icon.png"
+                  alt="Twitter"
+                  className={styles.hiddenLink}
+                />
+              </a>
+            </div>
           </div>
           <div className={styles.memberImage}>
             <img src="/weaver.jpg" alt="President - Michael Weaver" />
           </div>
         </div>
+
         {/* External Relations and CEO */}
         <div className={styles.member}>
           <div className={styles.memberInfo}>
@@ -51,11 +75,26 @@ const BoardMembers: React.FC = () => {
               strategies. Responsible for the day-to-day management of the
               company and executing the board’s vision and strategies.
             </p>
+            <div className={styles.socialLinks}>
+              <a
+                href="https://twitter.com/enjoy_weaver"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.hiddenLink}
+              >
+                <img
+                  src="/twitter-icon.png"
+                  alt="Twitter"
+                  className={styles.hiddenLink}
+                />
+              </a>
+            </div>
           </div>
           <div className={styles.memberImage}>
             <img src="/icon.jpg" alt=" CEO - Zack Edwards (CEO)" />
           </div>
         </div>
+
         {/* Legal */}
         <div className={styles.member}>
           <div className={styles.memberInfo}>
@@ -68,6 +107,20 @@ const BoardMembers: React.FC = () => {
               operations, ensuring compliance with statutory obligations, and
               advising on legal matters to protect the company’s interests.
             </p>
+            <div className={styles.socialLinks}>
+              <a
+                href="https://twitter.com/enjoy_weaver"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.hiddenLink}
+              >
+                <img
+                  src="/twitter-icon.png"
+                  alt="Twitter"
+                  className={styles.hiddenLink}
+                />
+              </a>
+            </div>
           </div>
           <div className={styles.memberImage}>
             <img src="/icon.jpg" alt="Legal - Braden Perry" />
@@ -87,6 +140,20 @@ const BoardMembers: React.FC = () => {
               disbursements outside the platform, ensuring security and
               compliance with financial regulations.
             </p>
+            <div className={styles.socialLinks}>
+              <a
+                href="https://twitter.com/enjoy_weaver"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.hiddenLink}
+              >
+                <img
+                  src="/twitter-icon.png"
+                  alt="Twitter"
+                  className={styles.hiddenLink}
+                />
+              </a>
+            </div>
           </div>
           <div className={styles.memberImage}>
             <img src="/icon.jpg" alt="Crypto & Exchanges - Matt La Rose" />
@@ -106,6 +173,20 @@ const BoardMembers: React.FC = () => {
               budgeting, and auditing. Sets financial projections and
               expectations.
             </p>
+            <div className={styles.socialLinks}>
+              <a
+                href="https://twitter.com/enjoy_weaver"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.hiddenLink}
+              >
+                <img
+                  src="/twitter-icon.png"
+                  alt="Twitter"
+                  className={styles.hiddenLink}
+                />
+              </a>
+            </div>
           </div>
           <div className={styles.memberImage}>
             <img src="/icon.jpg" alt="Accounting - Kevin Stursberg" />
@@ -125,6 +206,20 @@ const BoardMembers: React.FC = () => {
               (FinCEN), and corresponding international bodies, as applicable to
               Xogos Gaming and advises accordingly.
             </p>
+            <div className={styles.socialLinks}>
+              <a
+                href="https://twitter.com/enjoy_weaver"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.hiddenLink}
+              >
+                <img
+                  src="/twitter-icon.png"
+                  alt="Twitter"
+                  className={styles.hiddenLink}
+                />
+              </a>
+            </div>
           </div>
           <div className={styles.memberImage}>
             <img
@@ -146,6 +241,20 @@ const BoardMembers: React.FC = () => {
               education of Xogos Gaming for the students, teachers, and also
               within the cryptocurrency industry.
             </p>
+            <div className={styles.socialLinks}>
+              <a
+                href="https://twitter.com/enjoy_weaver"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.hiddenLink}
+              >
+                <img
+                  src="/twitter-icon.png"
+                  alt="Twitter"
+                  className={styles.hiddenLink}
+                />
+              </a>
+            </div>
           </div>
           <div className={styles.memberImage}>
             <img src="/icon.jpg" alt="Education – McKayla" />

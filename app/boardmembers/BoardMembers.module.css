@@ -1,3 +1,9 @@
+/* BoardMembers.module.css */
+
+.hiddenLink {
+  display: none; /* Hide the links visually */
+}
+
 .boardMembers {
   max-width: 1200px;
   margin: 0 auto;
@@ -17,7 +23,7 @@
   align-items: center;
   margin-bottom: 40px;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: var(--color-surface-elevated);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -59,10 +65,37 @@
   color: #777;
 }
 
+.content {
+  margin-bottom: 20px;
+  font-weight: normal;
+  color: #777;
+  margin-left: 100px;
+  margin-right: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
 .p {
   margin-bottom: 10px;
   font-size: 1rem;
   color: #666;
+}
+
+.socialLinks {
+  margin-top: 10px;
+}
+
+.socialLinks a {
+  margin-right: 10px;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+}
+
+.socialLinks a img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 @media (max-width: 768px) {
