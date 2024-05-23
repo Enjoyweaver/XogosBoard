@@ -69,10 +69,10 @@
   margin-bottom: 20px;
   font-weight: normal;
   color: #777;
-  margin-left: 100px;
-  margin-right: 100px;
-  justify-content: center;
-  align-items: center;
+  padding: 20px;
+  text-align: justify;
+  max-width: 800px;
+  margin: 0 auto; /* Center the content horizontally */
 }
 
 .p {
@@ -115,5 +115,9 @@
   .memberImage img {
     width: 120px;
     height: 120px;
+  }
+
+  .content {
+    max-width: 600px; /* Adjust this value for narrower width on desktop */
   }
 }
