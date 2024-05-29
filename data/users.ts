@@ -63,6 +63,17 @@ export const users: Omit<User, "color">[] = [
     ],
   },
   {
+    id: "terrence@terrencegatsby.com",
+    name: "Terrance Gatsby",
+    avatar: "https://liveblocks.io/avatars/avatar-6.png",
+    groupIds: [
+      "board_member",
+      "compliance_&_regulations_committee",
+      "terrences_notes",
+      "historical_agendas",
+    ],
+  },
+  {
     id: "kevin@darienadvisors.io",
     name: "Kevin Stursberg",
     avatar: "https://liveblocks.io/avatars/avatar-6.png",
