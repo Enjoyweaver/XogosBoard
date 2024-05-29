@@ -80,7 +80,7 @@ export const users: Omit<User, "color">[] = [
     groupIds: ["board_member", "kevins_notes", "historical_agendas"],
   },
   {
-    id: "tbd",
+    id: "mckaylaareece@gmail.com",
     name: "McKayla",
     avatar: "https://liveblocks.io/avatars/avatar-6.png",
     groupIds: [
