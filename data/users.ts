@@ -20,7 +20,7 @@ export const users: Omit<User, "color">[] = [
   {
     id: "enjoyweaver@gmail.com",
     name: "Michael Weaver",
-    avatar: "https://liveblocks.io/avatars/avatar-2.png",
+    avatar: "/weaver.jpg",
     groupIds: [
       "board_member",
       "audit_committee",
@@ -42,7 +42,7 @@ export const users: Omit<User, "color">[] = [
   {
     id: "zack@xogosgaming.com",
     name: "Zack Edwards",
-    avatar: "https://liveblocks.io/avatars/avatar-4.png",
+    avatar: "Zack.jpg",
     groupIds: ["board_member", "zacks_notes", "historical_agendas"],
   },
   {
