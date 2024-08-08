@@ -62,7 +62,11 @@ export const groups: Group[] = [
     name: "McKayla's Notes",
   },
   {
-    id: "matts_notes",
-    name: "Matt's Notes",
+    id: "jordans_notes",
+    name: "Jordan's Notes",
+  },
+  {
+    id: "tokenomics",
+    name: "Tokenomics",
   },
 ];

@@ -26,24 +26,19 @@ export const users: Omit<User, "color">[] = [
       "audit_committee",
       "michaels_notes",
       "historical_agendas",
-    ],
-  },
-  {
-    id: "larosenwny@yahoo.com",
-    name: "Matt La Rose",
-    avatar: "https://liveblocks.io/avatars/avatar-3.png",
-    groupIds: [
-      "board_member",
-      "audit_committee",
-      "matts_notes ",
-      "historical_agendas",
+      "tokenomics",
     ],
   },
   {
     id: "zack@xogosgaming.com",
     name: "Zack Edwards",
     avatar: "Zack.jpg",
-    groupIds: ["board_member", "zacks_notes", "historical_agendas"],
+    groupIds: [
+      "board_member",
+      "zacks_notes",
+      "historical_agendas",
+      "tokenomics",
+    ],
   },
   {
     id: "braden@kennyhertzperry.com",

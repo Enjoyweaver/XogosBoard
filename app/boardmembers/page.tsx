@@ -132,7 +132,7 @@ const BoardMembers: React.FC = () => {
           <div className={styles.memberInfo}>
             <h3 className={styles.header2}>
               <span className={styles.role}>Crypto & Exchanges</span> -{" "}
-              <span className={styles.name}>Matt La Rose</span>
+              <span className={styles.name}></span>
             </h3>
             <p>
               Oversees the integration and management of digital currency

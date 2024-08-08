@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Link from "next/link"; // Corrected import for Link
 import { redirect } from "next/navigation";
 import { ComponentProps, ReactNode } from "react";
 import { auth } from "@/auth";
@@ -11,13 +12,26 @@ import styles from "./page.module.css";
 interface FeatureProps extends Omit<ComponentProps<"div">, "title"> {
   description: ReactNode;
   title: ReactNode;
+  link?: string; // Add link prop
 }
 
-function Feature({ title, description, className, ...props }: FeatureProps) {
-  return (
-    <div className={clsx(className, styles.featuresFeature)} {...props}>
+function Feature({
+  title,
+  description,
+  link,
+  className,
+  ...props
+}: FeatureProps) {
+  const content = (
+    <>
       <h4 className={styles.featuresFeatureTitle}>{title}</h4>
       <p className={styles.featuresFeatureDescription}>{description}</p>
+    </>
+  );
+
+  return (
+    <div className={clsx(className, styles.featuresFeature)} {...props}>
+      {link ? <Link href={link}>{content}</Link> : content}
     </div>
   );
 }
@@ -94,7 +108,7 @@ export default async function Index() {
           <Feature
             description={
               <>
-                Utlizing cryptocurrency in ways that advance our understanding
+                Utilizing cryptocurrency in ways that advance our understanding
                 and comprehension of the technology, while onboarding more
                 users.
               </>
@@ -109,6 +123,11 @@ export default async function Index() {
               </>
             }
             title="Education and Crypto Lobbying"
+          />
+          <Feature
+            description={<>View the numbers and details the iServ token</>}
+            title="Tokenomics Dashboard"
+            link="/tokenomics"
           />
         </div>
       </Container>
