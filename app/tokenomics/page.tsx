@@ -1,30 +1,30 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useContractRead, useContractEvent } from "wagmi";
 import { ethers } from "ethers";
-import { iServABI } from "../../ABIs/iServ";
-import { TrackerABI } from "../../ABIs/Tracker";
+import React, { useEffect, useState } from "react";
+import { useContractEvent, useContractRead } from "wagmi";
+import { Activity, DollarSign, Users, Zap } from "lucide-react";
 import {
-  iServ,
-  storage,
-  iPlay,
-  Tracker,
-  secondaryAddress,
-} from "../../config/config";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import {
-  BarChart,
   Bar,
-  XAxis,
-  YAxis,
+  BarChart,
   CartesianGrid,
-  Tooltip,
   Legend,
   ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
 } from "recharts";
-import { Activity, DollarSign, Users, Zap } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { TrackerABI } from "../../ABIs/Tracker";
+import { iServABI } from "../../ABIs/iServ";
+import {
+  iPlay,
+  iServ,
+  secondaryAddress,
+  storage,
+  Tracker,
+} from "../../config/config";
 import styles from "./dashboard.module.css";
 
 const TokenomicsDashboard = () => {
