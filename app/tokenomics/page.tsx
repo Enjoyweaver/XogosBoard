@@ -16,7 +16,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { iServABI } from "../../ABIs/iServ";
-import { iServ, secondaryAddress, storage, Tracker } from "../../config/config";
+import { iServ, storage, Tracker, secondaryAddress } from "../../config/config";
 import styles from "./dashboard.module.css";
 
 const TokenomicsDashboard = () => {
