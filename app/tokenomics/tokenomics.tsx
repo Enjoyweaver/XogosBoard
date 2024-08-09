@@ -28,19 +28,17 @@ const TokenomicsDashboardClient = () => {
   const chainId = "4002"; // Fantom Testnet
   const rpcUrl = "https://rpc.testnet.fantom.network"; // Fantom Testnet RPC URL
   const [isLoading, setIsLoading] = useState(true);
+  const [isPreMintPhase, setIsPreMintPhase] = useState<boolean | null>(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
     const initProvider = async () => {
       try {
-        if (typeof window !== "undefined" && window.ethereum) {
-          // Metamask is available
-          const provider = new ethers.providers.Web3Provider(window.ethereum);
-          setProvider(provider);
-        } else {
-          // Fallback to JsonRpcProvider
-          const fallbackProvider = new ethers.providers.JsonRpcProvider(rpcUrl);
-          setProvider(fallbackProvider);
-        }
+        const fallbackProvider = new ethers.providers.JsonRpcProvider(
+          process.env.NEXT_PUBLIC_RPC_URL
+        );
+        setProvider(fallbackProvider);
       } catch (error) {
         console.error("Error initializing provider:", error);
       }
@@ -48,6 +46,12 @@ const TokenomicsDashboardClient = () => {
 
     initProvider();
   }, []);
+
+  useEffect(() => {
+    if (isClient && provider) {
+      fetchData();
+    }
+  }, [isClient, provider]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,6 +74,8 @@ const TokenomicsDashboardClient = () => {
 
         const totalSupplyBN = await iServContract.totalSupply();
         setTotalSupply(ethers.utils.formatUnits(totalSupplyBN, 18));
+        const preMintPhase = await iServContract.preMintPhase();
+        setIsPreMintPhase(preMintPhase);
 
         if (secondaryAddress?.[chainId]) {
           const secondaryBalanceBN = await iServContract.balanceOf(
@@ -77,7 +83,9 @@ const TokenomicsDashboardClient = () => {
           );
           setSecondaryBalance(ethers.utils.formatUnits(secondaryBalanceBN, 18));
         }
-
+        if (!isClient) {
+          return null;
+        }
         const filter = iServContract.filters.Transfer();
         const logs = await iServContract.queryFilter(filter, -10000, "latest");
         setTransferEvents(logs.reverse());
@@ -155,12 +163,26 @@ const TokenomicsDashboardClient = () => {
           <CardHeader className={styles.cardHeader}>
             <CardTitle className={styles.cardTitle}>
               <Users className={styles.icon} />
-              Secondary Address Balance
+              OTC 1 Balance
             </CardTitle>
           </CardHeader>
           <CardContent className={styles.cardContent}>
             <div className={styles.statValue}>
               {parseFloat(secondaryBalance).toLocaleString()} iServ
+            </div>
+          </CardContent>
+        </Card>
+        <Card className={styles.statsCard}>
+          <CardHeader className={styles.cardHeader}>
+            <CardTitle className={styles.cardTitle}>Pre-Mint Phase</CardTitle>
+          </CardHeader>
+          <CardContent className={styles.cardContent}>
+            <div className={styles.statValue}>
+              {isPreMintPhase === null
+                ? "Loading..."
+                : isPreMintPhase
+                  ? "Active"
+                  : "Inactive"}
             </div>
           </CardContent>
         </Card>
