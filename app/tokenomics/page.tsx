@@ -16,7 +16,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { iServABI } from "../../ABIs/iServ";
-import { iServ, storage, Tracker, secondaryAddress } from "../../config/config";
+import { iServ, secondaryAddress, storage, tracker } from "../../config/config";
 import styles from "./dashboard.module.css";
 
 const TokenomicsDashboard = () => {
@@ -30,7 +30,7 @@ const TokenomicsDashboard = () => {
   const contractAddresses = [
     { name: "iServ", address: iServ[chainId] },
     { name: "Storage", address: storage[chainId] },
-    { name: "Tracker", address: Tracker[chainId] },
+    { name: "Tracker", address: tracker[chainId] },
     { name: "Secondary Address", address: secondaryAddress[chainId] },
   ];
 

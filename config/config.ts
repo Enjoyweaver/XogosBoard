@@ -203,7 +203,7 @@ export const iPlay: {
   // "64165": "0xe5355DB1838d2e56786cC7E66FF9a122F2bb3d1d",
 };
 
-export const Tracker: {
+export const tracker: {
   [key: string]: string;
 } = {
   "4002": "0xfb1d9999a2361fA1F3C0c6CA021d6e964408b79C",
