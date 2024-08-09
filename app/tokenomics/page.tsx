@@ -27,15 +27,26 @@ const TokenomicsDashboard = () => {
   const chainId = "4002"; // Fantom Testnet
   const rpcUrl = "https://rpc.testnet.fantom.network"; // Fantom Testnet RPC URL
 
+  // Ensure contract addresses are defined before using them
   const contractAddresses = [
-    { name: "iServ", address: iServ[chainId] },
-    { name: "Storage", address: storage[chainId] },
-    { name: "Tracker", address: tracker[chainId] },
-    { name: "Secondary Address", address: secondaryAddress[chainId] },
-  ];
+    { name: "iServ", address: iServ?.[chainId] },
+    { name: "Storage", address: storage?.[chainId] },
+    { name: "Tracker", address: tracker?.[chainId] },
+    { name: "Secondary Address", address: secondaryAddress?.[chainId] },
+  ].filter((contract) => contract.address); // Filter out any undefined addresses
 
   useEffect(() => {
     const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+
+    // Ensure the iServ contract address is defined
+    if (!iServ?.[chainId]) {
+      console.error(
+        "iServ contract address is undefined for chainId:",
+        chainId
+      );
+      return;
+    }
+
     const iServContract = new ethers.Contract(
       iServ[chainId],
       iServABI,
@@ -49,10 +60,12 @@ const TokenomicsDashboard = () => {
         setTotalSupply(ethers.utils.formatUnits(totalSupplyBN, 18));
 
         // Fetch secondary address balance
-        const secondaryBalanceBN = await iServContract.balanceOf(
-          secondaryAddress[chainId]
-        );
-        setSecondaryBalance(ethers.utils.formatUnits(secondaryBalanceBN, 18));
+        if (secondaryAddress?.[chainId]) {
+          const secondaryBalanceBN = await iServContract.balanceOf(
+            secondaryAddress[chainId]
+          );
+          setSecondaryBalance(ethers.utils.formatUnits(secondaryBalanceBN, 18));
+        }
 
         // Fetch transfer events
         const filter = iServContract.filters.Transfer();
@@ -64,7 +77,7 @@ const TokenomicsDashboard = () => {
     };
 
     fetchData();
-  }, []);
+  }, [chainId, rpcUrl]);
 
   const transferData = transferEvents
     .map((event, index) => ({
