@@ -187,7 +187,7 @@ export const rpcUrls: { [key: string]: string } = {
 export const iServ: {
   [key: string]: string;
 } = {
-  "4002": "0xE189D049F251cAB3Bdf47d14b3e7AA276db4Fd16",
+  "4002": "0x427831F2F81Aa76BD551dA4D2B8f795945698A28",
 };
 
 export const storage: {
@@ -206,13 +206,13 @@ export const iPlay: {
 export const Tracker: {
   [key: string]: string;
 } = {
-  "4002": "0x268e772bFcDbf566f5340C09f9EF1Fc851FfBB47",
+  "4002": "0xfb1d9999a2361fA1F3C0c6CA021d6e964408b79C",
   //"64165": "0x0643e30ABfa871c5a22c602Cb2071c2B1230e0d9",
 };
 
 export const secondaryAddress: {
   [key: string]: string;
 } = {
-  "4002": "0xdAF13F891aD408E3991Cde12DF5D2f01d63168a5",
+  "4002": "0x2D53cd2d78F3827C4E37323505fcaF2A7bFD507a",
   // "64165": "0x8401eb679FBCc6522B6489C1a5E119532918f88a",
 };

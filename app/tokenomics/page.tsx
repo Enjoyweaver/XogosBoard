@@ -1,8 +1,7 @@
 "use client";
 
-import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
-import { useContractEvent, useContractRead } from "wagmi";
+import { ethers } from "ethers";
 import { Activity, DollarSign, Users, Zap } from "lucide-react";
 import {
   Bar,
@@ -18,156 +17,62 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrackerABI } from "../../ABIs/Tracker";
 import { iServABI } from "../../ABIs/iServ";
-import {
-  iPlay,
-  iServ,
-  secondaryAddress,
-  storage,
-  Tracker,
-} from "../../config/config";
+import { iServ, secondaryAddress, storage, Tracker } from "../../config/config";
 import styles from "./dashboard.module.css";
 
 const TokenomicsDashboard = () => {
   const [totalSupply, setTotalSupply] = useState("0");
   const [transferEvents, setTransferEvents] = useState<any[]>([]);
-  const [approvalEvents, setApprovalEvents] = useState<any[]>([]);
-  const [tokenTransfers, setTokenTransfers] = useState<any[]>([]);
-  const [studentInfo, setStudentInfo] = useState<any>(null);
-  const [gameInfo, setGameInfo] = useState<any>(null);
-  const [developerInfo, setDeveloperInfo] = useState<any>(null);
-  const [universityInfo, setUniversityInfo] = useState<any>(null);
-  const [parentInfo, setParentInfo] = useState<any>(null);
-  const [mintedInfo, setMintedInfo] = useState({ tokens: "0", days: "0" });
-  const [historicalTransferEvents, setHistoricalTransferEvents] = useState<
-    any[]
-  >([]);
-  const [historicalApprovalEvents, setHistoricalApprovalEvents] = useState<
-    any[]
-  >([]);
-  const [historicalTokenTransfers, setHistoricalTokenTransfers] = useState<
-    any[]
-  >([]);
+  const [secondaryBalance, setSecondaryBalance] = useState("0");
 
   const chainId = "4002"; // Fantom Testnet
+  const rpcUrl = "https://rpc.testnet.fantom.network"; // Fantom Testnet RPC URL
 
   const contractAddresses = [
     { name: "iServ", address: iServ[chainId] },
     { name: "Storage", address: storage[chainId] },
-    { name: "iPlay", address: iPlay[chainId] },
     { name: "Tracker", address: Tracker[chainId] },
     { name: "Secondary Address", address: secondaryAddress[chainId] },
   ];
 
-  const { data: totalSupplyData } = useContractRead({
-    address: iServ[chainId] as `0x${string}`,
-    abi: iServABI,
-    functionName: "totalSupply",
-  });
-
-  const { data: studentInfoData } = useContractRead({
-    address: Tracker[chainId] as `0x${string}`,
-    abi: TrackerABI,
-    functionName: "get_student_info",
-    args: [1], // Example user_id
-  });
-
-  const { data: gameInfoData } = useContractRead({
-    address: Tracker[chainId] as `0x${string}`,
-    abi: TrackerABI,
-    functionName: "get_game_info",
-    args: [1], // Example game_id
-  });
-
-  const { data: developerInfoData } = useContractRead({
-    address: Tracker[chainId] as `0x${string}`,
-    abi: TrackerABI,
-    functionName: "get_developer_info",
-    args: [1], // Example developer_id
-  });
-
-  const { data: universityInfoData } = useContractRead({
-    address: Tracker[chainId] as `0x${string}`,
-    abi: TrackerABI,
-    functionName: "get_university_info",
-  });
-
-  const { data: parentInfoData } = useContractRead({
-    address: Tracker[chainId] as `0x${string}`,
-    abi: TrackerABI,
-    functionName: "get_parent_info",
-    args: [1], // Example user_id
-  });
-
-  const { data: mintedTokensData } = useContractRead({
-    address: Tracker[chainId] as `0x${string}`,
-    abi: TrackerABI,
-    functionName: "minted_tokens",
-  });
-
-  const { data: mintedDaysData } = useContractRead({
-    address: Tracker[chainId] as `0x${string}`,
-    abi: TrackerABI,
-    functionName: "minted_days",
-  });
-
   useEffect(() => {
-    if (totalSupplyData) {
-      setTotalSupply(ethers.utils.formatEther(totalSupplyData));
-    }
-    if (studentInfoData) setStudentInfo(studentInfoData);
-    if (gameInfoData) setGameInfo(gameInfoData);
-    if (developerInfoData) setDeveloperInfo(developerInfoData);
-    if (universityInfoData) setUniversityInfo(universityInfoData);
-    if (parentInfoData) setParentInfo(parentInfoData);
-    if (mintedTokensData && mintedDaysData) {
-      setMintedInfo({
-        tokens: mintedTokensData.toString(),
-        days: mintedDaysData.toString(),
-      });
-    }
-  }, [
-    totalSupplyData,
-    studentInfoData,
-    gameInfoData,
-    developerInfoData,
-    universityInfoData,
-    parentInfoData,
-    mintedTokensData,
-    mintedDaysData,
-  ]);
+    const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+    const iServContract = new ethers.Contract(
+      iServ[chainId],
+      iServABI,
+      provider
+    );
 
-  useContractEvent({
-    address: iServ[chainId] as `0x${string}`,
-    abi: iServABI,
-    eventName: "Transfer",
-    listener(log) {
-      setTransferEvents((prev) => [log, ...prev].slice(0, 10));
-    },
-  });
+    const fetchData = async () => {
+      try {
+        // Fetch total supply
+        const totalSupplyBN = await iServContract.totalSupply();
+        setTotalSupply(ethers.utils.formatUnits(totalSupplyBN, 18));
 
-  useContractEvent({
-    address: iServ[chainId] as `0x${string}`,
-    abi: iServABI,
-    eventName: "Approval",
-    listener(log) {
-      setApprovalEvents((prev) => [log, ...prev].slice(0, 10));
-    },
-  });
+        // Fetch secondary address balance
+        const secondaryBalanceBN = await iServContract.balanceOf(
+          secondaryAddress[chainId]
+        );
+        setSecondaryBalance(ethers.utils.formatUnits(secondaryBalanceBN, 18));
 
-  useContractEvent({
-    address: Tracker[chainId] as `0x${string}`,
-    abi: TrackerABI,
-    eventName: "TokenTransfer" as any, // Temporary fix
-    listener(log) {
-      setTokenTransfers((prev) => [log, ...prev].slice(0, 10));
-    },
-  });
+        // Fetch transfer events
+        const filter = iServContract.filters.Transfer();
+        const logs = await iServContract.queryFilter(filter, -10000, "latest");
+        setTransferEvents(logs.reverse());
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const transferData = transferEvents
     .map((event, index) => ({
       name: `Transfer ${transferEvents.length - index}`,
-      amount: parseFloat(ethers.utils.formatEther(event.args.amount)),
+      amount: parseFloat(ethers.utils.formatEther(event.args?.amount || "0")),
     }))
+    .slice(0, 10)
     .reverse();
 
   return (
@@ -216,12 +121,14 @@ const TokenomicsDashboard = () => {
         <Card className={styles.statsCard}>
           <CardHeader className={styles.cardHeader}>
             <CardTitle className={styles.cardTitle}>
-              <Zap className={styles.icon} />
-              Approval Events
+              <Users className={styles.icon} />
+              Secondary Address Balance
             </CardTitle>
           </CardHeader>
           <CardContent className={styles.cardContent}>
-            <div className={styles.statValue}>{approvalEvents.length}</div>
+            <div className={styles.statValue}>
+              {parseFloat(secondaryBalance).toLocaleString()} iServ
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -247,219 +154,36 @@ const TokenomicsDashboard = () => {
       </Card>
 
       <div className={styles.eventsSection}>
-        <h2 className={styles.sectionTitle}>Historical Events</h2>
+        <h2 className={styles.sectionTitle}>Transfer Events</h2>
         <div className={styles.eventsGrid}>
-          {historicalTransferEvents.map((event, index) => (
-            <Alert
-              key={`historical-transfer-${index}`}
-              className={styles.eventAlert}
-            >
-              <AlertTitle className={styles.alertTitle}>
-                Historical Transfer Event
-              </AlertTitle>
-              <AlertDescription className={styles.alertDescription}>
-                From: {event.args.sender.slice(0, 6)}...
-                {event.args.sender.slice(-4)}
-                <br />
-                To: {event.args.recipient.slice(0, 6)}...
-                {event.args.recipient.slice(-4)}
-                <br />
-                Amount:{" "}
-                {parseFloat(
-                  ethers.utils.formatEther(event.args.amount)
-                ).toFixed(2)}{" "}
-                iServ
-                <br />
-                Block: {event.blockNumber}
-              </AlertDescription>
-            </Alert>
-          ))}
-          {historicalApprovalEvents.map((event, index) => (
-            <Alert
-              key={`historical-approval-${index}`}
-              className={styles.eventAlert}
-            >
-              <AlertTitle className={styles.alertTitle}>
-                Historical Approval Event
-              </AlertTitle>
-              <AlertDescription className={styles.alertDescription}>
-                Owner: {event.args.owner.slice(0, 6)}...
-                {event.args.owner.slice(-4)}
-                <br />
-                Spender: {event.args.spender.slice(0, 6)}...
-                {event.args.spender.slice(-4)}
-                <br />
-                Amount:{" "}
-                {parseFloat(
-                  ethers.utils.formatEther(event.args.amount)
-                ).toFixed(2)}{" "}
-                iServ
-                <br />
-                Block: {event.blockNumber}
-              </AlertDescription>
-            </Alert>
-          ))}
-          {historicalTokenTransfers.map((event, index) => (
-            <Alert
-              key={`historical-token-transfer-${index}`}
-              className={styles.eventAlert}
-            >
-              <AlertTitle className={styles.alertTitle}>
-                Historical Token Transfer Event
-              </AlertTitle>
-              <AlertDescription className={styles.alertDescription}>
-                Customer ID: {event.args.customerID.toString()}
-                <br />
-                Recipient: {event.args.recipient.slice(0, 6)}...
-                {event.args.recipient.slice(-4)}
-                <br />
-                Amount:{" "}
-                {parseFloat(
-                  ethers.utils.formatEther(event.args.amount)
-                ).toFixed(2)}{" "}
-                iServ
-                <br />
-                Value at Time: {event.args.valueAtTime.toString()}
-                <br />
-                Department: {event.args.department.toString()}
-                <br />
-                Block: {event.blockNumber}
-              </AlertDescription>
-            </Alert>
-          ))}
-        </div>
-      </div>
+          {transferEvents.map((event, index) => {
+            const from = event.args?.from || "Unknown";
+            const to = event.args?.to || "Unknown";
+            const amount = event.args?.amount
+              ? ethers.utils.formatUnits(event.args.amount, 18)
+              : "0";
 
-      <div className={styles.eventsSection}>
-        <h2 className={styles.sectionTitle}>Recent Events</h2>
-        <div className={styles.eventsGrid}>
-          {transferEvents.map((event, index) => (
-            <Alert key={`transfer-${index}`} className={styles.eventAlert}>
-              <AlertTitle className={styles.alertTitle}>
-                Transfer Event
-              </AlertTitle>
-              <AlertDescription className={styles.alertDescription}>
-                From: {event.args.sender.slice(0, 6)}...
-                {event.args.sender.slice(-4)}
-                <br />
-                To: {event.args.recipient.slice(0, 6)}...
-                {event.args.recipient.slice(-4)}
-                <br />
-                Amount:{" "}
-                {parseFloat(
-                  ethers.utils.formatEther(event.args.amount)
-                ).toFixed(2)}{" "}
-                iServ
-              </AlertDescription>
-            </Alert>
-          ))}
-          {approvalEvents.map((event, index) => (
-            <Alert key={`approval-${index}`} className={styles.eventAlert}>
-              <AlertTitle className={styles.alertTitle}>
-                Approval Event
-              </AlertTitle>
-              <AlertDescription className={styles.alertDescription}>
-                Owner: {event.args.owner.slice(0, 6)}...
-                {event.args.owner.slice(-4)}
-                <br />
-                Spender: {event.args.spender.slice(0, 6)}...
-                {event.args.spender.slice(-4)}
-                <br />
-                Amount:{" "}
-                {parseFloat(
-                  ethers.utils.formatEther(event.args.amount)
-                ).toFixed(2)}{" "}
-                iServ
-              </AlertDescription>
-            </Alert>
-          ))}
-          {tokenTransfers.map((event, index) => (
-            <Alert
-              key={`token-transfer-${index}`}
-              className={styles.eventAlert}
-            >
-              <AlertTitle className={styles.alertTitle}>
-                Token Transfer Event
-              </AlertTitle>
-              <AlertDescription className={styles.alertDescription}>
-                Customer ID: {event.args.customerID.toString()}
-                <br />
-                Recipient: {event.args.recipient.slice(0, 6)}...
-                {event.args.recipient.slice(-4)}
-                <br />
-                Amount:{" "}
-                {parseFloat(
-                  ethers.utils.formatEther(event.args.amount)
-                ).toFixed(2)}{" "}
-                iServ
-                <br />
-                Value at Time: {event.args.valueAtTime.toString()}
-                <br />
-                Department: {event.args.department.toString()}
-              </AlertDescription>
-            </Alert>
-          ))}
-        </div>
-      </div>
-
-      <div className={styles.infoSection}>
-        <h2 className={styles.sectionTitle}>Additional Information</h2>
-        <div className={styles.infoGrid}>
-          <Card className={styles.infoCard}>
-            <CardHeader className={styles.cardHeader}>
-              <CardTitle className={styles.cardTitle}>Student Info</CardTitle>
-            </CardHeader>
-            <CardContent className={styles.cardContent}>
-              {studentInfo && <pre>{JSON.stringify(studentInfo, null, 2)}</pre>}
-            </CardContent>
-          </Card>
-          <Card className={styles.infoCard}>
-            <CardHeader className={styles.cardHeader}>
-              <CardTitle className={styles.cardTitle}>Game Info</CardTitle>
-            </CardHeader>
-            <CardContent className={styles.cardContent}>
-              {gameInfo && <pre>{JSON.stringify(gameInfo, null, 2)}</pre>}
-            </CardContent>
-          </Card>
-          <Card className={styles.infoCard}>
-            <CardHeader className={styles.cardHeader}>
-              <CardTitle className={styles.cardTitle}>Developer Info</CardTitle>
-            </CardHeader>
-            <CardContent className={styles.cardContent}>
-              {developerInfo && (
-                <pre>{JSON.stringify(developerInfo, null, 2)}</pre>
-              )}
-            </CardContent>
-          </Card>
-          <Card className={styles.infoCard}>
-            <CardHeader className={styles.cardHeader}>
-              <CardTitle className={styles.cardTitle}>
-                University Info
-              </CardTitle>
-            </CardHeader>
-            <CardContent className={styles.cardContent}>
-              {universityInfo && (
-                <pre>{JSON.stringify(universityInfo, null, 2)}</pre>
-              )}
-            </CardContent>
-          </Card>
-          <Card className={styles.infoCard}>
-            <CardHeader className={styles.cardHeader}>
-              <CardTitle className={styles.cardTitle}>Parent Info</CardTitle>
-            </CardHeader>
-            <CardContent className={styles.cardContent}>
-              {parentInfo && <pre>{JSON.stringify(parentInfo, null, 2)}</pre>}
-            </CardContent>
-          </Card>
-          <Card className={styles.infoCard}>
-            <CardHeader className={styles.cardHeader}>
-              <CardTitle className={styles.cardTitle}>Minted Info</CardTitle>
-            </CardHeader>
-            <CardContent className={styles.cardContent}>
-              <p>Tokens: {mintedInfo.tokens}</p>
-              <p>Days: {mintedInfo.days}</p>
-            </CardContent>
-          </Card>
+            return (
+              <Alert key={`transfer-${index}`} className={styles.eventAlert}>
+                <AlertTitle className={styles.alertTitle}>
+                  Transfer Event
+                </AlertTitle>
+                <AlertDescription className={styles.alertDescription}>
+                  From:{" "}
+                  {from.length > 10
+                    ? `${from.slice(0, 6)}...${from.slice(-4)}`
+                    : from}
+                  <br />
+                  To:{" "}
+                  {to.length > 10 ? `${to.slice(0, 6)}...${to.slice(-4)}` : to}
+                  <br />
+                  Amount: {amount} iServ
+                  <br />
+                  Block: {event.blockNumber || "Unknown"}
+                </AlertDescription>
+              </Alert>
+            );
+          })}
         </div>
       </div>
     </div>
