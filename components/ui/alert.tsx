@@ -1,6 +1,15 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
-export const Alert = ({ className, children, ...props }) => {
+interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+  children: ReactNode;
+}
+
+export const Alert: React.FC<AlertProps> = ({
+  className = "",
+  children,
+  ...props
+}) => {
   return (
     <div
       className={`bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 ${className}`}
@@ -12,7 +21,16 @@ export const Alert = ({ className, children, ...props }) => {
   );
 };
 
-export const AlertTitle = ({ className, children, ...props }) => {
+interface AlertTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  className?: string;
+  children: ReactNode;
+}
+
+export const AlertTitle: React.FC<AlertTitleProps> = ({
+  className = "",
+  children,
+  ...props
+}) => {
   return (
     <h4 className={`font-bold mb-2 ${className}`} {...props}>
       {children}
@@ -20,7 +38,17 @@ export const AlertTitle = ({ className, children, ...props }) => {
   );
 };
 
-export const AlertDescription = ({ className, children, ...props }) => {
+interface AlertDescriptionProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {
+  className?: string;
+  children: ReactNode;
+}
+
+export const AlertDescription: React.FC<AlertDescriptionProps> = ({
+  className = "",
+  children,
+  ...props
+}) => {
   return (
     <p className={`${className}`} {...props}>
       {children}
