@@ -20,6 +20,7 @@ import { iServ, secondaryAddress, storage, tracker } from "../../config/config";
 import styles from "./dashboard.module.css";
 
 const TokenomicsDashboard = () => {
+  const [isClient, setIsClient] = useState(false); // New state to track client-side rendering
   const [totalSupply, setTotalSupply] = useState("0");
   const [transferEvents, setTransferEvents] = useState<any[]>([]);
   const [secondaryBalance, setSecondaryBalance] = useState("0");
@@ -28,12 +29,12 @@ const TokenomicsDashboard = () => {
   const rpcUrl = "https://rpc.testnet.fantom.network"; // Fantom Testnet RPC URL
 
   useEffect(() => {
-    // Ensure this code only runs on the client side
-    if (typeof window === "undefined") return;
+    setIsClient(true); // Ensures we are on the client side
+
+    if (!isClient) return; // Prevent execution on the server side
 
     const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
 
-    // Ensure the iServ contract address is defined
     if (!iServ?.[chainId]) {
       console.error(
         "iServ contract address is undefined for chainId:",
@@ -50,11 +51,9 @@ const TokenomicsDashboard = () => {
 
     const fetchData = async () => {
       try {
-        // Fetch total supply
         const totalSupplyBN = await iServContract.totalSupply();
         setTotalSupply(ethers.utils.formatUnits(totalSupplyBN, 18));
 
-        // Fetch secondary address balance
         if (secondaryAddress?.[chainId]) {
           const secondaryBalanceBN = await iServContract.balanceOf(
             secondaryAddress[chainId]
@@ -62,7 +61,6 @@ const TokenomicsDashboard = () => {
           setSecondaryBalance(ethers.utils.formatUnits(secondaryBalanceBN, 18));
         }
 
-        // Fetch transfer events
         const filter = iServContract.filters.Transfer();
         const logs = await iServContract.queryFilter(filter, -10000, "latest");
         setTransferEvents(logs.reverse());
@@ -72,7 +70,7 @@ const TokenomicsDashboard = () => {
     };
 
     fetchData();
-  }, [chainId, rpcUrl]);
+  }, [isClient, chainId, rpcUrl]);
 
   const transferData = transferEvents
     .map((event, index) => ({
