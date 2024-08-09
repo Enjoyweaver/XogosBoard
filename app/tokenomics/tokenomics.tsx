@@ -17,21 +17,43 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { iServABI } from "../../ABIs/iServ";
 import { iServ, secondaryAddress, storage, tracker } from "../../config/config";
 import styles from "./dashboard.module.css";
+import { ethers } from "ethers";
 
 const TokenomicsDashboardClient = () => {
   const [totalSupply, setTotalSupply] = useState("0");
   const [transferEvents, setTransferEvents] = useState<any[]>([]);
   const [secondaryBalance, setSecondaryBalance] = useState("0");
-
+  const [provider, setProvider] =
+    useState<ethers.providers.JsonRpcProvider | null>(null);
   const chainId = "4002"; // Fantom Testnet
   const rpcUrl = "https://rpc.testnet.fantom.network"; // Fantom Testnet RPC URL
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const initProvider = async () => {
+      try {
+        if (typeof window !== "undefined" && window.ethereum) {
+          // Metamask is available
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
+          setProvider(provider);
+        } else {
+          // Fallback to JsonRpcProvider
+          const fallbackProvider = new ethers.providers.JsonRpcProvider(rpcUrl);
+          setProvider(fallbackProvider);
+        }
+      } catch (error) {
+        console.error("Error initializing provider:", error);
+      }
+    };
+
+    initProvider();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!provider) return;
+      setIsLoading(true);
       try {
-        const { ethers } = await import("ethers");
-        const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
-
         if (!iServ?.[chainId]) {
           console.error(
             "iServ contract address is undefined for chainId:",
@@ -61,11 +83,13 @@ const TokenomicsDashboardClient = () => {
         setTransferEvents(logs.reverse());
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchData();
-  }, [chainId]);
+  }, [provider, chainId]);
 
   const transferData = transferEvents
     .map((event, index) => ({
