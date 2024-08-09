@@ -27,15 +27,10 @@ const TokenomicsDashboard = () => {
   const chainId = "4002"; // Fantom Testnet
   const rpcUrl = "https://rpc.testnet.fantom.network"; // Fantom Testnet RPC URL
 
-  // Ensure contract addresses are defined before using them
-  const contractAddresses = [
-    { name: "iServ", address: iServ?.[chainId] },
-    { name: "Storage", address: storage?.[chainId] },
-    { name: "Tracker", address: tracker?.[chainId] },
-    { name: "Secondary Address", address: secondaryAddress?.[chainId] },
-  ].filter((contract) => contract.address); // Filter out any undefined addresses
-
   useEffect(() => {
+    // Ensure this code only runs on the client side
+    if (typeof window === "undefined") return;
+
     const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
 
     // Ensure the iServ contract address is defined
@@ -96,12 +91,19 @@ const TokenomicsDashboard = () => {
           <CardTitle className={styles.cardTitle}>Contract Addresses</CardTitle>
         </CardHeader>
         <CardContent className={styles.cardContent}>
-          {contractAddresses.map((contract, index) => (
-            <div key={index} className={styles.addressItem}>
-              <span className={styles.addressName}>{contract.name}:</span>
-              <span className={styles.addressValue}>{contract.address}</span>
-            </div>
-          ))}
+          {[
+            { name: "iServ", address: iServ?.[chainId] },
+            { name: "Storage", address: storage?.[chainId] },
+            { name: "Tracker", address: tracker?.[chainId] },
+            { name: "Secondary Address", address: secondaryAddress?.[chainId] },
+          ]
+            .filter((contract) => contract.address)
+            .map((contract, index) => (
+              <div key={index} className={styles.addressItem}>
+                <span className={styles.addressName}>{contract.name}:</span>
+                <span className={styles.addressValue}>{contract.address}</span>
+              </div>
+            ))}
         </CardContent>
       </Card>
 
