@@ -1,10 +1,7 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,12 +15,8 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "react": [
-        "./node_modules/@types/react"
-      ],
-      "@/*": [
-        "./*"
-      ]
+      "react": ["./node_modules/@types/react"],
+      "@/*": ["./*"]
     },
     "plugins": [
       {
@@ -32,11 +25,12 @@
     ]
   },
   "include": [
+    "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "hardhat/scripts/vypercontracts.js",
+    "hardhat/scripts/solidity.js"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
