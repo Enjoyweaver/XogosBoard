@@ -30,8 +30,9 @@ const TokenomicsDashboardClient = () => {
   const [totalSupply, setTotalSupply] = useState("0");
   const [transferEvents, setTransferEvents] = useState<any[]>([]);
   const [secondaryBalance, setSecondaryBalance] = useState("0");
-  const [provider, setProvider] =
-    useState<ethers.providers.JsonRpcProvider | null>(null);
+  const [provider, setProvider] = useState<
+    ethers.providers.Web3Provider | ethers.providers.JsonRpcProvider | null
+  >(null);
   const chainId = "4002"; // Fantom Testnet
   const rpcUrl = "https://rpc.testnet.fantom.network"; // Fantom Testnet RPC URL
   const [isLoading, setIsLoading] = useState(true);

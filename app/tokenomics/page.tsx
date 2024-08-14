@@ -1,18 +1,13 @@
 import dynamic from "next/dynamic";
-import TokenomicsDashboardClient from "./tokenomics";
 
-const TokenomicsDashboard = dynamic(
-  () => Promise.resolve(TokenomicsDashboardClient),
-  {
-    ssr: false,
-    loading: () => <p>Loading dashboard...</p>,
-  }
-);
+const TokenomicsDashboardClient = dynamic(() => import("./tokenomics"), {
+  ssr: false,
+});
 
 export default function TokenomicsPage() {
   return (
     <div>
-      <TokenomicsDashboard />
+      <TokenomicsDashboardClient />
     </div>
   );
 }
