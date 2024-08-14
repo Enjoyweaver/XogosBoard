@@ -45,18 +45,16 @@ const TokenomicsDashboardClient = () => {
 
   useEffect(() => {
     const initProvider = async () => {
-      try {
-        if (typeof window !== "undefined" && window.ethereum) {
-          // Metamask is available
+      if (typeof window !== "undefined") {
+        if (window.ethereum) {
           const provider = new ethers.providers.Web3Provider(window.ethereum);
           setProvider(provider);
         } else {
-          // Fallback to JsonRpcProvider
-          const fallbackProvider = new ethers.providers.JsonRpcProvider(rpcUrl);
+          const fallbackProvider = new ethers.providers.JsonRpcProvider(
+            "https://rpc.testnet.fantom.network"
+          );
           setProvider(fallbackProvider);
         }
-      } catch (error) {
-        console.error("Error initializing provider:", error);
       }
     };
 
@@ -209,7 +207,7 @@ const TokenomicsDashboardClient = () => {
       setUsdReceived("");
     } catch (error) {
       console.error("Error executing OTC trade:", error);
-      setOtcStatus("Error: " + error.message);
+      setOtcStatus("Error: " + (error as Error).message);
     }
   };
 

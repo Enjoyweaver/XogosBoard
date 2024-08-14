@@ -1,25 +1,25 @@
 .dashboard {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1.5rem;
   background-color: #f9fafb;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .dashboardTitle {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #1f2937;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .statsCard {
@@ -27,20 +27,21 @@
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s ease-in-out;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .statsCard:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
 }
 
 .cardHeader {
   background-color: #3b82f6;
   color: #ffffff;
-  padding: 1rem;
+  padding: 0.75rem;
 }
 
 .cardTitle {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -48,67 +49,92 @@
 
 .icon {
   margin-right: 0.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.cardContent {
+  padding: 1rem;
 }
 
 .statValue {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #1f2937;
   text-align: center;
-  padding: 1rem;
+}
+
+.addressesCard {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto 1.5rem auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 900px;
+  text-align: center;
+}
+
+.addressItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.addressName,
+.addressValue {
+  text-align: left;
+}
+
+.addressItem:last-child {
+  border-bottom: none;
+}
+
+.cardContent {
+  padding: 0.75rem; /* Reduce padding */
+}
+
+.cardTitle {
+  font-size: 0.9rem; /* Reduce font size */
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.statValue {
+  font-size: 1.2rem; /* Reduce the size of the stat value text */
+  font-weight: bold;
+  color: #1f2937;
+  text-align: center;
+}
+
+.otcCard {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto 1.5rem auto;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 60%;
+  max-width: 900px;
+  text-align: center;
 }
 
 .chartCard {
   background-color: #ffffff;
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 2rem;
-}
-
-.eventsSection,
-.infoSection {
-  margin-top: 2rem;
-}
-
-.sectionTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1f2937;
-  margin-bottom: 1rem;
-}
-
-.eventsGrid,
-.infoGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-}
-
-.eventAlert {
-  background-color: #e5e7eb;
-  border-left: 4px solid #3b82f6;
-  border-radius: 4px;
-  padding: 1rem;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.eventAlert:hover {
-  background-color: #d1d5db;
-}
-
-.addressesCard,
-.infoCard {
-  margin-bottom: 2rem;
-  background-color: #f3f4f6;
-  border-radius: 8px;
-  overflow: hidden;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .addressItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0;
+  padding: 0.5rem 1rem;
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -117,28 +143,19 @@
 }
 
 .addressName {
-  font-weight: bold;
+  font-weight: 600;
   color: #374151;
+  font-size: 0.9rem;
+  width: 40%;
 }
 
 .addressValue {
   font-family: monospace;
   color: #6b7280;
+  font-size: 0.8rem;
+  width: 60%;
   word-break: break-all;
-}
-
-.infoCard {
-  background-color: #ffffff;
-}
-
-.infoCard pre {
-  white-space: pre-wrap;
-  word-break: break-all;
-  font-size: 0.875rem;
-  color: #4b5563;
-  padding: 1rem;
-  background-color: #f3f4f6;
-  border-radius: 4px;
+  text-align: right;
 }
 
 .inputGroup {
@@ -147,78 +164,84 @@
 
 .inputLabel {
   display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .input {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid #d1d5db;
   border-radius: 4px;
+  font-size: 0.9rem;
 }
 
-.otcCard {
-  margin-bottom: 2rem;
-}
-
-.inputGroup {
-  margin-bottom: 1rem;
-}
-
-.inputLabel {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
-
-.input {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .button {
-  width: 100%;
-  padding: 0.75rem;
+  padding: 0.5rem 1.5rem;
   background-color: #3b82f6;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .button:hover {
   background-color: #2563eb;
 }
 
-.alert {
-  margin-top: 1rem;
+.eventsSection {
+  margin-top: 1.5rem;
 }
 
-.tableWrapper {
-  overflow-x: auto;
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 1rem;
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
+.eventsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
 }
 
-.table th,
-.table td {
-  padding: 0.75rem;
-  text-align: left;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.table th {
+.eventAlert {
   background-color: #f3f4f6;
-  font-weight: 600;
+  border-left: 3px solid #3b82f6;
+  border-radius: 4px;
+  padding: 0.75rem;
 }
 
-.table tr:hover {
-  background-color: #f9fafb;
+.alertTitle {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+}
+
+.alertDescription {
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+@media (max-width: 640px) {
+  .dashboard {
+    padding: 1rem;
+  }
+
+  .statsGrid,
+  .eventsGrid {
+    grid-template-columns: 1fr;
+  }
 }
