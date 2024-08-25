@@ -18,7 +18,7 @@ export const config = createConfig({
     new CoinbaseWalletConnector({
       chains,
       options: {
-        appName: "SafeMeme Labs",
+        appName: "Xogos Board",
         appLogoUrl: "tbd",
       },
     }),
@@ -27,9 +27,9 @@ export const config = createConfig({
       options: {
         projectId: "7d2cdf0341b6bef24d9efae208f93467",
         metadata: {
-          name: "SafeMeme Labs",
-          description: "Safe Meme Economy",
-          url: "https://safememe.vercel.app",
+          name: "Xogos Board",
+          description: "Xogos Gaming Board",
+          url: "https://XogosBoard.vercel.app",
           icons: ["tbd"],
         },
       },

@@ -212,7 +212,7 @@ const TokenomicsDashboardClient = () => {
       <h1 className={styles.dashboardTitle}>iServ Tokenomics Dashboard</h1>
 
       {error && (
-        <Alert variant="destructive">
+        <Alert>
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
