@@ -7,7 +7,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { iServABI } from "../../ABIs/iServ";
 import { TrackerABI } from "../../ABIs/Tracker";
-import { iServ, secondaryAddress, tracker } from "../../config/config";
+import { iServ, rpcUrls, secondaryAddress, tracker } from "../../config/config";
 import styles from "./dashboard.module.css";
 
 interface TransferInfo {
@@ -58,8 +58,9 @@ const TokenomicsDashboardClient = () => {
           );
           setProvider(web3Provider);
         } else {
+          console.log("Using fallback provider");
           const fallbackProvider = new ethers.providers.JsonRpcProvider(
-            "https://rpc.testnet.fantom.network"
+            rpcUrls["4002"]
           );
           setProvider(fallbackProvider);
         }
