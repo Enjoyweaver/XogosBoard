@@ -1,5 +1,3 @@
-"use client";
-
 import { fantom, fantomTestnet, polygon } from "@wagmi/core/chains";
 import { configureChains, createConfig } from "wagmi";
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";

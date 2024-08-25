@@ -15,16 +15,23 @@ import {
 } from "recharts";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FunctionABI } from "../../ABIs/Function";
 import { iServABI } from "../../ABIs/iServ";
-import {
-  functionality,
-  iServ,
-  secondaryAddress,
-  storage,
-  tracker,
-} from "../../config/config";
+import { TrackerABI } from "../../ABIs/Tracker";
+import { iServ, secondaryAddress, tracker } from "../../config/config";
 import styles from "./dashboard.module.css";
+
+interface TransferInfo {
+  recipient: string;
+  transfer_time: number;
+  amount: string;
+  valueAtTime: string;
+  department: number;
+}
+
+interface MultisigWallet {
+  name: string;
+  address: string;
+}
 
 const TokenomicsDashboardClient = () => {
   const [totalSupply, setTotalSupply] = useState("0");
@@ -34,28 +41,43 @@ const TokenomicsDashboardClient = () => {
     ethers.providers.Web3Provider | ethers.providers.JsonRpcProvider | null
   >(null);
   const chainId = "4002"; // Fantom Testnet
-  const rpcUrl = "https://rpc.testnet.fantom.network"; // Fantom Testnet RPC URL
   const [isLoading, setIsLoading] = useState(true);
   const [isPreMintPhase, setIsPreMintPhase] = useState<boolean | null>(null);
-  const [recipientAddress, setRecipientAddress] = useState("");
-  const [amount, setAmount] = useState("");
-  const [usdReceived, setUsdReceived] = useState("");
-  const [isWhitelisted, setIsWhitelisted] = useState(false);
-  const [otcStatus, setOtcStatus] = useState("");
-  const [otcTrades, setOtcTrades] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [owner, setOwner] = useState<string | null>(null);
+  const [storageAddress, setStorageAddress] = useState<string | null>(null);
+  const [iPlayContract, setIPlayContract] = useState<string | null>(null);
+  const [transferRecords, setTransferRecords] = useState<TransferInfo[]>([]);
+  const [mintedTokens, setMintedTokens] = useState("0");
+  const [mintedDays, setMintedDays] = useState("0");
+
+  const [multisigWallets, setMultisigWallets] = useState<MultisigWallet[]>([
+    { name: "Main Wallet", address: "" },
+    { name: "Treasury Wallet", address: "" },
+    { name: "Operations Wallet", address: "" },
+    { name: "Development Wallet", address: "" },
+    { name: "Marketing Wallet", address: "" },
+  ]);
 
   useEffect(() => {
     const initProvider = async () => {
-      if (typeof window !== "undefined") {
-        if (window.ethereum) {
-          const provider = new ethers.providers.Web3Provider(window.ethereum);
-          setProvider(provider);
+      try {
+        if (typeof window !== "undefined" && window.ethereum) {
+          const web3Provider = new ethers.providers.Web3Provider(
+            window.ethereum
+          );
+          setProvider(web3Provider);
         } else {
           const fallbackProvider = new ethers.providers.JsonRpcProvider(
             "https://rpc.testnet.fantom.network"
           );
           setProvider(fallbackProvider);
         }
+      } catch (err) {
+        console.error("Error initializing provider:", err);
+        setError(
+          "Failed to initialize provider. Please check your connection."
+        );
       }
     };
 
@@ -66,13 +88,12 @@ const TokenomicsDashboardClient = () => {
     const fetchData = async () => {
       if (!provider) return;
       setIsLoading(true);
+      setError(null);
       try {
         if (!iServ?.[chainId]) {
-          console.error(
-            "iServ contract address is undefined for chainId:",
-            chainId
+          throw new Error(
+            "iServ contract address is undefined for chainId: " + chainId
           );
-          return;
         }
 
         const iServContract = new ethers.Contract(
@@ -81,143 +102,107 @@ const TokenomicsDashboardClient = () => {
           provider
         );
 
-        const totalSupplyBN = await iServContract.totalSupply();
-        setTotalSupply(ethers.utils.formatUnits(totalSupplyBN, 18));
-        const preMintPhase = await iServContract.preMintPhase();
-        setIsPreMintPhase(preMintPhase);
+        const trackerContract = new ethers.Contract(
+          tracker[chainId],
+          TrackerABI,
+          provider
+        );
 
-        if (secondaryAddress?.[chainId]) {
-          const secondaryBalanceBN = await iServContract.balanceOf(
-            secondaryAddress[chainId]
-          );
-          setSecondaryBalance(ethers.utils.formatUnits(secondaryBalanceBN, 18));
-        }
+        const [
+          totalSupplyBN,
+          preMintPhase,
+          ownerAddress,
+          storageAddr,
+          iPlayAddr,
+          secondaryBalanceBN,
+        ] = await Promise.all([
+          iServContract.totalSupply(),
+          iServContract.preMintPhase(),
+          iServContract.owner(),
+          iServContract.storageAddress(),
+          iServContract.iPlayContract(),
+          iServContract.balanceOf(secondaryAddress[chainId]),
+        ]);
+
+        setTotalSupply(ethers.utils.formatUnits(totalSupplyBN, 18));
+        setIsPreMintPhase(preMintPhase);
+        setOwner(ownerAddress);
+        setStorageAddress(storageAddr);
+        setIPlayContract(iPlayAddr);
+        setSecondaryBalance(ethers.utils.formatUnits(secondaryBalanceBN, 18));
 
         const filter = iServContract.filters.Transfer();
         const logs = await iServContract.queryFilter(filter, -10000, "latest");
         setTransferEvents(logs.reverse());
-      } catch (error) {
-        console.error("Error fetching data:", error);
+
+        const [mintedTokensBN, mintedDaysBN] = await Promise.all([
+          trackerContract.minted_tokens(),
+          trackerContract.minted_days(),
+        ]);
+
+        setMintedTokens(ethers.utils.formatUnits(mintedTokensBN, 18));
+        setMintedDays(mintedDaysBN.toString());
+
+        // Fetch transfer records (assuming customerID 1 for example)
+        const customerID = 1;
+        const transactionCount =
+          await trackerContract.transaction_count(customerID);
+        const records: TransferInfo[] = [];
+
+        for (let i = 0; i < transactionCount.toNumber(); i++) {
+          const record = await trackerContract.get_transaction(customerID, i);
+          records.push({
+            recipient: record.recipient,
+            transfer_time: record.transfer_time.toNumber(),
+            amount: ethers.utils.formatUnits(record.amount, 18),
+            valueAtTime: ethers.utils.formatUnits(record.valueAtTime, 18),
+            department: record.department.toNumber(),
+          });
+        }
+
+        setTransferRecords(records);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        setError("Failed to fetch contract data. Please try again later.");
       } finally {
         setIsLoading(false);
       }
     };
 
-    const checkWhitelist = async () => {
+    fetchData();
+  }, [provider, chainId]);
+
+  useEffect(() => {
+    const fetchData = async () => {
       if (!provider) return;
+      setIsLoading(true);
+      setError(null);
       try {
-        const signer = provider.getSigner();
-        const address = await signer.getAddress();
-        const functionContract = new ethers.Contract(
-          functionality[chainId],
-          FunctionABI,
-          provider
-        );
-        const whitelisted = await functionContract.is_whitelisted(address);
-        setIsWhitelisted(whitelisted);
-      } catch (error) {
-        console.error("Error checking whitelist status:", error);
-      }
-    };
-
-    const fetchOTCTrades = async () => {
-      if (!provider) return;
-      try {
-        const functionContract = new ethers.Contract(
-          functionality[chainId],
-          FunctionABI,
-          provider
-        );
-        const tradeCount = await functionContract.get_otc_trade_count();
-
-        const trades = [];
-        for (let i = 0; i < tradeCount; i++) {
-          const trade = await functionContract.get_otc_trade(i);
-          trades.push({
-            id: i,
-            sender: trade.sender,
-            recipient: trade.recipient,
-            amount: ethers.utils.formatUnits(trade.amount, 18),
-            usdReceived: ethers.utils.formatUnits(trade.usd_received, 18),
-            timestamp: new Date(
-              trade.timestamp.toNumber() * 1000
-            ).toLocaleString(),
-          });
-        }
-
-        setOtcTrades(trades.reverse());
-      } catch (error) {
-        console.error("Error fetching OTC trades:", error);
+        const updatedMultisigWallets = [
+          { name: "Main Wallet", address: "0x1234...5678" },
+          { name: "Treasury Wallet", address: "0x2345...6789" },
+          { name: "Operations Wallet", address: "0x3456...7890" },
+          { name: "Development Wallet", address: "0x4567...8901" },
+          { name: "Marketing Wallet", address: "0x5678...9012" },
+        ];
+        setMultisigWallets(updatedMultisigWallets);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        setError("Failed to fetch contract data. Please try again later.");
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchData();
-    checkWhitelist();
-    fetchOTCTrades();
   }, [provider, chainId]);
-
-  const handleOTCTrade = async () => {
-    if (!provider) return;
-    try {
-      const signer = provider.getSigner();
-      const functionalityContract = new ethers.Contract(
-        functionality[chainId],
-        FunctionABI,
-        signer
-      );
-      const iServContract = new ethers.Contract(
-        iServ[chainId],
-        iServABI,
-        signer
-      );
-
-      const amountInWei = ethers.utils.parseUnits(amount, 18);
-      const usdReceivedInWei = ethers.utils.parseUnits(usdReceived, 18);
-
-      await iServContract.approve(functionality[chainId], amountInWei);
-      const tx = await functionalityContract.otc_trade(
-        recipientAddress,
-        amountInWei,
-        usdReceivedInWei
-      );
-      await tx.wait();
-
-      setOtcStatus("OTC trade completed successfully!");
-
-      // Refresh OTC trades
-      const newTrade = await functionalityContract.get_otc_trade(
-        (await functionalityContract.get_otc_trade_count()) - 1
-      );
-      setOtcTrades([
-        {
-          id: otcTrades.length,
-          sender: newTrade.sender,
-          recipient: newTrade.recipient,
-          amount: ethers.utils.formatUnits(newTrade.amount, 18),
-          usdReceived: ethers.utils.formatUnits(newTrade.usd_received, 18),
-          timestamp: new Date(
-            newTrade.timestamp.toNumber() * 1000
-          ).toLocaleString(),
-        },
-        ...otcTrades,
-      ]);
-
-      // Clear input fields after successful trade
-      setRecipientAddress("");
-      setAmount("");
-      setUsdReceived("");
-    } catch (error) {
-      console.error("Error executing OTC trade:", error);
-      setOtcStatus("Error: " + (error as Error).message);
-    }
-  };
 
   const transferData = transferEvents
     .map((event, index) => ({
       name: `Transfer ${transferEvents.length - index}`,
-      amount:
-        parseFloat(event.args?.amount ? event.args.amount.toString() : "0") /
-        1e18,
+      amount: parseFloat(
+        ethers.utils.formatUnits(event.args?.amount || "0", 18)
+      ),
     }))
     .slice(0, 10)
     .reverse();
@@ -226,25 +211,56 @@ const TokenomicsDashboardClient = () => {
     <div className={styles.dashboard}>
       <h1 className={styles.dashboardTitle}>iServ Tokenomics Dashboard</h1>
 
+      {error && (
+        <Alert variant="destructive">
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+
       <Card className={styles.addressesCard}>
         <CardHeader className={styles.cardHeader}>
           <CardTitle className={styles.cardTitle}>Contract Addresses</CardTitle>
         </CardHeader>
         <CardContent className={styles.cardContent}>
-          {[
-            { name: "iServ", address: iServ?.[chainId] },
-            { name: "Storage", address: storage?.[chainId] },
-            { name: "Tracker", address: tracker?.[chainId] },
-            { name: "Secondary Address", address: secondaryAddress?.[chainId] },
-            { name: "Function", address: functionality?.[chainId] },
-          ]
-            .filter((contract) => contract.address)
-            .map((contract, index) => (
-              <div key={index} className={styles.addressItem}>
-                <span className={styles.addressName}>{contract.name}:</span>
-                <span className={styles.addressValue}>{contract.address}</span>
-              </div>
-            ))}
+          <div className={styles.addressItem}>
+            <span className={styles.addressName}>iServ:</span>
+            <span className={styles.addressValue}>{iServ[chainId]}</span>
+          </div>
+          <div className={styles.addressItem}>
+            <span className={styles.addressName}>Tracker:</span>
+            <span className={styles.addressValue}>{tracker[chainId]}</span>
+          </div>
+          <div className={styles.addressItem}>
+            <span className={styles.addressName}>Owner:</span>
+            <span className={styles.addressValue}>{owner || "Loading..."}</span>
+          </div>
+          <div className={styles.addressItem}>
+            <span className={styles.addressName}>Storage:</span>
+            <span className={styles.addressValue}>
+              {storageAddress || "Loading..."}
+            </span>
+          </div>
+          <div className={styles.addressItem}>
+            <span className={styles.addressName}>iPlay Contract:</span>
+            <span className={styles.addressValue}>
+              {iPlayContract || "Loading..."}
+            </span>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className={styles.multisigCard}>
+        <CardHeader className={styles.cardHeader}>
+          <CardTitle className={styles.cardTitle}>Multisig Wallets</CardTitle>
+        </CardHeader>
+        <CardContent className={styles.cardContent}>
+          {multisigWallets.map((wallet, index) => (
+            <div key={index} className={styles.walletItem}>
+              <span className={styles.walletName}>{wallet.name}:</span>
+              <span className={styles.walletAddress}>{wallet.address}</span>
+            </div>
+          ))}
         </CardContent>
       </Card>
 
@@ -277,7 +293,7 @@ const TokenomicsDashboardClient = () => {
           <CardHeader className={styles.cardHeader}>
             <CardTitle className={styles.cardTitle}>
               <Users className={styles.icon} />
-              OTC 1 Balance
+              Secondary Balance
             </CardTitle>
           </CardHeader>
           <CardContent className={styles.cardContent}>
@@ -302,49 +318,15 @@ const TokenomicsDashboardClient = () => {
         </Card>
       </div>
 
-      <Card className={styles.otcCard}>
+      <Card className={styles.statsCard}>
         <CardHeader className={styles.cardHeader}>
-          <CardTitle className={styles.cardTitle}>Create OTC Trade</CardTitle>
+          <CardTitle className={styles.cardTitle}>Minting Stats</CardTitle>
         </CardHeader>
         <CardContent className={styles.cardContent}>
-          <div className={styles.inputGroup}>
-            <span className={styles.inputLabel}>Recipient Address:</span>
-            <input
-              type="text"
-              value={recipientAddress}
-              onChange={(e) => setRecipientAddress(e.target.value)}
-              className={styles.input}
-              placeholder="0x..."
-            />
+          <div>
+            Minted Tokens: {parseFloat(mintedTokens).toLocaleString()} iServ
           </div>
-          <div className={styles.inputGroup}>
-            <span className={styles.inputLabel}>Amount (iServ):</span>
-            <input
-              type="text"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              className={styles.input}
-              placeholder="0.0"
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <span className={styles.inputLabel}>USD Received:</span>
-            <input
-              type="text"
-              value={usdReceived}
-              onChange={(e) => setUsdReceived(e.target.value)}
-              className={styles.input}
-              placeholder="0.0"
-            />
-          </div>
-          <button onClick={handleOTCTrade} className={styles.button}>
-            Execute OTC Trade
-          </button>
-          {otcStatus && (
-            <Alert className={styles.alert}>
-              <AlertDescription>{otcStatus}</AlertDescription>
-            </Alert>
-          )}
+          <div>Minted Days: {mintedDays}</div>
         </CardContent>
       </Card>
 
@@ -369,36 +351,27 @@ const TokenomicsDashboardClient = () => {
       </Card>
 
       <div className={styles.eventsSection}>
-        <h2 className={styles.sectionTitle}>Transfer Events</h2>
+        <h2 className={styles.sectionTitle}>Transfer Records</h2>
         <div className={styles.eventsGrid}>
-          {transferEvents.map((event, index) => {
-            const from = event.args?.from || "Unknown";
-            const to = event.args?.to || "Unknown";
-            const amount = event.args?.amount
-              ? (parseFloat(event.args.amount.toString()) / 1e18).toString()
-              : "0";
-
-            return (
-              <Alert key={`transfer-${index}`} className={styles.eventAlert}>
-                <AlertTitle className={styles.alertTitle}>
-                  Transfer Event
-                </AlertTitle>
-                <AlertDescription className={styles.alertDescription}>
-                  From:{" "}
-                  {from.length > 10
-                    ? `${from.slice(0, 6)}...${from.slice(-4)}`
-                    : from}
-                  <br />
-                  To:{" "}
-                  {to.length > 10 ? `${to.slice(0, 6)}...${to.slice(-4)}` : to}
-                  <br />
-                  Amount: {amount} iServ
-                  <br />
-                  Block: {event.blockNumber || "Unknown"}
-                </AlertDescription>
-              </Alert>
-            );
-          })}
+          {transferRecords.map((record, index) => (
+            <Alert key={`transfer-${index}`} className={styles.eventAlert}>
+              <AlertTitle className={styles.alertTitle}>
+                Transfer Record
+              </AlertTitle>
+              <AlertDescription className={styles.alertDescription}>
+                Recipient: {record.recipient.slice(0, 6)}...
+                {record.recipient.slice(-4)}
+                <br />
+                Time: {new Date(record.transfer_time * 1000).toLocaleString()}
+                <br />
+                Amount: {parseFloat(record.amount).toFixed(2)} iServ
+                <br />
+                Value: ${parseFloat(record.valueAtTime).toFixed(2)}
+                <br />
+                Department: {record.department}
+              </AlertDescription>
+            </Alert>
+          ))}
         </div>
       </div>
     </div>

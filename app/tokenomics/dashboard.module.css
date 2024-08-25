@@ -245,3 +245,38 @@
     grid-template-columns: 1fr;
   }
 }
+
+.multisigCard {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.5rem auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 900px;
+}
+
+.walletItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.walletItem:last-child {
+  border-bottom: none;
+}
+
+.walletName {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.walletAddress {
+  font-family: monospace;
+  color: #6b7280;
+  font-size: 0.8rem;
+  word-break: break-all;
+}
