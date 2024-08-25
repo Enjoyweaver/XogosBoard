@@ -3,16 +3,6 @@
 import { ethers } from "ethers";
 import { Activity, DollarSign, Users } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { iServABI } from "../../ABIs/iServ";
@@ -90,7 +80,7 @@ const TokenomicsDashboardClient = () => {
       setIsLoading(true);
       setError(null);
       try {
-        if (!iServ?.[chainId]) {
+        if (!iServ || !iServ[chainId]) {
           throw new Error(
             "iServ contract address is undefined for chainId: " + chainId
           );
@@ -188,7 +178,9 @@ const TokenomicsDashboardClient = () => {
         setMultisigWallets(updatedMultisigWallets);
       } catch (err) {
         console.error("Error fetching data:", err);
-        setError("Failed to fetch contract data. Please try again later.");
+        setError(
+          "Failed to fetch multisig wallet data. Please try again later."
+        );
       } finally {
         setIsLoading(false);
       }
@@ -211,169 +203,162 @@ const TokenomicsDashboardClient = () => {
     <div className={styles.dashboard}>
       <h1 className={styles.dashboardTitle}>iServ Tokenomics Dashboard</h1>
 
-      {error && (
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : error ? (
         <Alert>
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
+      ) : (
+        <>
+          <Card className={styles.addressesCard}>
+            <CardHeader className={styles.cardHeader}>
+              <CardTitle className={styles.cardTitle}>
+                Contract Addresses
+              </CardTitle>
+            </CardHeader>
+            <CardContent className={styles.cardContent}>
+              <div className={styles.addressItem}>
+                <span className={styles.addressName}>iServ:</span>
+                <span className={styles.addressValue}>{iServ[chainId]}</span>
+              </div>
+              <div className={styles.addressItem}>
+                <span className={styles.addressName}>Tracker:</span>
+                <span className={styles.addressValue}>{tracker[chainId]}</span>
+              </div>
+              <div className={styles.addressItem}>
+                <span className={styles.addressName}>Owner:</span>
+                <span className={styles.addressValue}>
+                  {owner || "Loading..."}
+                </span>
+              </div>
+              <div className={styles.addressItem}>
+                <span className={styles.addressName}>Storage:</span>
+                <span className={styles.addressValue}>
+                  {storageAddress || "Loading..."}
+                </span>
+              </div>
+              <div className={styles.addressItem}>
+                <span className={styles.addressName}>iPlay Contract:</span>
+                <span className={styles.addressValue}>
+                  {iPlayContract || "Loading..."}
+                </span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className={styles.multisigCard}>
+            <CardHeader className={styles.cardHeader}>
+              <CardTitle className={styles.cardTitle}>
+                Multisig Wallets
+              </CardTitle>
+            </CardHeader>
+            <CardContent className={styles.cardContent}>
+              {multisigWallets.map((wallet, index) => (
+                <div key={index} className={styles.walletItem}>
+                  <span className={styles.walletName}>{wallet.name}:</span>
+                  <span className={styles.walletAddress}>{wallet.address}</span>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          <div className={styles.statsGrid}>
+            <Card className={styles.statsCard}>
+              <CardHeader className={styles.cardHeader}>
+                <CardTitle className={styles.cardTitle}>
+                  <DollarSign className={styles.icon} />
+                  Total Supply
+                </CardTitle>
+              </CardHeader>
+              <CardContent className={styles.cardContent}>
+                <div className={styles.statValue}>
+                  {parseFloat(totalSupply).toLocaleString()} iServ
+                </div>
+              </CardContent>
+            </Card>
+            <Card className={styles.statsCard}>
+              <CardHeader className={styles.cardHeader}>
+                <CardTitle className={styles.cardTitle}>
+                  <Activity className={styles.icon} />
+                  Transfer Events
+                </CardTitle>
+              </CardHeader>
+              <CardContent className={styles.cardContent}>
+                <div className={styles.statValue}>{transferEvents.length}</div>
+              </CardContent>
+            </Card>
+            <Card className={styles.statsCard}>
+              <CardHeader className={styles.cardHeader}>
+                <CardTitle className={styles.cardTitle}>
+                  <Users className={styles.icon} />
+                  Secondary Balance
+                </CardTitle>
+              </CardHeader>
+              <CardContent className={styles.cardContent}>
+                <div className={styles.statValue}>
+                  {parseFloat(secondaryBalance).toLocaleString()} iServ
+                </div>
+              </CardContent>
+            </Card>
+            <Card className={styles.statsCard}>
+              <CardHeader className={styles.cardHeader}>
+                <CardTitle className={styles.cardTitle}>
+                  Pre-Mint Phase
+                </CardTitle>
+              </CardHeader>
+              <CardContent className={styles.cardContent}>
+                <div className={styles.statValue}>
+                  {isPreMintPhase === null
+                    ? "Loading..."
+                    : isPreMintPhase
+                      ? "Active"
+                      : "Inactive"}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <Card className={styles.statsCard}>
+            <CardHeader className={styles.cardHeader}>
+              <CardTitle className={styles.cardTitle}>Minting Stats</CardTitle>
+            </CardHeader>
+            <CardContent className={styles.cardContent}>
+              <div>
+                Minted Tokens: {parseFloat(mintedTokens).toLocaleString()} iServ
+              </div>
+              <div>Minted Days: {mintedDays}</div>
+            </CardContent>
+          </Card>
+
+          <div className={styles.eventsSection}>
+            <h2 className={styles.sectionTitle}>Transfer Records</h2>
+            <div className={styles.eventsGrid}>
+              {transferRecords.map((record, index) => (
+                <Alert key={`transfer-${index}`} className={styles.eventAlert}>
+                  <AlertTitle className={styles.alertTitle}>
+                    Transfer Record
+                  </AlertTitle>
+                  <AlertDescription className={styles.alertDescription}>
+                    Recipient: {record.recipient.slice(0, 6)}...
+                    {record.recipient.slice(-4)}
+                    <br />
+                    Time:{" "}
+                    {new Date(record.transfer_time * 1000).toLocaleString()}
+                    <br />
+                    Amount: {parseFloat(record.amount).toFixed(2)} iServ
+                    <br />
+                    Value: ${parseFloat(record.valueAtTime).toFixed(2)}
+                    <br />
+                    Department: {record.department}
+                  </AlertDescription>
+                </Alert>
+              ))}
+            </div>
+          </div>
+        </>
       )}
-
-      <Card className={styles.addressesCard}>
-        <CardHeader className={styles.cardHeader}>
-          <CardTitle className={styles.cardTitle}>Contract Addresses</CardTitle>
-        </CardHeader>
-        <CardContent className={styles.cardContent}>
-          <div className={styles.addressItem}>
-            <span className={styles.addressName}>iServ:</span>
-            <span className={styles.addressValue}>{iServ[chainId]}</span>
-          </div>
-          <div className={styles.addressItem}>
-            <span className={styles.addressName}>Tracker:</span>
-            <span className={styles.addressValue}>{tracker[chainId]}</span>
-          </div>
-          <div className={styles.addressItem}>
-            <span className={styles.addressName}>Owner:</span>
-            <span className={styles.addressValue}>{owner || "Loading..."}</span>
-          </div>
-          <div className={styles.addressItem}>
-            <span className={styles.addressName}>Storage:</span>
-            <span className={styles.addressValue}>
-              {storageAddress || "Loading..."}
-            </span>
-          </div>
-          <div className={styles.addressItem}>
-            <span className={styles.addressName}>iPlay Contract:</span>
-            <span className={styles.addressValue}>
-              {iPlayContract || "Loading..."}
-            </span>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className={styles.multisigCard}>
-        <CardHeader className={styles.cardHeader}>
-          <CardTitle className={styles.cardTitle}>Multisig Wallets</CardTitle>
-        </CardHeader>
-        <CardContent className={styles.cardContent}>
-          {multisigWallets.map((wallet, index) => (
-            <div key={index} className={styles.walletItem}>
-              <span className={styles.walletName}>{wallet.name}:</span>
-              <span className={styles.walletAddress}>{wallet.address}</span>
-            </div>
-          ))}
-        </CardContent>
-      </Card>
-
-      <div className={styles.statsGrid}>
-        <Card className={styles.statsCard}>
-          <CardHeader className={styles.cardHeader}>
-            <CardTitle className={styles.cardTitle}>
-              <DollarSign className={styles.icon} />
-              Total Supply
-            </CardTitle>
-          </CardHeader>
-          <CardContent className={styles.cardContent}>
-            <div className={styles.statValue}>
-              {parseFloat(totalSupply).toLocaleString()} iServ
-            </div>
-          </CardContent>
-        </Card>
-        <Card className={styles.statsCard}>
-          <CardHeader className={styles.cardHeader}>
-            <CardTitle className={styles.cardTitle}>
-              <Activity className={styles.icon} />
-              Transfer Events
-            </CardTitle>
-          </CardHeader>
-          <CardContent className={styles.cardContent}>
-            <div className={styles.statValue}>{transferEvents.length}</div>
-          </CardContent>
-        </Card>
-        <Card className={styles.statsCard}>
-          <CardHeader className={styles.cardHeader}>
-            <CardTitle className={styles.cardTitle}>
-              <Users className={styles.icon} />
-              Secondary Balance
-            </CardTitle>
-          </CardHeader>
-          <CardContent className={styles.cardContent}>
-            <div className={styles.statValue}>
-              {parseFloat(secondaryBalance).toLocaleString()} iServ
-            </div>
-          </CardContent>
-        </Card>
-        <Card className={styles.statsCard}>
-          <CardHeader className={styles.cardHeader}>
-            <CardTitle className={styles.cardTitle}>Pre-Mint Phase</CardTitle>
-          </CardHeader>
-          <CardContent className={styles.cardContent}>
-            <div className={styles.statValue}>
-              {isPreMintPhase === null
-                ? "Loading..."
-                : isPreMintPhase
-                  ? "Active"
-                  : "Inactive"}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card className={styles.statsCard}>
-        <CardHeader className={styles.cardHeader}>
-          <CardTitle className={styles.cardTitle}>Minting Stats</CardTitle>
-        </CardHeader>
-        <CardContent className={styles.cardContent}>
-          <div>
-            Minted Tokens: {parseFloat(mintedTokens).toLocaleString()} iServ
-          </div>
-          <div>Minted Days: {mintedDays}</div>
-        </CardContent>
-      </Card>
-
-      <Card className={styles.chartCard}>
-        <CardHeader className={styles.cardHeader}>
-          <CardTitle className={styles.cardTitle}>
-            Recent Transfer Events
-          </CardTitle>
-        </CardHeader>
-        <CardContent className={styles.cardContent}>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={transferData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="amount" fill="#8884d8" />
-            </BarChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
-
-      <div className={styles.eventsSection}>
-        <h2 className={styles.sectionTitle}>Transfer Records</h2>
-        <div className={styles.eventsGrid}>
-          {transferRecords.map((record, index) => (
-            <Alert key={`transfer-${index}`} className={styles.eventAlert}>
-              <AlertTitle className={styles.alertTitle}>
-                Transfer Record
-              </AlertTitle>
-              <AlertDescription className={styles.alertDescription}>
-                Recipient: {record.recipient.slice(0, 6)}...
-                {record.recipient.slice(-4)}
-                <br />
-                Time: {new Date(record.transfer_time * 1000).toLocaleString()}
-                <br />
-                Amount: {parseFloat(record.amount).toFixed(2)} iServ
-                <br />
-                Value: ${parseFloat(record.valueAtTime).toFixed(2)}
-                <br />
-                Department: {record.department}
-              </AlertDescription>
-            </Alert>
-          ))}
-        </div>
-      </div>
     </div>
   );
 };
