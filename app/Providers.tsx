@@ -4,9 +4,9 @@ import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { ReactNode } from "react";
-import { LiveblocksProvider } from "@/liveblocks.config";
 import { WagmiConfig } from "wagmi";
 import { config } from "@/config/config";
+import { LiveblocksProvider } from "@/liveblocks.config";
 
 export function Providers({
   children,

@@ -7,7 +7,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { iServABI } from "../../ABIs/iServ";
 import { TrackerABI } from "../../ABIs/Tracker";
-import { iServ, rpcUrls, secondaryAddress, tracker } from "../../config/config";
+import { iServ, rpcUrls, tracker } from "../../config/config";
 import styles from "./dashboard.module.css";
 
 interface TransferInfo {
@@ -26,7 +26,6 @@ interface MultisigWallet {
 const TokenomicsDashboardClient = () => {
   const [totalSupply, setTotalSupply] = useState("0");
   const [transferEvents, setTransferEvents] = useState<any[]>([]);
-  const [secondaryBalance, setSecondaryBalance] = useState("0");
   const [provider, setProvider] = useState<
     ethers.providers.Web3Provider | ethers.providers.JsonRpcProvider | null
   >(null);
@@ -40,11 +39,11 @@ const TokenomicsDashboardClient = () => {
   const [transferRecords, setTransferRecords] = useState<TransferInfo[]>([]);
   const [mintedTokens, setMintedTokens] = useState("0");
   const [mintedDays, setMintedDays] = useState("0");
-
-  const [multisigWallets, setMultisigWallets] = useState<MultisigWallet[]>([
-    { name: "Main Wallet", address: "" },
-    { name: "Treasury Wallet", address: "" },
-    { name: "Operations Wallet", address: "" },
+  const [storageBalance, setStorageBalance] = useState("0");
+  const [multisigWallets] = useState<MultisigWallet[]>([
+    { name: "Xogos CEO Wallet", address: "" },
+    { name: "Board Pres Wallet", address: "" },
+    { name: "Legal Wallet", address: "" },
     { name: "Development Wallet", address: "" },
     { name: "Marketing Wallet", address: "" },
   ]);
@@ -57,6 +56,9 @@ const TokenomicsDashboardClient = () => {
           selectedProvider = new ethers.providers.Web3Provider(window.ethereum);
         } else {
           console.log("Using fallback provider");
+          if (!rpcUrls || !rpcUrls["4002"]) {
+            throw new Error("RPC URL for chain ID 4002 is not defined");
+          }
           selectedProvider = new ethers.providers.JsonRpcProvider(
             rpcUrls["4002"]
           );
@@ -65,7 +67,7 @@ const TokenomicsDashboardClient = () => {
       } catch (err) {
         console.error("Error initializing provider:", err);
         setError(
-          "Failed to initialize provider. Please check your connection."
+          "Failed to initialize provider. Please check your connection and configuration."
         );
       }
     };
@@ -75,13 +77,11 @@ const TokenomicsDashboardClient = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!provider) {
-        setError("Provider not initialized. Please try again later.");
-        return;
-      }
+      if (!provider) return;
 
       setIsLoading(true);
       setError(null);
+
       try {
         if (!iServ || !iServ[chainId]) {
           throw new Error(
@@ -107,14 +107,12 @@ const TokenomicsDashboardClient = () => {
           ownerAddress,
           storageAddr,
           iPlayAddr,
-          secondaryBalanceBN,
         ] = await Promise.all([
           iServContract.totalSupply(),
           iServContract.preMintPhase(),
           iServContract.owner(),
           iServContract.storageAddress(),
           iServContract.iPlayContract(),
-          iServContract.balanceOf(secondaryAddress[chainId]),
         ]);
 
         setTotalSupply(ethers.utils.formatUnits(totalSupplyBN, 18));
@@ -122,17 +120,26 @@ const TokenomicsDashboardClient = () => {
         setOwner(ownerAddress);
         setStorageAddress(storageAddr);
         setIPlayContract(iPlayAddr);
-        setSecondaryBalance(ethers.utils.formatUnits(secondaryBalanceBN, 18));
+
+        // Fetch storage contract balance
+        const storageBalanceBN = await iServContract.balanceOf(storageAddr);
+        setStorageBalance(ethers.utils.formatUnits(storageBalanceBN, 18));
 
         const filter = iServContract.filters.Transfer();
         const logs = await iServContract.queryFilter(filter, -10000, "latest");
         setTransferEvents(logs.reverse());
 
+        // Fetching minted tokens and days
         const [mintedTokensBN, mintedDaysBN] = await Promise.all([
           trackerContract.minted_tokens(),
           trackerContract.minted_days(),
         ]);
 
+        // Debug logs to confirm values
+        console.log("Minted Tokens (BN):", mintedTokensBN.toString());
+        console.log("Minted Days (BN):", mintedDaysBN.toString());
+
+        // Ensure the values are correctly formatted
         setMintedTokens(ethers.utils.formatUnits(mintedTokensBN, 18));
         setMintedDays(mintedDaysBN.toString());
 
@@ -161,29 +168,21 @@ const TokenomicsDashboardClient = () => {
       }
     };
 
-    fetchData();
+    if (provider) {
+      fetchData();
+    }
   }, [provider, chainId]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (!provider) {
-        setError("Provider not initialized. Please try again later.");
-        return;
-      }
+    const fetchMultisigData = async () => {
+      if (!provider) return;
 
       setIsLoading(true);
       setError(null);
+
       try {
-        const updatedMultisigWallets = [
-          { name: "Main Wallet", address: "0x1234...5678" },
-          { name: "Treasury Wallet", address: "0x2345...6789" },
-          { name: "Operations Wallet", address: "0x3456...7890" },
-          { name: "Development Wallet", address: "0x4567...8901" },
-          { name: "Marketing Wallet", address: "0x5678...9012" },
-        ];
-        setMultisigWallets(updatedMultisigWallets);
       } catch (err) {
-        console.error("Error fetching data:", err);
+        console.error("Error fetching multisig wallet data:", err);
         setError(
           "Failed to fetch multisig wallet data. Please try again later."
         );
@@ -192,7 +191,9 @@ const TokenomicsDashboardClient = () => {
       }
     };
 
-    fetchData();
+    if (provider) {
+      fetchMultisigData();
+    }
   }, [provider, chainId]);
 
   const transferData = transferEvents
@@ -299,12 +300,14 @@ const TokenomicsDashboardClient = () => {
               <CardHeader className={styles.cardHeader}>
                 <CardTitle className={styles.cardTitle}>
                   <Users className={styles.icon} />
-                  Secondary Balance
+                  Storage Contract Balance
                 </CardTitle>
               </CardHeader>
               <CardContent className={styles.cardContent}>
                 <div className={styles.statValue}>
-                  {parseFloat(secondaryBalance).toLocaleString()} iServ
+                  {storageBalance
+                    ? `${parseFloat(storageBalance).toLocaleString()} iServ`
+                    : "Loading..."}
                 </div>
               </CardContent>
             </Card>
@@ -360,6 +363,14 @@ const TokenomicsDashboardClient = () => {
                     Department: {record.department}
                   </AlertDescription>
                 </Alert>
+              ))}
+            </div>
+            <div className={styles.transferList}>
+              {transferData.map((transfer, index) => (
+                <div key={index} className={styles.transferItem}>
+                  <p>{transfer.name}</p>
+                  <p>{transfer.amount} iServ</p>
+                </div>
               ))}
             </div>
           </div>

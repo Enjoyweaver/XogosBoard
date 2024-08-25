@@ -12,7 +12,7 @@ import styles from "./page.module.css";
 interface FeatureProps extends Omit<ComponentProps<"div">, "title"> {
   description: ReactNode;
   title: ReactNode;
-  link?: string; // Add link prop
+  link?: string;
 }
 
 function Feature({
