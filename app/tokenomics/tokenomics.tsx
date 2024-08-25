@@ -52,18 +52,16 @@ const TokenomicsDashboardClient = () => {
   useEffect(() => {
     const initProvider = async () => {
       try {
+        let selectedProvider;
         if (typeof window !== "undefined" && window.ethereum) {
-          const web3Provider = new ethers.providers.Web3Provider(
-            window.ethereum
-          );
-          setProvider(web3Provider);
+          selectedProvider = new ethers.providers.Web3Provider(window.ethereum);
         } else {
           console.log("Using fallback provider");
-          const fallbackProvider = new ethers.providers.JsonRpcProvider(
+          selectedProvider = new ethers.providers.JsonRpcProvider(
             rpcUrls["4002"]
           );
-          setProvider(fallbackProvider);
         }
+        setProvider(selectedProvider);
       } catch (err) {
         console.error("Error initializing provider:", err);
         setError(
@@ -77,7 +75,11 @@ const TokenomicsDashboardClient = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!provider) return;
+      if (!provider) {
+        setError("Provider not initialized. Please try again later.");
+        return;
+      }
+
       setIsLoading(true);
       setError(null);
       try {
@@ -134,7 +136,6 @@ const TokenomicsDashboardClient = () => {
         setMintedTokens(ethers.utils.formatUnits(mintedTokensBN, 18));
         setMintedDays(mintedDaysBN.toString());
 
-        // Fetch transfer records (assuming customerID 1 for example)
         const customerID = 1;
         const transactionCount =
           await trackerContract.transaction_count(customerID);
@@ -165,7 +166,11 @@ const TokenomicsDashboardClient = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!provider) return;
+      if (!provider) {
+        setError("Provider not initialized. Please try again later.");
+        return;
+      }
+
       setIsLoading(true);
       setError(null);
       try {
