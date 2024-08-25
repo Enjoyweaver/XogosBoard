@@ -180,15 +180,9 @@ const TokenomicsDashboardClient = () => {
       setIsLoading(true);
       setError(null);
 
-      try {
-      } catch (err) {
-        console.error("Error fetching multisig wallet data:", err);
-        setError(
-          "Failed to fetch multisig wallet data. Please try again later."
-        );
-      } finally {
-        setIsLoading(false);
-      }
+      // Placeholder for future multisig data fetching logic
+
+      setIsLoading(false);
     };
 
     if (provider) {
