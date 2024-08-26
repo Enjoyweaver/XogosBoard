@@ -7,6 +7,8 @@ import { iServABI } from "../../ABIs/iServ";
 import { TrackerABI } from "../../ABIs/Tracker";
 import {
   adminAddress,
+  blockExplorerAddress,
+  blockExplorerUrls,
   iServAddress,
   rpcUrls,
   trackerAddress,
@@ -18,6 +20,7 @@ interface TransferInfo {
   recipient: string;
   amount: string;
   transfer_time: number;
+  transactionHash: string;
 }
 
 const TokenomicsDashboardClient = () => {
@@ -126,9 +129,6 @@ const TokenomicsDashboardClient = () => {
         }
 
         setTransferRecords(transferRecordsData);
-      } catch (err) {
-        console.error("Error fetching data:", err.message);
-        setError("Failed to fetch contract data. Please try again later.");
       } finally {
         setIsLoading(false);
       }
@@ -172,7 +172,6 @@ const TokenomicsDashboardClient = () => {
       alert("Tokens minted successfully!");
     } catch (err) {
       console.error("Error minting tokens:", err);
-      setMintError(`Failed to mint tokens: ${err.message}`);
     } finally {
       setIsMinting(false);
     }
@@ -204,7 +203,6 @@ const TokenomicsDashboardClient = () => {
       alert("Address whitelisted successfully!");
     } catch (err) {
       console.error("Error whitelisting address:", err);
-      setWhitelistError(`Failed to whitelist address: ${err.message}`);
     } finally {
       setIsWhitelisting(false);
     }
@@ -235,11 +233,6 @@ const TokenomicsDashboardClient = () => {
         }
 
         setWhitelistedAddresses(whitelisted);
-      } catch (err) {
-        console.error("Error fetching whitelisted addresses:", err);
-        setError(
-          "Failed to fetch whitelisted addresses. Please try again later."
-        );
       } finally {
         setIsLoading(false);
       }
@@ -431,14 +424,36 @@ const TokenomicsDashboardClient = () => {
             <div key={`transfer-${index}`} className={styles.eventAlert}>
               <div className={styles.alertTitle}>Transfer Record</div>
               <div className={styles.alertDescription}>
-                From: {record.sender.slice(0, 6)}...{record.sender.slice(-4)}
+                From:{" "}
+                <a
+                  href={`${blockExplorerAddress[chainId]}${record.sender}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {record.sender.slice(0, 6)}...{record.sender.slice(-4)}
+                </a>
                 <br />
-                To: {record.recipient.slice(0, 6)}...
-                {record.recipient.slice(-4)}
+                To:{" "}
+                <a
+                  href={`${blockExplorerAddress[chainId]}${record.recipient}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {record.recipient.slice(0, 6)}...{record.recipient.slice(-4)}
+                </a>
                 <br />
                 Amount: {parseFloat(record.amount).toFixed(2)} {symbol}
                 <br />
                 Time: {new Date(record.transfer_time * 1000).toLocaleString()}
+                <br />
+                Transaction:{" "}
+                <a
+                  href={`${blockExplorerUrls[chainId]}${record.transactionHash}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View on Explorer
+                </a>
               </div>
             </div>
           ))}
