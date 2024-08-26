@@ -185,25 +185,25 @@ export const rpcUrls: { [key: string]: string } = {
 export const iServAddress: {
   [key: string]: string;
 } = {
-  "4002": "0x2cFf9f004c3484B3eB16834Ba24F90F105EA2B5A",
+  "4002": "0xdd2041a8d116a5D5B9B594C657286f1a16eaee16",
 };
 
 export const randomAddress: {
   [key: string]: string;
 } = {
-  "4002": "0xe29Fc0207C0F5f30d5AEF09e72B5FB7E6981D7bd",
+  "4002": "0x262198e41EE3F02DB7CDE7B5516Cc6caDAa3BA0d",
 };
 
 export const trackerAddress: {
   [key: string]: string;
 } = {
-  "4002": "0x0F8d3D886051B8E4BfdDEa62C9Dd3aad77888A31",
+  "4002": "0xe06C525B566B3215585774a589495bD8557684DA",
   //"64165": "0x0643e30ABfa871c5a22c602Cb2071c2B1230e0d9",
 };
 
 export const adminAddress: {
   [key: string]: string;
 } = {
-  "4002": "0x6EB369B3A1E9E97ce2A2116B514eb753901d3153",
+  "4002": "0x49fe0217133F91Db38F1866E53D3E00CD1AA710B",
   // "64165": "0x8401eb679FBCc6522B6489C1a5E119532918f88a",
 };

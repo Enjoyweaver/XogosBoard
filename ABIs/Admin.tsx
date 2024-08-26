@@ -138,6 +138,35 @@ export const AdminABI = [
   {
     stateMutability: "view",
     type: "function",
+    name: "get_whitelist_count",
+    inputs: [],
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
+      },
+    ],
+  },
+  {
+    stateMutability: "view",
+    type: "function",
+    name: "get_whitelisted_address",
+    inputs: [
+      {
+        name: "_index",
+        type: "uint256",
+      },
+    ],
+    outputs: [
+      {
+        name: "",
+        type: "address",
+      },
+    ],
+  },
+  {
+    stateMutability: "view",
+    type: "function",
     name: "get_otc_trade",
     inputs: [
       {
@@ -328,6 +357,35 @@ export const AdminABI = [
       {
         name: "",
         type: "bool",
+      },
+    ],
+  },
+  {
+    stateMutability: "view",
+    type: "function",
+    name: "whitelisted_addresses_list",
+    inputs: [
+      {
+        name: "arg0",
+        type: "uint256",
+      },
+    ],
+    outputs: [
+      {
+        name: "",
+        type: "address",
+      },
+    ],
+  },
+  {
+    stateMutability: "view",
+    type: "function",
+    name: "whitelist_count",
+    inputs: [],
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
       },
     ],
   },

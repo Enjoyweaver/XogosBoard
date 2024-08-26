@@ -305,3 +305,83 @@
   background-color: #9e9e9e;
   cursor: not-allowed;
 }
+
+.whitelistCard {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto 1.5rem auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 60%;
+  max-width: 900px;
+  text-align: center;
+}
+
+.inputGroup {
+  margin-bottom: 1rem;
+}
+
+.inputLabel {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.button {
+  padding: 0.5rem 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: #2563eb;
+}
+
+.whitelistDisplayCard {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto 1.5rem auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 60%;
+  max-width: 900px;
+  text-align: center;
+}
+
+.whitelistList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.whitelistItem {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  font-family: monospace;
+  color: #374151;
+}
+
+.whitelistItem:last-child {
+  border-bottom: none;
+}

@@ -42,6 +42,14 @@ const TokenomicsDashboardClient = () => {
   const [isMinting, setIsMinting] = useState(false);
   const [mintError, setMintError] = useState<string | null>(null);
 
+  // Whitelist state
+  const [whitelistAddress, setWhitelistAddress] = useState("");
+  const [isWhitelisting, setIsWhitelisting] = useState(false);
+  const [whitelistError, setWhitelistError] = useState<string | null>(null);
+  const [whitelistedAddresses, setWhitelistedAddresses] = useState<string[]>(
+    []
+  );
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -79,6 +87,15 @@ const TokenomicsDashboardClient = () => {
           trackerContract.minted_days(),
         ]);
 
+        // Safeguarding against undefined values
+        if (
+          decimalsResult === undefined ||
+          mintedDaysBN === undefined ||
+          trackerContract.transfer_count === undefined
+        ) {
+          throw new Error("One or more contract calls returned undefined");
+        }
+
         // Convert BigNumbers to strings or numbers
         setTotalSupply(ethers.utils.formatUnits(totalSupplyBN, 18));
         setName(nameResult);
@@ -96,19 +113,21 @@ const TokenomicsDashboardClient = () => {
         const transferCount = await trackerContract.transfer_count();
         const transferRecordsData: TransferInfo[] = [];
 
-        for (let i = 0; i < Math.min(transferCount.toNumber(), 10); i++) {
-          const transferInfo = await trackerContract.get_transfer_info(i);
-          transferRecordsData.push({
-            sender: transferInfo.sender,
-            recipient: transferInfo.recipient,
-            amount: ethers.utils.formatUnits(transferInfo.amount, 18),
-            transfer_time: transferInfo.transfer_time.toNumber(),
-          });
+        if (transferCount) {
+          for (let i = 0; i < Math.min(transferCount.toNumber(), 10); i++) {
+            const transferInfo = await trackerContract.get_transfer_info(i);
+            transferRecordsData.push({
+              sender: transferInfo.sender,
+              recipient: transferInfo.recipient,
+              amount: ethers.utils.formatUnits(transferInfo.amount, 18),
+              transfer_time: transferInfo.time.toNumber(),
+            });
+          }
         }
 
         setTransferRecords(transferRecordsData);
       } catch (err) {
-        console.error("Error fetching data:", err);
+        console.error("Error fetching data:", err.message);
         setError("Failed to fetch contract data. Please try again later.");
       } finally {
         setIsLoading(false);
@@ -116,7 +135,7 @@ const TokenomicsDashboardClient = () => {
     };
 
     fetchData();
-  }, []);
+  }, [chainId]);
 
   const handleMint = async () => {
     if (!window.ethereum) {
@@ -153,10 +172,81 @@ const TokenomicsDashboardClient = () => {
       alert("Tokens minted successfully!");
     } catch (err) {
       console.error("Error minting tokens:", err);
+      setMintError(`Failed to mint tokens: ${err.message}`);
     } finally {
       setIsMinting(false);
     }
   };
+
+  const handleAddToWhitelist = async () => {
+    if (!window.ethereum) {
+      setWhitelistError("Please install MetaMask to whitelist addresses.");
+      return;
+    }
+
+    setIsWhitelisting(true);
+    setWhitelistError(null);
+
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner();
+      const adminContract = new ethers.Contract(
+        adminAddress[chainId],
+        AdminABI,
+        signer
+      );
+
+      const tx = await adminContract.add_to_whitelist(whitelistAddress);
+      await tx.wait();
+
+      setWhitelistAddress("");
+      alert("Address whitelisted successfully!");
+    } catch (err) {
+      console.error("Error whitelisting address:", err);
+      setWhitelistError(`Failed to whitelist address: ${err.message}`);
+    } finally {
+      setIsWhitelisting(false);
+    }
+  };
+
+  useEffect(() => {
+    const fetchWhitelistedAddresses = async () => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const provider = new ethers.providers.JsonRpcProvider(rpcUrls[chainId]);
+        const adminContract = new ethers.Contract(
+          adminAddress[chainId],
+          AdminABI,
+          provider
+        );
+
+        // Ensure these function names are exactly as defined in your Vyper contract
+        const whitelistCount = await adminContract.get_whitelist_count();
+        const whitelisted: string[] = [];
+
+        for (let i = 0; i < whitelistCount.toNumber(); i++) {
+          const address = await adminContract.get_whitelisted_address(i);
+          if (address !== ethers.constants.AddressZero) {
+            whitelisted.push(address);
+          }
+        }
+
+        setWhitelistedAddresses(whitelisted);
+      } catch (err) {
+        console.error("Error fetching whitelisted addresses:", err);
+        setError(
+          "Failed to fetch whitelisted addresses. Please try again later."
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchWhitelistedAddresses();
+  }, [chainId]);
 
   return (
     <div className={styles.dashboard}>
@@ -284,6 +374,53 @@ const TokenomicsDashboardClient = () => {
             </button>
           </div>
           {mintError && <div>{mintError}</div>}
+        </div>
+      </div>
+
+      <div className={styles.whitelistCard}>
+        <div className={styles.cardHeader}>
+          <h2 className={styles.cardTitle}>Whitelist Address</h2>
+        </div>
+        <div className={styles.cardContent}>
+          <div className={styles.inputGroup}>
+            <label className={styles.inputLabel}>Address to Whitelist</label>
+            <input
+              type="text"
+              value={whitelistAddress}
+              onChange={(e) => setWhitelistAddress(e.target.value)}
+              placeholder="Address to whitelist"
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.buttonWrapper}>
+            <button
+              onClick={handleAddToWhitelist}
+              disabled={isWhitelisting}
+              className={styles.button}
+            >
+              Add to Whitelist
+            </button>
+          </div>
+          {whitelistError && <div>{whitelistError}</div>}
+        </div>
+      </div>
+
+      <div className={styles.whitelistDisplayCard}>
+        <div className={styles.cardHeader}>
+          <h2 className={styles.cardTitle}>Whitelisted Addresses</h2>
+        </div>
+        <div className={styles.cardContent}>
+          {whitelistedAddresses.length > 0 ? (
+            <ul className={styles.whitelistList}>
+              {whitelistedAddresses.map((address, index) => (
+                <li key={index} className={styles.whitelistItem}>
+                  {address}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div>No addresses whitelisted.</div>
+          )}
         </div>
       </div>
 
