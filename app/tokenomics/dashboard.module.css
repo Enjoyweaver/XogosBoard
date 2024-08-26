@@ -385,3 +385,16 @@
 .whitelistItem:last-child {
   border-bottom: none;
 }
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.tokenomicsImage {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+}

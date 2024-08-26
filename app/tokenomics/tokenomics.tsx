@@ -1,6 +1,7 @@
 "use client";
 
 import { ethers } from "ethers";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { AdminABI } from "@/ABIs/Admin";
 import { iServABI } from "../../ABIs/iServ";
@@ -262,6 +263,15 @@ const TokenomicsDashboardClient = () => {
   return (
     <div className={styles.dashboard}>
       <h1 className={styles.dashboardTitle}>iServ Tokenomics Dashboard</h1>
+      <div className={styles.imageContainer}>
+        <Image
+          src="/tokenomics.png"
+          alt="Tokenomics"
+          className={styles.tokenomicsImage}
+          width={300}
+          height={300}
+        />
+      </div>
 
       {error && (
         <div>
