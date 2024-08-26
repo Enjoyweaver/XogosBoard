@@ -108,7 +108,6 @@ const TokenomicsDashboardClient = () => {
         setIPlayContract(iPlayContractAddress);
         setMintedTokens(ethers.utils.formatUnits(mintedTokensBN, 18));
         setMintedDays(mintedDaysBN.toString());
-
         const filter = iServContract.filters.Transfer();
         const logs = await iServContract.queryFilter(filter, -10000, "latest");
         setTransferEvents(logs.reverse());
@@ -119,14 +118,21 @@ const TokenomicsDashboardClient = () => {
         if (transferCount) {
           for (let i = 0; i < Math.min(transferCount.toNumber(), 10); i++) {
             const transferInfo = await trackerContract.get_transfer_info(i);
+
+            // Retrieve the transactionHash from the logs based on the index
+            const transactionHash = logs[i]?.transactionHash || "";
+
             transferRecordsData.push({
               sender: transferInfo.sender,
               recipient: transferInfo.recipient,
               amount: ethers.utils.formatUnits(transferInfo.amount, 18),
               transfer_time: transferInfo.time.toNumber(),
+              transactionHash: transactionHash, // Add the transactionHash here
             });
           }
         }
+
+        setTransferRecords(transferRecordsData);
 
         setTransferRecords(transferRecordsData);
       } finally {
