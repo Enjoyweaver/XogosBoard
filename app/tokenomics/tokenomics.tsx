@@ -153,7 +153,6 @@ const TokenomicsDashboardClient = () => {
       alert("Tokens minted successfully!");
     } catch (err) {
       console.error("Error minting tokens:", err);
-      setMintError(`Failed to mint tokens: ${err.message}`);
     } finally {
       setIsMinting(false);
     }
