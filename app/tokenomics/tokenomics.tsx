@@ -1,165 +1,112 @@
 "use client";
 
 import { ethers } from "ethers";
-import { Activity, DollarSign, Users } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AdminABI } from "@/ABIs/Admin";
 import { iServABI } from "../../ABIs/iServ";
 import { TrackerABI } from "../../ABIs/Tracker";
-import { iServ, rpcUrls, tracker } from "../../config/config";
+import {
+  adminAddress,
+  iServAddress,
+  rpcUrls,
+  trackerAddress,
+} from "../../config/config";
 import styles from "./dashboard.module.css";
 
 interface TransferInfo {
+  sender: string;
   recipient: string;
-  transfer_time: number;
   amount: string;
-  valueAtTime: string;
-  department: number;
-}
-
-interface MultisigWallet {
-  name: string;
-  address: string;
+  transfer_time: number;
 }
 
 const TokenomicsDashboardClient = () => {
   const [totalSupply, setTotalSupply] = useState("0");
   const [transferEvents, setTransferEvents] = useState<any[]>([]);
-  const [provider, setProvider] = useState<
-    ethers.providers.Web3Provider | ethers.providers.JsonRpcProvider | null
-  >(null);
   const chainId = "4002"; // Fantom Testnet
   const [isLoading, setIsLoading] = useState(true);
-  const [isPreMintPhase, setIsPreMintPhase] = useState<boolean | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [owner, setOwner] = useState<string | null>(null);
-  const [storageAddress, setStorageAddress] = useState<string | null>(null);
   const [iPlayContract, setIPlayContract] = useState<string | null>(null);
   const [transferRecords, setTransferRecords] = useState<TransferInfo[]>([]);
   const [mintedTokens, setMintedTokens] = useState("0");
   const [mintedDays, setMintedDays] = useState("0");
-  const [storageBalance, setStorageBalance] = useState("0");
-  const [multisigWallets] = useState<MultisigWallet[]>([
-    { name: "Xogos CEO Wallet", address: "" },
-    { name: "Board Pres Wallet", address: "" },
-    { name: "Legal Wallet", address: "" },
-    { name: "Development Wallet", address: "" },
-    { name: "Marketing Wallet", address: "" },
-  ]);
+  const [name, setName] = useState("");
+  const [symbol, setSymbol] = useState("");
+  const [decimals, setDecimals] = useState(0);
 
-  useEffect(() => {
-    const initProvider = async () => {
-      try {
-        let selectedProvider;
-        if (typeof window !== "undefined" && window.ethereum) {
-          selectedProvider = new ethers.providers.Web3Provider(window.ethereum);
-        } else {
-          console.log("Using fallback provider");
-          if (!rpcUrls || !rpcUrls["4002"]) {
-            throw new Error("RPC URL for chain ID 4002 is not defined");
-          }
-          selectedProvider = new ethers.providers.JsonRpcProvider(
-            rpcUrls["4002"]
-          );
-        }
-        setProvider(selectedProvider);
-      } catch (err) {
-        console.error("Error initializing provider:", err);
-        setError(
-          "Failed to initialize provider. Please check your connection and configuration."
-        );
-      }
-    };
-
-    initProvider();
-  }, []);
+  // Minting state
+  const [mintAmount, setMintAmount] = useState("");
+  const [mintRecipient, setMintRecipient] = useState("");
+  const [mintUsdAmount, setMintUsdAmount] = useState("");
+  const [isMinting, setIsMinting] = useState(false);
+  const [mintError, setMintError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!provider) return;
-
       setIsLoading(true);
       setError(null);
-
       try {
-        if (!iServ || !iServ[chainId]) {
-          throw new Error(
-            "iServ contract address is undefined for chainId: " + chainId
-          );
-        }
-
+        const provider = new ethers.providers.JsonRpcProvider(rpcUrls[chainId]);
         const iServContract = new ethers.Contract(
-          iServ[chainId],
+          iServAddress[chainId],
           iServABI,
           provider
         );
-
         const trackerContract = new ethers.Contract(
-          tracker[chainId],
+          trackerAddress[chainId],
           TrackerABI,
           provider
         );
 
         const [
           totalSupplyBN,
-          preMintPhase,
+          nameResult,
+          symbolResult,
+          decimalsResult,
           ownerAddress,
-          storageAddr,
-          iPlayAddr,
+          iPlayContractAddress,
+          mintedTokensBN,
+          mintedDaysBN,
         ] = await Promise.all([
           iServContract.totalSupply(),
-          iServContract.preMintPhase(),
+          iServContract.name(),
+          iServContract.symbol(),
+          iServContract.decimals(),
           iServContract.owner(),
-          iServContract.storageAddress(),
           iServContract.iPlayContract(),
+          trackerContract.total_minted(),
+          trackerContract.minted_days(),
         ]);
 
+        // Convert BigNumbers to strings or numbers
         setTotalSupply(ethers.utils.formatUnits(totalSupplyBN, 18));
-        setIsPreMintPhase(preMintPhase);
+        setName(nameResult);
+        setSymbol(symbolResult);
+        setDecimals(decimalsResult.toNumber());
         setOwner(ownerAddress);
-        setStorageAddress(storageAddr);
-        setIPlayContract(iPlayAddr);
-
-        // Fetch storage contract balance
-        const storageBalanceBN = await iServContract.balanceOf(storageAddr);
-        setStorageBalance(ethers.utils.formatUnits(storageBalanceBN, 18));
+        setIPlayContract(iPlayContractAddress);
+        setMintedTokens(ethers.utils.formatUnits(mintedTokensBN, 18));
+        setMintedDays(mintedDaysBN.toString());
 
         const filter = iServContract.filters.Transfer();
         const logs = await iServContract.queryFilter(filter, -10000, "latest");
         setTransferEvents(logs.reverse());
 
-        // Fetching minted tokens and days
-        const [mintedTokensBN, mintedDaysBN] = await Promise.all([
-          trackerContract.minted_tokens(),
-          trackerContract.minted_days(),
-        ]);
+        const transferCount = await trackerContract.transfer_count();
+        const transferRecordsData: TransferInfo[] = [];
 
-        // Debug logs to confirm values
-        console.log("Minted Tokens (BN):", mintedTokensBN.toString());
-        console.log("Minted Days (BN):", mintedDaysBN.toString());
-
-        // Ensure the values are correctly formatted
-        setMintedTokens(ethers.utils.formatUnits(mintedTokensBN, 18));
-        setMintedDays(mintedDaysBN.toString());
-
-        const customerID = 1;
-        const transactionCount =
-          await trackerContract.transaction_count(customerID);
-        const records: TransferInfo[] = [];
-
-        for (let i = 0; i < transactionCount.toNumber(); i++) {
-          const record = await trackerContract.get_transaction(customerID, i);
-          records.push({
-            recipient: record.recipient,
-            transfer_time: record.transfer_time.toNumber(),
-            amount: ethers.utils.formatUnits(record.amount, 18),
-            valueAtTime: ethers.utils.formatUnits(record.valueAtTime, 18),
-            department: record.department.toNumber(),
+        for (let i = 0; i < Math.min(transferCount.toNumber(), 10); i++) {
+          const transferInfo = await trackerContract.get_transfer_info(i);
+          transferRecordsData.push({
+            sender: transferInfo.sender,
+            recipient: transferInfo.recipient,
+            amount: ethers.utils.formatUnits(transferInfo.amount, 18),
+            transfer_time: transferInfo.transfer_time.toNumber(),
           });
         }
 
-        setTransferRecords(records);
+        setTransferRecords(transferRecordsData);
       } catch (err) {
         console.error("Error fetching data:", err);
         setError("Failed to fetch contract data. Please try again later.");
@@ -168,208 +115,199 @@ const TokenomicsDashboardClient = () => {
       }
     };
 
-    if (provider) {
-      fetchData();
+    fetchData();
+  }, []);
+
+  const handleMint = async () => {
+    if (!window.ethereum) {
+      setMintError("Please install MetaMask to mint tokens.");
+      return;
     }
-  }, [provider, chainId]);
 
-  useEffect(() => {
-    const fetchMultisigData = async () => {
-      if (!provider) return;
+    setIsMinting(true);
+    setMintError(null);
 
-      setIsLoading(true);
-      setError(null);
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner();
+      const adminContract = new ethers.Contract(
+        adminAddress[chainId],
+        AdminABI,
+        signer
+      );
 
-      // Placeholder for future multisig data fetching logic
+      const mintAmountBN = ethers.utils.parseUnits(mintAmount, 18);
+      const usdAmountBN = ethers.utils.parseUnits(mintUsdAmount, 18);
 
-      setIsLoading(false);
-    };
+      const tx = await adminContract.otc_trade(
+        mintRecipient,
+        mintAmountBN,
+        usdAmountBN
+      );
+      await tx.wait();
 
-    if (provider) {
-      fetchMultisigData();
+      setMintAmount("");
+      setMintRecipient("");
+      setMintUsdAmount("");
+      alert("Tokens minted successfully!");
+    } catch (err) {
+      console.error("Error minting tokens:", err);
+      setMintError(`Failed to mint tokens: ${err.message}`);
+    } finally {
+      setIsMinting(false);
     }
-  }, [provider, chainId]);
-
-  const transferData = transferEvents
-    .map((event, index) => ({
-      name: `Transfer ${transferEvents.length - index}`,
-      amount: parseFloat(
-        ethers.utils.formatUnits(event.args?.amount || "0", 18)
-      ),
-    }))
-    .slice(0, 10)
-    .reverse();
+  };
 
   return (
     <div className={styles.dashboard}>
       <h1 className={styles.dashboardTitle}>iServ Tokenomics Dashboard</h1>
 
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : error ? (
-        <Alert>
-          <AlertTitle>Error</AlertTitle>
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      ) : (
-        <>
-          <Card className={styles.addressesCard}>
-            <CardHeader className={styles.cardHeader}>
-              <CardTitle className={styles.cardTitle}>
-                Contract Addresses
-              </CardTitle>
-            </CardHeader>
-            <CardContent className={styles.cardContent}>
-              <div className={styles.addressItem}>
-                <span className={styles.addressName}>iServ:</span>
-                <span className={styles.addressValue}>{iServ[chainId]}</span>
-              </div>
-              <div className={styles.addressItem}>
-                <span className={styles.addressName}>Tracker:</span>
-                <span className={styles.addressValue}>{tracker[chainId]}</span>
-              </div>
-              <div className={styles.addressItem}>
-                <span className={styles.addressName}>Owner:</span>
-                <span className={styles.addressValue}>
-                  {owner || "Loading..."}
-                </span>
-              </div>
-              <div className={styles.addressItem}>
-                <span className={styles.addressName}>Storage:</span>
-                <span className={styles.addressValue}>
-                  {storageAddress || "Loading..."}
-                </span>
-              </div>
-              <div className={styles.addressItem}>
-                <span className={styles.addressName}>iPlay Contract:</span>
-                <span className={styles.addressValue}>
-                  {iPlayContract || "Loading..."}
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className={styles.multisigCard}>
-            <CardHeader className={styles.cardHeader}>
-              <CardTitle className={styles.cardTitle}>
-                Multisig Wallets
-              </CardTitle>
-            </CardHeader>
-            <CardContent className={styles.cardContent}>
-              {multisigWallets.map((wallet, index) => (
-                <div key={index} className={styles.walletItem}>
-                  <span className={styles.walletName}>{wallet.name}:</span>
-                  <span className={styles.walletAddress}>{wallet.address}</span>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-
-          <div className={styles.statsGrid}>
-            <Card className={styles.statsCard}>
-              <CardHeader className={styles.cardHeader}>
-                <CardTitle className={styles.cardTitle}>
-                  <DollarSign className={styles.icon} />
-                  Total Supply
-                </CardTitle>
-              </CardHeader>
-              <CardContent className={styles.cardContent}>
-                <div className={styles.statValue}>
-                  {parseFloat(totalSupply).toLocaleString()} iServ
-                </div>
-              </CardContent>
-            </Card>
-            <Card className={styles.statsCard}>
-              <CardHeader className={styles.cardHeader}>
-                <CardTitle className={styles.cardTitle}>
-                  <Activity className={styles.icon} />
-                  Transfer Events
-                </CardTitle>
-              </CardHeader>
-              <CardContent className={styles.cardContent}>
-                <div className={styles.statValue}>{transferEvents.length}</div>
-              </CardContent>
-            </Card>
-            <Card className={styles.statsCard}>
-              <CardHeader className={styles.cardHeader}>
-                <CardTitle className={styles.cardTitle}>
-                  <Users className={styles.icon} />
-                  Storage Contract Balance
-                </CardTitle>
-              </CardHeader>
-              <CardContent className={styles.cardContent}>
-                <div className={styles.statValue}>
-                  {storageBalance
-                    ? `${parseFloat(storageBalance).toLocaleString()} iServ`
-                    : "Loading..."}
-                </div>
-              </CardContent>
-            </Card>
-            <Card className={styles.statsCard}>
-              <CardHeader className={styles.cardHeader}>
-                <CardTitle className={styles.cardTitle}>
-                  Pre-Mint Phase
-                </CardTitle>
-              </CardHeader>
-              <CardContent className={styles.cardContent}>
-                <div className={styles.statValue}>
-                  {isPreMintPhase === null
-                    ? "Loading..."
-                    : isPreMintPhase
-                      ? "Active"
-                      : "Inactive"}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          <Card className={styles.statsCard}>
-            <CardHeader className={styles.cardHeader}>
-              <CardTitle className={styles.cardTitle}>Minting Stats</CardTitle>
-            </CardHeader>
-            <CardContent className={styles.cardContent}>
-              <div>
-                Minted Tokens: {parseFloat(mintedTokens).toLocaleString()} iServ
-              </div>
-              <div>Minted Days: {mintedDays}</div>
-            </CardContent>
-          </Card>
-
-          <div className={styles.eventsSection}>
-            <h2 className={styles.sectionTitle}>Transfer Records</h2>
-            <div className={styles.eventsGrid}>
-              {transferRecords.map((record, index) => (
-                <Alert key={`transfer-${index}`} className={styles.eventAlert}>
-                  <AlertTitle className={styles.alertTitle}>
-                    Transfer Record
-                  </AlertTitle>
-                  <AlertDescription className={styles.alertDescription}>
-                    Recipient: {record.recipient.slice(0, 6)}...
-                    {record.recipient.slice(-4)}
-                    <br />
-                    Time:{" "}
-                    {new Date(record.transfer_time * 1000).toLocaleString()}
-                    <br />
-                    Amount: {parseFloat(record.amount).toFixed(2)} iServ
-                    <br />
-                    Value: ${parseFloat(record.valueAtTime).toFixed(2)}
-                    <br />
-                    Department: {record.department}
-                  </AlertDescription>
-                </Alert>
-              ))}
-            </div>
-            <div className={styles.transferList}>
-              {transferData.map((transfer, index) => (
-                <div key={index} className={styles.transferItem}>
-                  <p>{transfer.name}</p>
-                  <p>{transfer.amount} iServ</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </>
+      {error && (
+        <div>
+          <strong>Error</strong>: {error}
+        </div>
       )}
+
+      <div className={styles.addressesCard}>
+        <div className={styles.cardHeader}>
+          <h2 className={styles.cardTitle}>Contract Addresses</h2>
+        </div>
+        <div className={styles.cardContent}>
+          <div className={styles.addressItem}>
+            <strong className={styles.addressName}>iServ:</strong>
+            <span className={styles.addressValue}>{iServAddress[chainId]}</span>
+          </div>
+          <div className={styles.addressItem}>
+            <strong className={styles.addressName}>Tracker:</strong>
+            <span className={styles.addressValue}>
+              {trackerAddress[chainId]}
+            </span>
+          </div>
+          <div className={styles.addressItem}>
+            <strong className={styles.addressName}>Admin:</strong>
+            <span className={styles.addressValue}>{adminAddress[chainId]}</span>
+          </div>
+          <div className={styles.addressItem}>
+            <strong className={styles.addressName}>Owner:</strong>
+            <span className={styles.addressValue}>{owner || "Loading..."}</span>
+          </div>
+          <div className={styles.addressItem}>
+            <strong className={styles.addressName}>iPlay Contract:</strong>
+            <span className={styles.addressValue}>
+              {iPlayContract || "Loading..."}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.statsGrid}>
+        <div className={styles.statsCard}>
+          <div className={styles.cardHeader}>
+            <h2 className={styles.cardTitle}>Total Supply</h2>
+          </div>
+          <div className={styles.cardContent}>
+            <div className={styles.statValue}>
+              {parseFloat(totalSupply).toLocaleString()} {symbol}
+            </div>
+          </div>
+        </div>
+        <div className={styles.statsCard}>
+          <div className={styles.cardHeader}>
+            <h2 className={styles.cardTitle}>Transfer Events</h2>
+          </div>
+          <div className={styles.cardContent}>
+            <div className={styles.statValue}>{transferEvents.length}</div>
+          </div>
+        </div>
+        <div className={styles.statsCard}>
+          <div className={styles.cardHeader}>
+            <h2 className={styles.cardTitle}>Minted Tokens</h2>
+          </div>
+          <div className={styles.cardContent}>
+            <div className={styles.statValue}>
+              {parseFloat(mintedTokens).toLocaleString()} {symbol}
+            </div>
+          </div>
+        </div>
+        <div className={styles.statsCard}>
+          <div className={styles.cardHeader}>
+            <h2 className={styles.cardTitle}>Minted Days</h2>
+          </div>
+          <div className={styles.cardContent}>
+            <div className={styles.statValue}>{mintedDays}</div>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.otcCard}>
+        <div className={styles.cardHeader}>
+          <h2 className={styles.cardTitle}>Mint Tokens (OTC Trade)</h2>
+        </div>
+        <div className={styles.cardContent}>
+          <div className={styles.inputGroup}>
+            <label className={styles.inputLabel}>Amount to mint</label>
+            <input
+              type="text"
+              value={mintAmount}
+              onChange={(e) => setMintAmount(e.target.value)}
+              placeholder="Amount to mint"
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label className={styles.inputLabel}>Recipient address</label>
+            <input
+              type="text"
+              value={mintRecipient}
+              onChange={(e) => setMintRecipient(e.target.value)}
+              placeholder="Recipient address"
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label className={styles.inputLabel}>USD received</label>
+            <input
+              type="text"
+              value={mintUsdAmount}
+              onChange={(e) => setMintUsdAmount(e.target.value)}
+              placeholder="USD received"
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.buttonWrapper}>
+            <button
+              onClick={handleMint}
+              disabled={isMinting}
+              className={styles.button}
+            >
+              Mint
+            </button>
+          </div>
+          {mintError && <div>{mintError}</div>}
+        </div>
+      </div>
+
+      <div className={styles.eventsSection}>
+        <h2 className={styles.sectionTitle}>Transfer Records</h2>
+        <div className={styles.eventsGrid}>
+          {transferRecords.map((record, index) => (
+            <div key={`transfer-${index}`} className={styles.eventAlert}>
+              <div className={styles.alertTitle}>Transfer Record</div>
+              <div className={styles.alertDescription}>
+                From: {record.sender.slice(0, 6)}...{record.sender.slice(-4)}
+                <br />
+                To: {record.recipient.slice(0, 6)}...
+                {record.recipient.slice(-4)}
+                <br />
+                Amount: {parseFloat(record.amount).toFixed(2)} {symbol}
+                <br />
+                Time: {new Date(record.transfer_time * 1000).toLocaleString()}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

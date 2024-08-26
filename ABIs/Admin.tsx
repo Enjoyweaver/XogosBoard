@@ -1,4 +1,4 @@
-export const FunctionABI = [
+export const AdminABI = [
   {
     name: "OTCTrade",
     inputs: [
@@ -41,12 +41,72 @@ export const FunctionABI = [
     type: "constructor",
     inputs: [
       {
-        name: "_iServ_token_address",
+        name: "_iServ_contract_address",
         type: "address",
       },
       {
-        name: "_tracker_address",
+        name: "_tracker_contract_address",
         type: "address",
+      },
+    ],
+    outputs: [],
+  },
+  {
+    stateMutability: "nonpayable",
+    type: "function",
+    name: "setiServContract",
+    inputs: [
+      {
+        name: "_iServ_contract_address",
+        type: "address",
+      },
+    ],
+    outputs: [],
+  },
+  {
+    stateMutability: "nonpayable",
+    type: "function",
+    name: "setTrackerContract",
+    inputs: [
+      {
+        name: "_tracker_contract_address",
+        type: "address",
+      },
+    ],
+    outputs: [],
+  },
+  {
+    stateMutability: "nonpayable",
+    type: "function",
+    name: "mint_tokens",
+    inputs: [
+      {
+        name: "_amount",
+        type: "uint256",
+      },
+      {
+        name: "_to",
+        type: "address",
+      },
+    ],
+    outputs: [],
+  },
+  {
+    stateMutability: "nonpayable",
+    type: "function",
+    name: "otc_trade",
+    inputs: [
+      {
+        name: "_recipient",
+        type: "address",
+      },
+      {
+        name: "_amount",
+        type: "uint256",
+      },
+      {
+        name: "_usd_received",
+        type: "uint256",
       },
     ],
     outputs: [],
@@ -74,43 +134,6 @@ export const FunctionABI = [
       },
     ],
     outputs: [],
-  },
-  {
-    stateMutability: "nonpayable",
-    type: "function",
-    name: "otc_trade",
-    inputs: [
-      {
-        name: "_recipient",
-        type: "address",
-      },
-      {
-        name: "_amount",
-        type: "uint256",
-      },
-      {
-        name: "_usd_received",
-        type: "uint256",
-      },
-    ],
-    outputs: [],
-  },
-  {
-    stateMutability: "view",
-    type: "function",
-    name: "is_whitelisted",
-    inputs: [
-      {
-        name: "_address",
-        type: "address",
-      },
-    ],
-    outputs: [
-      {
-        name: "",
-        type: "bool",
-      },
-    ],
   },
   {
     stateMutability: "view",
@@ -166,7 +189,24 @@ export const FunctionABI = [
   {
     stateMutability: "view",
     type: "function",
-    name: "iServ_token",
+    name: "is_whitelisted",
+    inputs: [
+      {
+        name: "_address",
+        type: "address",
+      },
+    ],
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+      },
+    ],
+  },
+  {
+    stateMutability: "view",
+    type: "function",
+    name: "iServContract",
     inputs: [],
     outputs: [
       {
@@ -178,7 +218,7 @@ export const FunctionABI = [
   {
     stateMutability: "view",
     type: "function",
-    name: "tracker",
+    name: "trackerContract",
     inputs: [],
     outputs: [
       {
@@ -202,17 +242,36 @@ export const FunctionABI = [
   {
     stateMutability: "view",
     type: "function",
-    name: "whitelisted_addresses",
-    inputs: [
-      {
-        name: "arg0",
-        type: "address",
-      },
-    ],
+    name: "lastMintTime",
+    inputs: [],
     outputs: [
       {
         name: "",
-        type: "bool",
+        type: "uint256",
+      },
+    ],
+  },
+  {
+    stateMutability: "view",
+    type: "function",
+    name: "dailyMinted",
+    inputs: [],
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
+      },
+    ],
+  },
+  {
+    stateMutability: "view",
+    type: "function",
+    name: "otc_trade_count",
+    inputs: [],
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
       },
     ],
   },
@@ -258,12 +317,17 @@ export const FunctionABI = [
   {
     stateMutability: "view",
     type: "function",
-    name: "otc_trade_count",
-    inputs: [],
+    name: "whitelisted_addresses",
+    inputs: [
+      {
+        name: "arg0",
+        type: "address",
+      },
+    ],
     outputs: [
       {
         name: "",
-        type: "uint256",
+        type: "bool",
       },
     ],
   },

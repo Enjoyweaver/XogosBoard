@@ -50,6 +50,30 @@ export const iServABI = [
     outputs: [],
   },
   {
+    stateMutability: "nonpayable",
+    type: "function",
+    name: "setTrackerAddress",
+    inputs: [
+      {
+        name: "_trackerAddress",
+        type: "address",
+      },
+    ],
+    outputs: [],
+  },
+  {
+    stateMutability: "nonpayable",
+    type: "function",
+    name: "setAdminContract",
+    inputs: [
+      {
+        name: "_adminContract",
+        type: "address",
+      },
+    ],
+    outputs: [],
+  },
+  {
     stateMutability: "view",
     type: "function",
     name: "name",
@@ -134,6 +158,22 @@ export const iServABI = [
         type: "uint256",
       },
     ],
+  },
+  {
+    stateMutability: "nonpayable",
+    type: "function",
+    name: "mint",
+    inputs: [
+      {
+        name: "_amount",
+        type: "uint256",
+      },
+      {
+        name: "_to",
+        type: "address",
+      },
+    ],
+    outputs: [],
   },
   {
     stateMutability: "nonpayable",
@@ -234,22 +274,6 @@ export const iServABI = [
     outputs: [],
   },
   {
-    stateMutability: "nonpayable",
-    type: "function",
-    name: "mint",
-    inputs: [
-      {
-        name: "_amount",
-        type: "uint256",
-      },
-      {
-        name: "_to",
-        type: "address",
-      },
-    ],
-    outputs: [],
-  },
-  {
     stateMutability: "view",
     type: "function",
     name: "owner",
@@ -294,6 +318,30 @@ export const iServABI = [
       {
         name: "",
         type: "bool",
+      },
+    ],
+  },
+  {
+    stateMutability: "view",
+    type: "function",
+    name: "trackerAddress",
+    inputs: [],
+    outputs: [
+      {
+        name: "",
+        type: "address",
+      },
+    ],
+  },
+  {
+    stateMutability: "view",
+    type: "function",
+    name: "adminContract",
+    inputs: [],
+    outputs: [
+      {
+        name: "",
+        type: "address",
       },
     ],
   },

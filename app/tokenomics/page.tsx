@@ -1,8 +1,4 @@
-import dynamic from "next/dynamic";
-
-const TokenomicsDashboardClient = dynamic(() => import("./tokenomics"), {
-  ssr: false,
-});
+import TokenomicsDashboardClient from "./tokenomics";
 
 export default function TokenomicsPage() {
   return (

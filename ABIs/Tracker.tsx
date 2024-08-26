@@ -1,5 +1,86 @@
 export const TrackerABI = [
   {
+    name: "MintTracked",
+    inputs: [
+      {
+        name: "amount",
+        type: "uint256",
+        indexed: false,
+      },
+      {
+        name: "time",
+        type: "uint256",
+        indexed: false,
+      },
+    ],
+    anonymous: false,
+    type: "event",
+  },
+  {
+    name: "TransferTracked",
+    inputs: [
+      {
+        name: "sender",
+        type: "address",
+        indexed: true,
+      },
+      {
+        name: "recipient",
+        type: "address",
+        indexed: true,
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        indexed: false,
+      },
+      {
+        name: "time",
+        type: "uint256",
+        indexed: false,
+      },
+    ],
+    anonymous: false,
+    type: "event",
+  },
+  {
+    name: "OTCTradeTracked",
+    inputs: [
+      {
+        name: "trade_id",
+        type: "uint256",
+        indexed: true,
+      },
+      {
+        name: "sender",
+        type: "address",
+        indexed: true,
+      },
+      {
+        name: "recipient",
+        type: "address",
+        indexed: true,
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        indexed: false,
+      },
+      {
+        name: "usd_received",
+        type: "uint256",
+        indexed: false,
+      },
+      {
+        name: "trade_timestamp",
+        type: "uint256",
+        indexed: false,
+      },
+    ],
+    anonymous: false,
+    type: "event",
+  },
+  {
     stateMutability: "nonpayable",
     type: "constructor",
     inputs: [
@@ -13,7 +94,7 @@ export const TrackerABI = [
   {
     stateMutability: "nonpayable",
     type: "function",
-    name: "approve_contract",
+    name: "track_mint",
     inputs: [
       {
         name: "amount",
@@ -25,11 +106,31 @@ export const TrackerABI = [
   {
     stateMutability: "nonpayable",
     type: "function",
-    name: "transfer_tokens",
+    name: "track_transfer",
     inputs: [
       {
-        name: "customerID",
+        name: "sender",
+        type: "address",
+      },
+      {
+        name: "recipient",
+        type: "address",
+      },
+      {
+        name: "amount",
         type: "uint256",
+      },
+    ],
+    outputs: [],
+  },
+  {
+    stateMutability: "nonpayable",
+    type: "function",
+    name: "track_otc_trade",
+    inputs: [
+      {
+        name: "sender",
+        type: "address",
       },
       {
         name: "recipient",
@@ -40,11 +141,7 @@ export const TrackerABI = [
         type: "uint256",
       },
       {
-        name: "valueAtTime",
-        type: "uint256",
-      },
-      {
-        name: "department",
+        name: "usd_paid",
         type: "uint256",
       },
     ],
@@ -53,12 +150,8 @@ export const TrackerABI = [
   {
     stateMutability: "view",
     type: "function",
-    name: "get_transaction",
+    name: "get_mint_info",
     inputs: [
-      {
-        name: "customerID",
-        type: "uint256",
-      },
       {
         name: "index",
         type: "uint256",
@@ -70,23 +163,46 @@ export const TrackerABI = [
         type: "tuple",
         components: [
           {
-            name: "recipient",
+            name: "amount",
+            type: "uint256",
+          },
+          {
+            name: "time",
+            type: "uint256",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    stateMutability: "view",
+    type: "function",
+    name: "get_transfer_info",
+    inputs: [
+      {
+        name: "index",
+        type: "uint256",
+      },
+    ],
+    outputs: [
+      {
+        name: "",
+        type: "tuple",
+        components: [
+          {
+            name: "sender",
             type: "address",
           },
           {
-            name: "transfer_time",
-            type: "uint256",
+            name: "recipient",
+            type: "address",
           },
           {
             name: "amount",
             type: "uint256",
           },
           {
-            name: "valueAtTime",
-            type: "uint256",
-          },
-          {
-            name: "department",
+            name: "time",
             type: "uint256",
           },
         ],
@@ -96,175 +212,10 @@ export const TrackerABI = [
   {
     stateMutability: "view",
     type: "function",
-    name: "get_all_transactions",
+    name: "get_otc_trade_info",
     inputs: [
       {
-        name: "customerID",
-        type: "uint256",
-      },
-    ],
-    outputs: [
-      {
-        name: "",
-        type: "uint256[5][1000]",
-      },
-    ],
-  },
-  {
-    stateMutability: "nonpayable",
-    type: "function",
-    name: "update_student_info",
-    inputs: [
-      {
-        name: "user_id",
-        type: "uint256",
-      },
-      {
-        name: "game_id",
-        type: "uint256",
-      },
-      {
-        name: "contractor_id",
-        type: "uint256",
-      },
-      {
-        name: "parentA_id",
-        type: "uint256",
-      },
-      {
-        name: "parentB_id",
-        type: "uint256",
-      },
-      {
-        name: "teacher_id",
-        type: "uint256",
-      },
-      {
-        name: "time_of_earning_iPlay",
-        type: "uint256",
-      },
-      {
-        name: "where_iPlay_earned",
-        type: "uint256",
-      },
-      {
-        name: "time_of_conversion",
-        type: "uint256",
-      },
-      {
-        name: "time_of_tuition_submission",
-        type: "uint256",
-      },
-      {
-        name: "time_of_first_game",
-        type: "uint256",
-      },
-      {
-        name: "time_of_last_game",
-        type: "uint256",
-      },
-      {
-        name: "highschool_graduate",
-        type: "bool",
-      },
-      {
-        name: "highschool_graduation_date",
-        type: "uint256",
-      },
-    ],
-    outputs: [],
-  },
-  {
-    stateMutability: "nonpayable",
-    type: "function",
-    name: "update_game_info",
-    inputs: [
-      {
-        name: "game_id",
-        type: "uint256",
-      },
-      {
-        name: "developer_id",
-        type: "uint256",
-      },
-    ],
-    outputs: [],
-  },
-  {
-    stateMutability: "nonpayable",
-    type: "function",
-    name: "update_developer_info",
-    inputs: [
-      {
-        name: "developer_id",
-        type: "uint256",
-      },
-      {
-        name: "game_number_developed",
-        type: "uint256",
-      },
-    ],
-    outputs: [],
-  },
-  {
-    stateMutability: "nonpayable",
-    type: "function",
-    name: "update_university_info",
-    inputs: [
-      {
-        name: "universityA_id",
-        type: "uint256",
-      },
-      {
-        name: "universityB_id",
-        type: "uint256",
-      },
-    ],
-    outputs: [],
-  },
-  {
-    stateMutability: "nonpayable",
-    type: "function",
-    name: "update_parent_info",
-    inputs: [
-      {
-        name: "user_id",
-        type: "uint256",
-      },
-      {
-        name: "parentA_id",
-        type: "uint256",
-      },
-      {
-        name: "parentB_id",
-        type: "uint256",
-      },
-    ],
-    outputs: [],
-  },
-  {
-    stateMutability: "nonpayable",
-    type: "function",
-    name: "update_minted_info",
-    inputs: [
-      {
-        name: "tokens",
-        type: "uint256",
-      },
-      {
-        name: "days",
-        type: "uint256",
-      },
-    ],
-    outputs: [],
-  },
-  {
-    stateMutability: "view",
-    type: "function",
-    name: "get_student_info",
-    inputs: [
-      {
-        name: "user_id",
+        name: "index",
         type: "uint256",
       },
     ],
@@ -274,59 +225,23 @@ export const TrackerABI = [
         type: "tuple",
         components: [
           {
-            name: "user_id",
+            name: "sender",
+            type: "address",
+          },
+          {
+            name: "recipient",
+            type: "address",
+          },
+          {
+            name: "amount",
             type: "uint256",
           },
           {
-            name: "game_id",
+            name: "usd_received",
             type: "uint256",
           },
           {
-            name: "contractor_id",
-            type: "uint256",
-          },
-          {
-            name: "parentA_id",
-            type: "uint256",
-          },
-          {
-            name: "parentB_id",
-            type: "uint256",
-          },
-          {
-            name: "teacher_id",
-            type: "uint256",
-          },
-          {
-            name: "time_of_earning_iPlay",
-            type: "uint256",
-          },
-          {
-            name: "where_iPlay_earned",
-            type: "uint256",
-          },
-          {
-            name: "time_of_conversion",
-            type: "uint256",
-          },
-          {
-            name: "time_of_tuition_submission",
-            type: "uint256",
-          },
-          {
-            name: "time_of_first_game",
-            type: "uint256",
-          },
-          {
-            name: "time_of_last_game",
-            type: "uint256",
-          },
-          {
-            name: "highschool_graduate",
-            type: "bool",
-          },
-          {
-            name: "highschool_graduation_date",
+            name: "trade_timestamp",
             type: "uint256",
           },
         ],
@@ -336,10 +251,10 @@ export const TrackerABI = [
   {
     stateMutability: "view",
     type: "function",
-    name: "get_game_info",
+    name: "mint_records",
     inputs: [
       {
-        name: "game_id",
+        name: "arg0",
         type: "uint256",
       },
     ],
@@ -349,11 +264,11 @@ export const TrackerABI = [
         type: "tuple",
         components: [
           {
-            name: "game_id",
+            name: "amount",
             type: "uint256",
           },
           {
-            name: "developer_id",
+            name: "time",
             type: "uint256",
           },
         ],
@@ -363,76 +278,36 @@ export const TrackerABI = [
   {
     stateMutability: "view",
     type: "function",
-    name: "get_developer_info",
-    inputs: [
-      {
-        name: "developer_id",
-        type: "uint256",
-      },
-    ],
-    outputs: [
-      {
-        name: "",
-        type: "tuple",
-        components: [
-          {
-            name: "developer_id",
-            type: "uint256",
-          },
-          {
-            name: "game_number_developed",
-            type: "uint256",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    stateMutability: "view",
-    type: "function",
-    name: "get_university_info",
+    name: "mint_count",
     inputs: [],
     outputs: [
       {
         name: "",
-        type: "tuple",
-        components: [
-          {
-            name: "universityA_id",
-            type: "uint256",
-          },
-          {
-            name: "universityB_id",
-            type: "uint256",
-          },
-        ],
+        type: "uint256",
       },
     ],
   },
   {
     stateMutability: "view",
     type: "function",
-    name: "get_parent_info",
-    inputs: [
-      {
-        name: "user_id",
-        type: "uint256",
-      },
-    ],
+    name: "total_minted",
+    inputs: [],
     outputs: [
       {
         name: "",
-        type: "tuple",
-        components: [
-          {
-            name: "parentA_id",
-            type: "uint256",
-          },
-          {
-            name: "parentB_id",
-            type: "uint256",
-          },
-        ],
+        type: "uint256",
+      },
+    ],
+  },
+  {
+    stateMutability: "view",
+    type: "function",
+    name: "minted_days",
+    inputs: [],
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
       },
     ],
   },
@@ -445,10 +320,6 @@ export const TrackerABI = [
         name: "arg0",
         type: "uint256",
       },
-      {
-        name: "arg1",
-        type: "uint256",
-      },
     ],
     outputs: [
       {
@@ -456,23 +327,19 @@ export const TrackerABI = [
         type: "tuple",
         components: [
           {
-            name: "recipient",
+            name: "sender",
             type: "address",
           },
           {
-            name: "transfer_time",
-            type: "uint256",
+            name: "recipient",
+            type: "address",
           },
           {
             name: "amount",
             type: "uint256",
           },
           {
-            name: "valueAtTime",
-            type: "uint256",
-          },
-          {
-            name: "department",
+            name: "time",
             type: "uint256",
           },
         ],
@@ -482,13 +349,59 @@ export const TrackerABI = [
   {
     stateMutability: "view",
     type: "function",
-    name: "transaction_count",
+    name: "transfer_count",
+    inputs: [],
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
+      },
+    ],
+  },
+  {
+    stateMutability: "view",
+    type: "function",
+    name: "otc_trade_records",
     inputs: [
       {
         name: "arg0",
         type: "uint256",
       },
     ],
+    outputs: [
+      {
+        name: "",
+        type: "tuple",
+        components: [
+          {
+            name: "sender",
+            type: "address",
+          },
+          {
+            name: "recipient",
+            type: "address",
+          },
+          {
+            name: "amount",
+            type: "uint256",
+          },
+          {
+            name: "usd_received",
+            type: "uint256",
+          },
+          {
+            name: "trade_timestamp",
+            type: "uint256",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    stateMutability: "view",
+    type: "function",
+    name: "otc_trade_count",
+    inputs: [],
     outputs: [
       {
         name: "",
@@ -511,202 +424,12 @@ export const TrackerABI = [
   {
     stateMutability: "view",
     type: "function",
-    name: "student_info",
-    inputs: [
-      {
-        name: "arg0",
-        type: "uint256",
-      },
-    ],
-    outputs: [
-      {
-        name: "",
-        type: "tuple",
-        components: [
-          {
-            name: "user_id",
-            type: "uint256",
-          },
-          {
-            name: "game_id",
-            type: "uint256",
-          },
-          {
-            name: "contractor_id",
-            type: "uint256",
-          },
-          {
-            name: "parentA_id",
-            type: "uint256",
-          },
-          {
-            name: "parentB_id",
-            type: "uint256",
-          },
-          {
-            name: "teacher_id",
-            type: "uint256",
-          },
-          {
-            name: "time_of_earning_iPlay",
-            type: "uint256",
-          },
-          {
-            name: "where_iPlay_earned",
-            type: "uint256",
-          },
-          {
-            name: "time_of_conversion",
-            type: "uint256",
-          },
-          {
-            name: "time_of_tuition_submission",
-            type: "uint256",
-          },
-          {
-            name: "time_of_first_game",
-            type: "uint256",
-          },
-          {
-            name: "time_of_last_game",
-            type: "uint256",
-          },
-          {
-            name: "highschool_graduate",
-            type: "bool",
-          },
-          {
-            name: "highschool_graduation_date",
-            type: "uint256",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    stateMutability: "view",
-    type: "function",
-    name: "game_info",
-    inputs: [
-      {
-        name: "arg0",
-        type: "uint256",
-      },
-    ],
-    outputs: [
-      {
-        name: "",
-        type: "tuple",
-        components: [
-          {
-            name: "game_id",
-            type: "uint256",
-          },
-          {
-            name: "developer_id",
-            type: "uint256",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    stateMutability: "view",
-    type: "function",
-    name: "developer_info",
-    inputs: [
-      {
-        name: "arg0",
-        type: "uint256",
-      },
-    ],
-    outputs: [
-      {
-        name: "",
-        type: "tuple",
-        components: [
-          {
-            name: "developer_id",
-            type: "uint256",
-          },
-          {
-            name: "game_number_developed",
-            type: "uint256",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    stateMutability: "view",
-    type: "function",
-    name: "university_info",
+    name: "owner",
     inputs: [],
     outputs: [
       {
         name: "",
-        type: "tuple",
-        components: [
-          {
-            name: "universityA_id",
-            type: "uint256",
-          },
-          {
-            name: "universityB_id",
-            type: "uint256",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    stateMutability: "view",
-    type: "function",
-    name: "parent_info",
-    inputs: [
-      {
-        name: "arg0",
-        type: "uint256",
-      },
-    ],
-    outputs: [
-      {
-        name: "",
-        type: "tuple",
-        components: [
-          {
-            name: "parentA_id",
-            type: "uint256",
-          },
-          {
-            name: "parentB_id",
-            type: "uint256",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    stateMutability: "view",
-    type: "function",
-    name: "minted_tokens",
-    inputs: [],
-    outputs: [
-      {
-        name: "",
-        type: "uint256",
-      },
-    ],
-  },
-  {
-    stateMutability: "view",
-    type: "function",
-    name: "minted_days",
-    inputs: [],
-    outputs: [
-      {
-        name: "",
-        type: "uint256",
+        type: "address",
       },
     ],
   },

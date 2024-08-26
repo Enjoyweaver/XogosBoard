@@ -182,42 +182,28 @@ export const rpcUrls: { [key: string]: string } = {
   "1337": "https://rpc.ankr.com/eth_sepolia",
 };
 
-export const iServ: {
+export const iServAddress: {
   [key: string]: string;
 } = {
-  "4002": "0x1A80B11EeE6fdC75435BA42825BC4A0E8b67F713",
+  "4002": "0x2cFf9f004c3484B3eB16834Ba24F90F105EA2B5A",
 };
 
-export const storage: {
+export const randomAddress: {
   [key: string]: string;
 } = {
-  "4002": "0x1896a628809F13A738FCF0f551B4767Cb59Ea86d",
+  "4002": "0xe29Fc0207C0F5f30d5AEF09e72B5FB7E6981D7bd",
 };
 
-export const iPlay: {
+export const trackerAddress: {
   [key: string]: string;
 } = {
-  "4002": "0x8cfeb8Eacdfe56C5C3B529e5EBf9F76399d8Ca49",
-  // "64165": "0xe5355DB1838d2e56786cC7E66FF9a122F2bb3d1d",
-};
-
-export const tracker: {
-  [key: string]: string;
-} = {
-  "4002": "0x5c7832E79fEB99e375FBB2486d0080Aa76D886e3",
+  "4002": "0x0F8d3D886051B8E4BfdDEa62C9Dd3aad77888A31",
   //"64165": "0x0643e30ABfa871c5a22c602Cb2071c2B1230e0d9",
 };
 
-export const secondaryAddress: {
+export const adminAddress: {
   [key: string]: string;
 } = {
-  "4002": "0x054FA95D53d1a166663af5FaF68543418EA0D294",
-  // "64165": "0x8401eb679FBCc6522B6489C1a5E119532918f88a",
-};
-
-export const functionality: {
-  [key: string]: string;
-} = {
-  "4002": "0xCA52f5bc5D730F85FA9aC549f04BAd4874bE9bc5",
+  "4002": "0x6EB369B3A1E9E97ce2A2116B514eb753901d3153",
   // "64165": "0x8401eb679FBCc6522B6489C1a5E119532918f88a",
 };
