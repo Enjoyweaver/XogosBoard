@@ -44,6 +44,7 @@ const TokenomicsDashboardClient = () => {
   const [mintUsdAmount, setMintUsdAmount] = useState("");
   const [isMinting, setIsMinting] = useState(false);
   const [mintError, setMintError] = useState<string | null>(null);
+  const [lastMinted, setLastMinted] = useState("0");
 
   // Whitelist state
   const [whitelistAddress, setWhitelistAddress] = useState("");
@@ -79,6 +80,7 @@ const TokenomicsDashboardClient = () => {
           iPlayContractAddress,
           mintedTokensBN,
           mintedDaysBN,
+          mintCountBN,
         ] = await Promise.all([
           iServContract.totalSupply(),
           iServContract.name(),
@@ -88,6 +90,7 @@ const TokenomicsDashboardClient = () => {
           iServContract.iPlayContract(),
           trackerContract.total_minted(),
           trackerContract.minted_days(),
+          trackerContract.mint_count(),
         ]);
 
         // Safeguarding against undefined values
@@ -114,6 +117,15 @@ const TokenomicsDashboardClient = () => {
 
         const transferCount = await trackerContract.transfer_count();
         const transferRecordsData: TransferInfo[] = [];
+
+        if (mintCountBN.gt(0)) {
+          const lastMintInfo = await trackerContract.get_mint_info(
+            mintCountBN.sub(1)
+          );
+          setLastMinted(ethers.utils.formatUnits(lastMintInfo.amount, 18));
+        } else {
+          setLastMinted("0");
+        }
 
         if (transferCount) {
           for (let i = 0; i < Math.min(transferCount.toNumber(), 10); i++) {
@@ -330,14 +342,15 @@ const TokenomicsDashboardClient = () => {
         </div>
         <div className={styles.statsCard}>
           <div className={styles.cardHeader}>
-            <h2 className={styles.cardTitle}>Minted Tokens</h2>
+            <h2 className={styles.cardTitle}>Last Minted Tokens</h2>
           </div>
           <div className={styles.cardContent}>
             <div className={styles.statValue}>
-              {parseFloat(mintedTokens).toLocaleString()} {symbol}
+              {parseFloat(lastMinted).toLocaleString()} {symbol}
             </div>
           </div>
         </div>
+
         <div className={styles.statsCard}>
           <div className={styles.cardHeader}>
             <h2 className={styles.cardTitle}>Minted Days</h2>
