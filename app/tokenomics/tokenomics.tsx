@@ -264,27 +264,47 @@ const TokenomicsDashboardClient = () => {
         <div className={styles.cardContent}>
           <div className={styles.addressItem}>
             <strong className={styles.addressName}>iServ:</strong>
-            <span className={styles.addressValue}>{iServAddress[chainId]}</span>
+            <a
+              href={`${blockExplorerAddress[chainId]}${iServAddress[chainId]}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.addressValue}
+            >
+              {iServAddress[chainId]}
+            </a>
           </div>
           <div className={styles.addressItem}>
             <strong className={styles.addressName}>Tracker:</strong>
-            <span className={styles.addressValue}>
+            <a
+              href={`${blockExplorerAddress[chainId]}${trackerAddress[chainId]}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.addressValue}
+            >
               {trackerAddress[chainId]}
-            </span>
+            </a>
           </div>
           <div className={styles.addressItem}>
             <strong className={styles.addressName}>Admin:</strong>
-            <span className={styles.addressValue}>{adminAddress[chainId]}</span>
+            <a
+              href={`${blockExplorerAddress[chainId]}${adminAddress[chainId]}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.addressValue}
+            >
+              {adminAddress[chainId]}
+            </a>
           </div>
           <div className={styles.addressItem}>
             <strong className={styles.addressName}>Owner:</strong>
-            <span className={styles.addressValue}>{owner || "Loading..."}</span>
-          </div>
-          <div className={styles.addressItem}>
-            <strong className={styles.addressName}>iPlay Contract:</strong>
-            <span className={styles.addressValue}>
-              {iPlayContract || "Loading..."}
-            </span>
+            <a
+              href={`${blockExplorerAddress[chainId]}${owner}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.addressValue}
+            >
+              {owner || "Loading..."}
+            </a>
           </div>
         </div>
       </div>
