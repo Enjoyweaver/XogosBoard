@@ -234,7 +234,7 @@ const BoardMembers: React.FC = () => {
           <div className={styles.memberInfo}>
             <h3 className={styles.header2}>
               <span className={styles.role}>Education</span> –{" "}
-              <span className={styles.name}>McKayla</span>
+              <span className={styles.name}>McKayla Reece</span>
             </h3>
             <p>
               Creates, oversees, and executes the strategy that advances the
