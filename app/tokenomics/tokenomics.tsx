@@ -508,10 +508,15 @@ const TokenomicsDashboardClient = () => {
           ))}
         </div>
       </div>
-      <video autoPlay loop muted style={{ borderRadius: "20px" }}>
-        <source src="/images/XogosNFT.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      <div>
+        <p className={styles.nft}>
+          Xogos Gaming NFT to be given to contributors
+        </p>
+        <video autoPlay loop muted style={{ borderRadius: "20px" }}>
+          <source src="/images/XogosNFT.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
     </div>
   );
 };
