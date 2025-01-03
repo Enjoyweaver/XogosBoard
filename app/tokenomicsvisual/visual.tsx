@@ -6,6 +6,7 @@ import ReactFlow, {
   MarkerType,
   MiniMap,
   Node,
+  NodeChange,
   ReactFlowProvider,
   applyNodeChanges,
   useEdgesState,
@@ -311,7 +312,7 @@ function TokenomicsDiagram() {
 
   // Whenever nodes change (dragging, etc.), save them to localStorage
   const handleNodesChange = useCallback(
-    (changes) => {
+    (changes: NodeChange[]) => {
       setNodes((currentNodes) => {
         const newNodes = applyNodeChanges(changes, currentNodes);
         // Save new layout in localStorage
