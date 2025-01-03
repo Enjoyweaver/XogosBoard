@@ -1,17 +1,14 @@
 import React, { useCallback } from "react";
 import ReactFlow, {
+  Background,
+  Controls,
+  Edge,
+  MiniMap,
+  Node,
   ReactFlowProvider,
   applyNodeChanges,
-  addEdge,
-  MiniMap,
-  Controls,
-  Background,
-  Connection,
-  Edge,
-  Node,
   useEdgesState,
   useNodesState,
-  Position,
 } from "react-flow-renderer";
 
 const initialNodes: Node[] = [
