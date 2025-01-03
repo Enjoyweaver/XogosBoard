@@ -310,7 +310,7 @@ function TokenomicsDiagram() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   // Whenever nodes change (dragging, etc.), save them to localStorage
-  const handleNodesChange: OnNodesChange = useCallback(
+  const handleNodesChange = useCallback(
     (changes) => {
       setNodes((currentNodes) => {
         const newNodes = applyNodeChanges(changes, currentNodes);
