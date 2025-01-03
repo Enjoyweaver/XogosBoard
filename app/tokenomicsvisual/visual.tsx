@@ -3,6 +3,7 @@ import ReactFlow, {
   Background,
   Controls,
   Edge,
+  MarkerType,
   MiniMap,
   Node,
   ReactFlowProvider,
@@ -189,7 +190,8 @@ const initialEdges: Edge[] = [
     source: "educational-games",
     target: "iplay-banking",
     label: "Students Earn iPlay",
-    markerEnd: { type: "arrowclosed" },
+    markerEnd: { type: MarkerType.ArrowClosed }
+
     style: {
       stroke: "#000",
       strokeWidth: 2,
@@ -201,7 +203,8 @@ const initialEdges: Edge[] = [
     source: "aips",
     target: "iplay-banking",
     label: "Students Earn iPlay",
-    markerEnd: { type: "arrowclosed" },
+    markerEnd: { type: MarkerType.ArrowClosed }
+
     style: {
       stroke: "#000",
       strokeWidth: 2,
@@ -225,7 +228,8 @@ const initialEdges: Edge[] = [
     source: "iplay-banking",
     target: "students",
     label: "Max 4 iPlay/day",
-    markerEnd: { type: "arrowclosed" },
+    markerEnd: { type: MarkerType.ArrowClosed }
+
     style: {
       stroke: "#000",
       strokeWidth: 2,
@@ -237,7 +241,8 @@ const initialEdges: Edge[] = [
     source: "iplay-banking",
     target: "in-app-spending",
     label: "Spend iPlay",
-    markerEnd: { type: "arrowclosed" },
+    markerEnd: { type: MarkerType.ArrowClosed }
+
     style: {
       stroke: "#000",
       strokeWidth: 2,
@@ -249,7 +254,8 @@ const initialEdges: Edge[] = [
     source: "in-app-spending",
     target: "dev-earnings",
     label: "Developers Earn iPlay",
-    markerEnd: { type: "arrowclosed" },
+    markerEnd: { type: MarkerType.ArrowClosed }
+
     style: {
       stroke: "#000",
       strokeWidth: 2,
@@ -261,7 +267,8 @@ const initialEdges: Edge[] = [
     source: "iplay-banking",
     target: "iconversion",
     label: "Save iPlay,\nConvert Quarterly",
-    markerEnd: { type: "arrowclosed" },
+    markerEnd: { type: MarkerType.ArrowClosed }
+
     style: {
       stroke: "#000",
       strokeWidth: 2,
@@ -273,7 +280,8 @@ const initialEdges: Edge[] = [
     source: "iconversion",
     target: "iserv-pools",
     label: "Mint iServ",
-    markerEnd: { type: "arrowclosed" },
+    markerEnd: { type: MarkerType.ArrowClosed }
+
     style: {
       stroke: "#000",
       strokeWidth: 2,
@@ -285,7 +293,8 @@ const initialEdges: Edge[] = [
     source: "iserv-pools",
     target: "scholarships",
     label: "Funding Allocation",
-    markerEnd: { type: "arrowclosed" },
+    markerEnd: { type: MarkerType.ArrowClosed }
+
     style: {
       stroke: "#000",
       strokeWidth: 2,
