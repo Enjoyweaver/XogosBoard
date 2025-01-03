@@ -44,14 +44,15 @@
     "next-auth": "^5.0.0-beta.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-flow-renderer": "^10.3.17",
     "swr": "^2.2.5",
-    "y-prosemirror": "^1.2.5",
-    "y-protocols": "^1.0.6",
-    "yjs": "^13.6.11",
     "viem": "^1.19.11",
     "wagmi": "^1.4.7",
     "web3": "^4.9.0",
-    "web3-validator": "^2.0.3"
+    "web3-validator": "^2.0.3",
+    "y-prosemirror": "^1.2.5",
+    "y-protocols": "^1.0.6",
+    "yjs": "^13.6.11"
   },
   "devDependencies": {
     "@types/base-64": "^1.0.0",

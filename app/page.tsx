@@ -129,6 +129,13 @@ export default async function Index() {
             title="Tokenomics Dashboard"
             link="/tokenomics"
           />
+          <Feature
+            description={
+              <>View the diagram and details the Xogos Gaming system</>
+            }
+            title="Tokenomics Visual"
+            link="/tokenomicsvisual"
+          />
         </div>
       </Container>
     </MarketingLayout>
