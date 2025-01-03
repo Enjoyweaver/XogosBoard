@@ -1,7 +1,6 @@
 "use client";
 
 import { ethers } from "ethers";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { AdminABI } from "@/ABIs/Admin";
 import { iServABI } from "../../ABIs/iServ";

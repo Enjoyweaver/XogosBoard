@@ -11,6 +11,7 @@ import ReactFlow, {
   Node,
   useEdgesState,
   useNodesState,
+  Position,
 } from "react-flow-renderer";
 
 const initialNodes: Node[] = [
