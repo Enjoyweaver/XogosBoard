@@ -216,11 +216,7 @@ const initialEdges: Edge[] = [
     source: "students",
     target: "iplay-banking",
     label: "Check balances\n& statements",
-    style: { strokeDasharray: "5,5" },
-    style: {
-      stroke: "#000",
-      strokeWidth: 2,
-    },
+    style: { strokeDasharray: "5,5", stroke: "#000", strokeWidth: 2 },
   },
   // Flow from iPlay Coin -> Students
   {
