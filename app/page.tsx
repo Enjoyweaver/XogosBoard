@@ -136,11 +136,6 @@ export default async function Index() {
             title="Tokenomics Visual"
             link="/tokenomicsvisual"
           />
-          <Feature
-            description={<>View our project timeline.</>}
-            title="Project Timeline"
-            link="/timeline"
-          />
         </div>
       </Container>
     </MarketingLayout>
