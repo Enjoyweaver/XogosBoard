@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, CSSProperties } from "react";
 import ReactFlow, {
   Background,
   BackgroundVariant,
@@ -14,44 +14,44 @@ import ReactFlow, {
   useNodesState,
 } from "react-flow-renderer";
 
-const baseNodeStyle = {
+const baseNodeStyle: CSSProperties = {
   width: 180,
   height: 80,
   padding: "8px",
-  textAlign: "center",
-  whiteSpace: "pre-wrap",
+  textAlign: "center" as const,
+  whiteSpace: "pre-wrap" as const,
 };
 
-const NODE_STYLES = {
+const NODE_STYLES: Record<string, CSSProperties> = {
   token: {
     ...baseNodeStyle,
-    background: "#7DD3FC",
+    backgroundColor: "#7DD3FC",
     border: "2px solid #0284C7",
   },
   economic: {
     ...baseNodeStyle,
-    background: "#FCA5A5",
+    backgroundColor: "#FCA5A5",
     border: "2px solid #DC2626",
   },
   stakeholder: {
     ...baseNodeStyle,
-    background: "#C7D2FE",
+    backgroundColor: "#C7D2FE",
     border: "2px solid #4F46E5",
     fontWeight: "bold",
   },
   system: {
     ...baseNodeStyle,
-    background: "#FDE68A",
+    backgroundColor: "#FDE68A",
     border: "2px solid #D97706",
   },
   pool: {
     ...baseNodeStyle,
-    background: "#FECACA",
+    backgroundColor: "#FECACA",
     border: "2px solid #DC2626",
   },
   governance: {
     ...baseNodeStyle,
-    background: "#86EFAC",
+    backgroundColor: "#86EFAC",
     border: "2px solid #16A34A",
   },
 };
