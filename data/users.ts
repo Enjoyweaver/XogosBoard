@@ -58,7 +58,7 @@ export const users: Omit<User, "color">[] = [
     ],
   },
   {
-    id: "kevin@darienadvisors.io",
+    id: "sturs49@gmail.com",
     name: "Kevin Stursberg",
     avatar: "https://liveblocks.io/avatars/avatar-6.png",
     groupIds: ["board_member", "kevins_notes", "historical_agendas"],
