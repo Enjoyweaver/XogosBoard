@@ -57,27 +57,46 @@ const NODE_STYLES = {
 };
 
 const initialNodes: Node[] = [
-  // Core Token Systems
+  // Top Row: Developers, iPlay, iServ, Badge Sales & Transaction Fees
+  {
+    id: "developers",
+    type: "input",
+    data: { label: "Developers\nCreate Educational Content" },
+    position: { x: 50, y: 50 },
+    style: NODE_STYLES.stakeholder,
+  },
   {
     id: "iplay-token",
     data: { label: "iPlay Token\n(Educational Utility)\nInfinite Supply" },
-    position: { x: 400, y: 50 },
+    position: { x: 350, y: 50 },
     style: NODE_STYLES.token,
   },
   {
     id: "iserv-token",
     data: { label: "iServ Token\n(Governance)\nFixed Supply: 106M" },
-    position: { x: 400, y: 600 },
+    position: { x: 550, y: 50 },
     style: NODE_STYLES.token,
   },
+  {
+    id: "badge-sales",
+    data: { label: "Badge (NFT) Sales\nPrimary Revenue Stream" },
+    position: { x: 800, y: 50 },
+    style: NODE_STYLES.economic,
+  },
+  {
+    id: "transaction-fees",
+    data: { label: "Transaction Fees\n5% Total Fee" },
+    position: { x: 1300, y: 50 },
+    style: NODE_STYLES.economic,
+  },
 
-  // Earning Systems
+  // Second Row: Educational Games & Active Incentive Programs
   {
     id: "educational-games",
     data: {
       label: "Educational Games\n(2 coins max daily)\nCoin-Producing Games",
     },
-    position: { x: 150, y: 150 },
+    position: { x: 50, y: 200 },
     style: NODE_STYLES.economic,
   },
   {
@@ -86,16 +105,30 @@ const initialNodes: Node[] = [
       label:
         "Active Incentive Programs\n(2 coins max daily)\nOff-screen Activities",
     },
-    position: { x: 150, y: 350 },
+    position: { x: 250, y: 200 },
     style: NODE_STYLES.economic,
   },
 
-  // Banking & Conversion
+  // Third Row: Students (below Education Games & AIPs)
+  {
+    id: "students",
+    data: { label: "Students\nEarn & Save iPlay\nMax 4 coins daily" },
+    position: { x: 150, y: 350 },
+    style: NODE_STYLES.stakeholder,
+  },
+
+  // Fourth Row: Banking System Section (below/right of Students)
   {
     id: "banking-system",
     data: { label: "Banking System\n30d→1.1x  60d→1.25x\n90d→1.5x  180d→2.0x" },
-    position: { x: 650, y: 250 },
+    position: { x: 350, y: 450 },
     style: NODE_STYLES.system,
+  },
+  {
+    id: "board-governance",
+    data: { label: "Board Governance\nPlatform Liability\nCore Parameters" },
+    position: { x: 550, y: 250 },
+    style: NODE_STYLES.governance,
   },
   {
     id: "conversion-system",
@@ -103,85 +136,48 @@ const initialNodes: Node[] = [
       label:
         "Quarterly Conversion\nR(x) = R0 * (1-x)^k\nDynamic Rate + Board Oversight",
     },
-    position: { x: 650, y: 400 },
+    position: { x: 500, y: 550 },
     style: NODE_STYLES.system,
   },
 
-  // Revenue Sources
-  {
-    id: "badge-sales",
-    data: { label: "Badge (NFT) Sales\nPrimary Revenue Stream" },
-    position: { x: 900, y: 150 },
-    style: NODE_STYLES.economic,
-  },
-  {
-    id: "transaction-fees",
-    data: { label: "Transaction Fees\n5% Total Fee" },
-    position: { x: 900, y: 250 },
-    style: NODE_STYLES.economic,
-  },
-
-  // Pool System
+  // Right Side (Pools & Scholarship Distribution remain unchanged)
   {
     id: "scholarship-pool",
     data: {
       label: "Scholarship Pool\n65% Badge + 3% Fees\n85% Direct Distribution",
     },
-    position: { x: 900, y: 350 },
-    style: NODE_STYLES.pool,
-  },
-  {
-    id: "strategic-reserve",
-    data: { label: "Strategic Reserve\n10% of Scholarship" },
-    position: { x: 1150, y: 350 },
-    style: NODE_STYLES.pool,
-  },
-  {
-    id: "annual-fund",
-    data: { label: "Annual Scholarship\n5% of Scholarship" },
-    position: { x: 1150, y: 450 },
+    position: { x: 1050, y: 200 },
     style: NODE_STYLES.pool,
   },
   {
     id: "liquidity-pool",
     data: { label: "Liquidity Pool\n20% Badge + 1% Fees" },
-    position: { x: 900, y: 450 },
+    position: { x: 1050, y: 350 },
     style: NODE_STYLES.pool,
   },
   {
     id: "dev-pool",
     data: { label: "Developer Pool\n10% Badge + 0.5% Fees" },
-    position: { x: 900, y: 550 },
+    position: { x: 1050, y: 450 },
     style: NODE_STYLES.pool,
   },
   {
     id: "board-pool",
     data: { label: "Board Pool\n5% Badge + 0.5% Fees" },
-    position: { x: 900, y: 650 },
+    position: { x: 1050, y: 550 },
     style: NODE_STYLES.pool,
   },
-
-  // Stakeholders
   {
-    id: "students",
-    type: "input",
-    data: { label: "Students\nEarn & Save iPlay\nMax 4 coins daily" },
-    position: { x: 150, y: 250 },
-    style: NODE_STYLES.stakeholder,
+    id: "strategic-reserve",
+    data: { label: "Strategic Reserve\n10% of Scholarship" },
+    position: { x: 1300, y: 350 },
+    style: NODE_STYLES.pool,
   },
   {
-    id: "developers",
-    data: { label: "Developers\nCreate Educational Content" },
-    position: { x: 150, y: 50 },
-    style: NODE_STYLES.stakeholder,
-  },
-
-  // Governance
-  {
-    id: "board-governance",
-    data: { label: "Board Governance\nPlatform Liability\nCore Parameters" },
-    position: { x: 650, y: 550 },
-    style: NODE_STYLES.governance,
+    id: "annual-fund",
+    data: { label: "Annual Scholarship\n5% of Scholarship" },
+    position: { x: 1300, y: 500 },
+    style: NODE_STYLES.pool,
   },
 ];
 
@@ -234,8 +230,32 @@ const initialEdges: Edge[] = [
     style: { stroke: "#0284C7", strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed },
   },
+  {
+    id: "e16",
+    source: "board-governance",
+    target: "conversion-system",
+    label: "Oversight",
+    style: { stroke: "#16A34A", strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed },
+  },
+  {
+    id: "e17",
+    source: "iplay-token",
+    target: "banking-system",
+    label: "Token Flow",
+    style: { stroke: "#0284C7", strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed },
+  },
+  {
+    id: "e18",
+    source: "iserv-token",
+    target: "board-governance",
+    label: "Governance",
+    style: { stroke: "#16A34A", strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed },
+  },
 
-  // Revenue Distribution
+  // Revenue Distribution from Badge Sales
   {
     id: "e6",
     source: "badge-sales",
@@ -303,7 +323,7 @@ const initialEdges: Edge[] = [
     markerEnd: { type: MarkerType.ArrowClosed },
   },
 
-  // Scholarship Distribution
+  // Scholarship Distribution from Scholarship Pool
   {
     id: "e14",
     source: "scholarship-pool",
@@ -320,34 +340,6 @@ const initialEdges: Edge[] = [
     style: { stroke: "#DC2626", strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed },
   },
-
-  // Governance
-  {
-    id: "e16",
-    source: "board-governance",
-    target: "conversion-system",
-    label: "Oversight",
-    style: { stroke: "#16A34A", strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed },
-  },
-
-  // Token System Connections
-  {
-    id: "e17",
-    source: "iplay-token",
-    target: "banking-system",
-    label: "Token Flow",
-    style: { stroke: "#0284C7", strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed },
-  },
-  {
-    id: "e18",
-    source: "iserv-token",
-    target: "board-governance",
-    label: "Governance",
-    style: { stroke: "#16A34A", strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed },
-  },
 ];
 
 function TokenomicsDiagram() {
@@ -361,7 +353,7 @@ function TokenomicsDiagram() {
   );
 
   return (
-    <div style={{ width: "100%", height: "1000px" }}>
+    <div style={{ width: "100%", height: "1200px" }}>
       <ReactFlowProvider>
         <ReactFlow
           nodes={nodes}
