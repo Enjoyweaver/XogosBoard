@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import SkillsMatrix from "@/components/risk/skillsmatrix";
 
 const RiskManagement = () => {
   const [activeTab, setActiveTab] = useState("risk-overview");
@@ -841,21 +840,6 @@ const RiskManagement = () => {
                   </span>
                 ))}
               </div>
-            </div>
-          </div>
-        )}
-
-        {/* Skills Matrix Tab Content */}
-        {activeTab === "skills-matrix" && (
-          <div className="animate-fadeIn">
-            <p className="text-center text-gray-300 text-sm mb-5 max-w-2xl mx-auto">
-              Our Board Skills Matrix ensures we have the right expertise for
-              effective risk oversight, especially in specialized areas like
-              educational technology and cryptocurrency governance.
-            </p>
-
-            <div className="bg-gray-800 bg-opacity-50 rounded-lg p-4 mb-6 shadow-sm">
-              <SkillsMatrix />
             </div>
           </div>
         )}
