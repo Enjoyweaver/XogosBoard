@@ -1,9 +1,9 @@
 import clsx from "clsx";
+import Image from "next/image";
 import Link from "next/link";
 import { ComponentProps, useMemo } from "react";
 import { Container } from "@/primitives/Container";
 import styles from "./MarketingFooter.module.css";
-import Image from "next/image";
 
 export function MarketingFooter({
   className,

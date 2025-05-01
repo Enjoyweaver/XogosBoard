@@ -1,11 +1,7 @@
 "use client"; // Mark this file as a Client Component in Next 13+
 
-import clsx from "clsx";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { signIn } from "@/auth";
-import { SignInIcon } from "@/icons";
-import { Button } from "@/primitives/Button";
 import { Container } from "@/primitives/Container";
 import styles from "./BoardroomHeader.module.css";
 

@@ -1,13 +1,12 @@
 "use client";
-
 import clsx from "clsx";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { signIn } from "next-auth/react";
 import { ComponentProps, useEffect, useState } from "react";
+import { SignInIcon } from "@/icons";
 import { Container } from "@/primitives/Container";
 import styles from "./MarketingHeader.module.css";
-import { SignInIcon } from "@/icons";
-import { signIn } from "next-auth/react";
 
 export function MarketingHeader({
   className,
@@ -71,10 +70,15 @@ export function MarketingHeader({
           </nav>
         </div>
         <div className={styles.actionButtons}>
-          <Link href="/login" className={styles.boardButton}>
+          <button
+            className={styles.boardButton}
+            onClick={async () => {
+              await signIn();
+            }}
+          >
             <SignInIcon />
-            <span>Board Sign-In</span>
-          </Link>
+            <span>Board Sign-in</span>
+          </button>
           <button
             className={clsx(
               styles.mobileMenuToggle,

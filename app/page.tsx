@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { MarketingLayout } from "@/layouts/Marketing/Marketing";
-import { Container } from "@/primitives/Container";
 import styles from "./page.module.css";
 
 // SVG Icons for features and ecosystem
