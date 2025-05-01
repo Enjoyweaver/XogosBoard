@@ -22,7 +22,6 @@
   align-items: center;
   height: 100%;
   padding: 0 2rem;
-  max-width: 1100px;
 }
 
 .logoAndLinks {
@@ -46,7 +45,6 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: 2rem;
 }
 
 .navLinkContainer {
@@ -86,6 +84,106 @@
   width: 100%;
 }
 
+.navDropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.navDropdown .navLink {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navDropdown .navLink::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid rgba(229, 229, 229, 0.9);
+  border-bottom: 2px solid rgba(229, 229, 229, 0.9);
+  transform: rotate(45deg);
+  margin-left: 8px;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  margin-top: -2px;
+}
+
+.navDropdown:hover .navLink::before {
+  transform: rotate(225deg);
+  border-color: #e62739;
+  margin-top: 2px;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: -20px;
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(10px);
+  min-width: 200px;
+  border-radius: 8px;
+  padding: 0.75rem 0;
+  z-index: 10;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 20px rgba(230, 39, 57, 0.15);
+  transform: translateY(10px);
+  opacity: 0;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.navDropdown:hover .dropdownContent {
+  display: block;
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.dropdownLink {
+  color: rgba(229, 229, 229, 0.8);
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  font-family: "Inter", sans-serif;
+  position: relative;
+}
+
+.dropdownLink:hover {
+  background-color: rgba(230, 39, 57, 0.1);
+  color: #e62739;
+  padding-left: 2rem;
+}
+
+.dropdownLink::before {
+  content: "";
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  width: 0;
+  height: 2px;
+  background: #e62739;
+  transform: translateY(-50%);
+  transition: width 0.2s ease;
+  opacity: 0;
+}
+
+.dropdownLink:hover::before {
+  width: 8px;
+  opacity: 1;
+}
+
 .actionButtons {
   display: flex;
   align-items: center;
@@ -98,8 +196,9 @@
   gap: 1rem;
 }
 
-.loginButton {
-  min-width: 140px;
+.loginButton,
+.boardButton {
+  min-width: 100px;
   height: 44px;
   padding: 0 1.25rem;
   font-size: 0.95rem;
@@ -108,9 +207,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
   border-radius: 8px;
   transition: all 0.3s ease;
+}
+
+.loginButton {
   background: rgba(255, 255, 255, 0.05) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: rgba(229, 229, 229, 0.9) !important;
@@ -122,9 +223,36 @@
   transform: translateY(-2px);
 }
 
-.buttonIcon {
-  width: 20px;
-  height: 20px;
+.boardButton {
+  background: linear-gradient(45deg, #e62739, #7928ca) !important;
+  color: white !important;
+  border: none !important;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.boardButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #7928ca, #e62739);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.boardButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(230, 39, 57, 0.3);
+}
+
+.boardButton:hover::before {
+  opacity: 1;
 }
 
 .mobileMenuToggle {
@@ -198,24 +326,42 @@
     padding: 0.75rem 0;
   }
 
-  .buttonGroup {
+  .navDropdown {
+    width: 100%;
+  }
+
+  .navDropdown .navLink {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .navDropdown .navLink::before {
+    position: relative;
+    right: 0;
+    top: 0;
+    margin-top: 0;
+    margin-left: 10px;
+  }
+
+  .dropdownContent {
+    position: static;
+    background: rgba(26, 26, 46, 0.5);
+    box-shadow: none;
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
     display: none;
+    opacity: 1;
+    transform: none;
+    pointer-events: all;
   }
 
-  .nav .buttonGroup {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 2rem;
-    gap: 1rem;
+  .navDropdown.active .dropdownContent {
+    display: block;
   }
 
-  .nav .buttonGroup .loginButton {
-    width: 100%;
-  }
-
-  .actionButtons .buttonGroup {
-    display: flex;
+  .dropdownLink {
+    padding: 0.75rem 1rem;
   }
 
   .mobileMenuToggle {
@@ -234,109 +380,24 @@
     transform: translateY(-11px) rotate(-45deg);
   }
 
+  .buttonGroup {
+    display: none;
+  }
+
+  .nav.mobileOpen .buttonGroup {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 2rem;
+    gap: 1rem;
+  }
+
+  .nav.mobileOpen .buttonGroup .loginButton,
+  .nav.mobileOpen .buttonGroup .boardButton {
+    width: 100%;
+  }
+
   body.mobileOpen {
     overflow: hidden;
   }
-}
-
-/* Add these styles to MarketingHeader.module.css */
-.logoImage {
-  position: relative;
-  width: 100px;
-  height: 60px;
-  overflow: hidden;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logoImg {
-  object-fit: contain;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-/* Add or update these styles in MarketingHeader.module.css */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  height: 80px;
-  transition: all 0.3s ease;
-  background-color: rgba(13, 13, 26, 0.85);
-  backdrop-filter: blur(10px);
-}
-
-.header.scrolled {
-  background-color: rgba(13, 13, 26, 0.95);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.logoWrapper {
-  position: relative;
-  width: 100px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-}
-
-.logoImg {
-  object-fit: contain;
-}
-
-.navLink {
-  color: rgba(229, 229, 229, 0.9) !important;
-  font-weight: 500;
-}
-
-.navLink:hover {
-  color: #e62739 !important;
-}
-
-.boardButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  min-width: 180px;
-  height: 44px;
-  padding: 0 1.25rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  font-family: "Montserrat", sans-serif;
-  border-radius: 8px;
-  background: linear-gradient(45deg, #e62739, #7928ca) !important;
-  color: white !important;
-  border: none !important;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-
-.boardButton::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, #7928ca, #e62739);
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.boardButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(230, 39, 57, 0.3);
-}
-
-.boardButton:hover::before {
-  opacity: 1;
 }

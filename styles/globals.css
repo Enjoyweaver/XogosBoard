@@ -1,26 +1,27 @@
 :root {
-  --color-black: 0 0 0;
-  --color-white: 255 255 255;
-  --color-gray-50: 250 250 250;
-  --color-gray-100: 244 244 245;
-  --color-gray-150: 236 236 238;
-  --color-gray-200: 228 228 231;
-  --color-gray-250: 220 220 224;
-  --color-gray-300: 212 212 216;
-  --color-gray-350: 187 187 193;
-  --color-gray-400: 161 161 170;
-  --color-gray-450: 137 137 146;
-  --color-gray-500: 113 113 122;
-  --color-gray-550: 98 98 107;
-  --color-gray-600: 82 82 91;
-  --color-gray-650: 73 73 81;
-  --color-gray-700: 63 63 70;
-  --color-gray-750: 51 51 56;
-  --color-gray-800: 39 39 42;
-  --color-gray-850: 32 32 35;
-  --color-gray-900: 24 24 27;
-  --color-gray-950: 18 18 21;
-  --color-overlay: rgb(var(--color-black) / 60%);
+  /* Color palette */
+  --color-cream: #fdf4e6;
+  --color-gold: #e6bb84;
+  --color-dark-red: #441510;
+  --color-red: #951e0f;
+  --color-bright-red: #db2e12;
+  --color-orange: #e46816;
+  --color-peach: #f6a27c;
+  --color-black: #000000;
+
+  /* Functional colors */
+  --color-bg-primary: var(--color-cream);
+  --color-bg-secondary: #f8f1e4;
+  --color-bg-accent: rgba(246, 162, 124, 0.08);
+  --color-text-primary: var(--color-dark-red);
+  --color-text-secondary: #221008;
+  --color-text-accent: var(--color-red);
+  --color-border: rgba(68, 21, 16, 0.1);
+  --color-accent: var(--color-red);
+  --color-button-primary: var(--color-red);
+  --color-button-hover: var(--color-bright-red);
+
+  /* Space and size variables */
   --space-0: 0;
   --space-1: 0.125rem;
   --space-2: 0.25rem;
@@ -46,6 +47,7 @@
   --space-22: 8rem;
   --space-23: 9rem;
   --space-24: 10rem;
+
   --size-2xs: 0.625rem;
   --size-xs: 0.75rem;
   --size-sm: 0.875rem;
@@ -55,16 +57,17 @@
   --size-2xl: 1.5rem;
   --size-3xl: 2rem;
   --size-4xl: 3rem;
+
   --radius-xs: 0.3rem;
   --radius-sm: 0.4rem;
   --radius: 0.7rem;
   --radius-lg: 0.8rem;
-  --shadow-xs: 0 1px 4px rgb(var(--color-black) / 5%);
-  --shadow-sm: 0 2px 8px rgb(var(--color-black) / 5%);
-  --shadow: 0 3px 10px rgb(var(--color-black) / 5%);
-  --shadow-lg: 0 4px 20px rgb(var(--color-black) / 5%);
-  --shadow-xl: 0 5px 30px rgb(var(--color-black) / 5%);
-  --backdrop-surface: saturate(2) blur(16px);
+
+  --shadow-sm: 0 2px 8px rgba(68, 21, 16, 0.04);
+  --shadow: 0 4px 16px rgba(68, 21, 16, 0.06);
+  --shadow-lg: 0 8px 24px rgba(68, 21, 16, 0.08);
+  --shadow-accent: 0 4px 16px rgba(149, 30, 15, 0.16);
+
   --transition: 0.15s ease-in-out;
   --transition-linear: 0.15s linear;
   --header-height: 60px;
@@ -73,79 +76,79 @@
   --z-badge: 1000;
   --opacity-hover: 0.8;
   --opacity-disabled: 0.5;
-
-  accent-color: var(--color-accent);
 }
 
-/* Light theme */
-:root {
-  --color-red: 239 67 67;
-  --color-green: 132 204 22;
-  --color-accent: rgb(var(--color-gray-900));
-  --color-surface: rgb(var(--color-gray-100));
-  --color-surface-hover: rgb(var(--color-gray-150));
-  --color-surface-elevated: rgb(var(--color-white));
-  --color-border: rgb(var(--color-gray-150));
-  --color-border-contrasted: rgb(var(--color-gray-250));
-  --color-border-transparent: rgb(var(--color-gray-900) / 10%);
-  --color-skeleton: rgb(var(--color-gray-150));
-  --color-skeleton-shine: rgb(var(--color-gray-50));
-  --color-tooltip: rgb(var(--color-gray-950));
-  --color-tooltip-text: rgb(var(--color-white));
-  --color-tooltip-border: rgb(var(--color-gray-750));
-  --color-text: rgb(var(--color-gray-900));
-  --color-text-light: rgb(var(--color-gray-600));
-  --color-text-lighter: rgb(var(--color-gray-500));
-  --color-text-lightest: rgb(var(--color-gray-400));
+/* Font imports */
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap");
 
-  --comment-highlight-composing: #ffff00;
-  --comment-highlight-composing-border: #ffff00;
-  --comment-highlight-complete: #ffffcd;
-  --comment-highlight-complete-border: #f4d037;
-  --comment-highlight-selected: #ffff00;
-  --comment-highlight-selected-border: #f4d037;
-
-  color-scheme: light;
-}
-
-/* Dark theme */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-red: 248 113 113;
-    --color-green: 162 230 53;
-    --color-accent: rgb(var(--color-white));
-    --color-surface: rgb(var(--color-gray-850));
-    --color-surface-hover: rgb(var(--color-gray-800));
-    --color-surface-elevated: rgb(var(--color-gray-950));
-    --color-border: rgb(var(--color-gray-750));
-    --color-border-contrasted: rgb(var(--color-gray-650));
-    --color-border-transparent: rgb(var(--color-white) / 10%);
-    --color-skeleton: rgb(var(--color-gray-750));
-    --color-skeleton-shine: rgb(var(--color-gray-850));
-    --color-text: rgb(var(--color-white));
-    --color-text-light: rgb(var(--color-gray-300));
-    --color-text-lighter: rgb(var(--color-gray-400));
-    --color-text-lightest: rgb(var(--color-gray-500));
-
-    --comment-highlight-composing: #0079a2;
-    --comment-highlight-composing-border: #0079a2;
-    --comment-highlight-complete: #2d414b;
-    --comment-highlight-complete-border: #00748d;
-    --comment-highlight-selected: #0079a2;
-    --comment-highlight-selected-border: #009cd3;
-
-    color-scheme: dark;
-  }
+/* Bank Gothic font via @font-face since it's not freely available on Google Fonts */
+@font-face {
+  font-family: "Bank Gothic";
+  src: url("/fonts/bankgothic-md-bt-medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 html,
 body {
-  background: var(--color-surface-elevated);
-  color: var(--color-text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family:
+    "Titillium Web",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
+  line-height: 1.5;
 }
 
+h1,
+h2,
+h3 {
+  font-family: "Russo One", sans-serif;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+h4,
+h5,
+h6,
+.subtitle {
+  font-family: "Bank Gothic", sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+a {
+  color: var(--color-accent);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-button-hover);
+}
+
+button,
+.button {
+  font-family: "Bank Gothic", sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Reset other styles */
 html,
 body,
 #__next {
@@ -159,18 +162,4 @@ html.grabbing {
 
 html.grabbing * {
   user-select: none;
-}
-
-.lb-root {
-  --lb-accent: var(--color-accent);
-  --lb-accent-foreground: var(--color-surface);
-  --lb-background: var(--color-surface-elevated);
-}
-
-.lb-tooltip {
-  background: rgb(var(--color-gray-800));
-}
-
-.lb-portal {
-  z-index: var(--z-overlay);
 }

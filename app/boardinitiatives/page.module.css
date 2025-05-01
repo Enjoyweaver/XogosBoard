@@ -1,0 +1,589 @@
+/* Modern Board Initiatives Page with Professional Tech Aesthetic */
+.boardPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 100%);
+  color: #e5e5e5;
+  font-family: "Inter", sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Base styling for sections */
+.section {
+  padding: 4rem 2em;
+  color: #e5e5e5;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hero section styles */
+.heroInfo {
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.heroTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #ff3e3e, #ff7e3e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heroTitleSecondary {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.heroLead {
+  font-size: 1.25rem;
+  opacity: 0.8;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+/* Hero actions */
+.heroActions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+/* Section title styling */
+.sectionTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+}
+
+.sectionTitle::after {
+  content: "";
+  display: block;
+  margin: 0.5rem auto 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #e62739, #7928ca);
+  border-radius: 2px;
+}
+
+/* Background elements */
+.boardBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.circuitPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.bgGlow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+}
+
+.bgGlow:nth-child(1) {
+  top: -200px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  background: #e62739;
+}
+
+.bgGlow:nth-child(2) {
+  bottom: -300px;
+  left: -200px;
+  width: 800px;
+  height: 800px;
+  background: #7928ca;
+}
+
+.bgGlow:nth-child(3) {
+  top: 40%;
+  right: 20%;
+  width: 300px;
+  height: 300px;
+  background: #1a8fe3;
+}
+
+/* Hero section */
+.heroSection {
+  position: relative;
+  padding: 160px 0 100px;
+  text-align: center;
+  z-index: 1;
+  background: rgba(13, 13, 26, 0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+.heroSection::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("/images/board/hero-bg.jpg") center center/cover no-repeat;
+  opacity: 0.15;
+  z-index: -1;
+}
+
+.mainTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #e5e5e5;
+  position: relative;
+  display: inline-block;
+}
+
+.mainTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #e62739, #7928ca);
+  border-radius: 2px;
+}
+
+.mainDescription {
+  max-width: 800px;
+  margin: 2rem auto 0;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: rgba(229, 229, 229, 0.8);
+}
+
+/* Main content area */
+.sectionIntro {
+  text-align: center;
+  margin: 80px 0 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.sectionTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #e5e5e5;
+  position: relative;
+  display: inline-block;
+}
+
+.sectionTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #e62739, #7928ca);
+  border-radius: 2px;
+}
+
+.sectionDescription {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(229, 229, 229, 0.8);
+}
+
+/* Board members grid */
+.boardMembers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 30px;
+  margin-bottom: 80px;
+}
+
+.memberCard {
+  display: flex;
+  background: rgba(26, 26, 46, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+  min-height: 350px;
+}
+
+.memberCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.memberSidebar {
+  width: 120px;
+  background: rgba(13, 13, 26, 0.6);
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.memberImageContainer {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+.memberImageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.memberPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(230, 39, 57, 0.3),
+    rgba(121, 40, 202, 0.3)
+  );
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memberPlaceholder::after {
+  content: "";
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(229, 229, 229, 0.8);
+}
+
+.memberName {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e5e5e5;
+  margin: 0 0 0.5rem;
+  word-break: break-word;
+}
+
+.memberTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #e62739;
+  margin: 0 0 0.5rem;
+}
+
+.memberRole {
+  font-size: 0.75rem;
+  color: rgba(229, 229, 229, 0.7);
+}
+
+.memberDetails {
+  flex: 1;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.memberSection {
+  margin-bottom: 20px;
+}
+
+.memberSection:last-child {
+  margin-bottom: 0;
+}
+
+.memberSectionTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e5e5e5;
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.memberList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.memberListItem {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(229, 229, 229, 0.8);
+}
+
+.memberListItem:last-child {
+  margin-bottom: 0;
+}
+
+.memberListItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e62739;
+}
+
+/* Strategic initiatives grid */
+.initiativesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 30px;
+}
+
+.initiativeCard {
+  background: rgba(26, 26, 46, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0;
+}
+
+.initiativeCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.initiativeCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #e62739, #7928ca);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.initiativeCard:hover::before {
+  opacity: 1;
+}
+
+.initiativeTitle {
+  padding: 1.5rem 1.5rem 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #e5e5e5;
+  margin: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.initiativeDescription {
+  padding: 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(229, 229, 229, 0.8);
+  margin: 0;
+  background: rgba(13, 13, 26, 0.3);
+}
+
+.initiativeSection {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.initiativeSectionTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e5e5e5;
+  margin: 1.5rem 0 1rem;
+}
+
+.initiativeList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.initiativeListItem {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(229, 229, 229, 0.8);
+}
+
+.initiativeListItem:last-child {
+  margin-bottom: 0;
+}
+
+.initiativeListItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7928ca;
+}
+
+.initiativeTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.initiativeTag {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background: rgba(230, 39, 57, 0.1);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: rgba(229, 229, 229, 0.9);
+}
+
+.initiativeStatus {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(13, 13, 26, 0.3);
+  border-radius: 8px;
+}
+
+.initiativeStatusTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e5e5e5;
+  margin: 0 0 0.5rem;
+}
+
+.initiativeStatusText {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(229, 229, 229, 0.8);
+  margin: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .heroSection {
+    padding: 140px 0 80px;
+  }
+
+  .mainTitle {
+    font-size: 3rem;
+  }
+
+  .mainDescription {
+    font-size: 1.1rem;
+  }
+
+  .sectionTitle {
+    font-size: 2.25rem;
+  }
+
+  .boardMembers,
+  .initiativesGrid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 120px 0 60px;
+  }
+
+  .mainTitle {
+    font-size: 2.5rem;
+  }
+
+  .mainDescription {
+    font-size: 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .sectionDescription {
+    font-size: 1rem;
+  }
+
+  .boardMembers,
+  .initiativesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .memberCard {
+    flex-direction: column;
+  }
+
+  .memberSidebar {
+    width: 100%;
+    padding: 20px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    padding: 100px 0 50px;
+  }
+
+  .mainTitle {
+    font-size: 2rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+}

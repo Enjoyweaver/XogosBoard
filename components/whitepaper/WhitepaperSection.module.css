@@ -1,0 +1,48 @@
+/* components/whitepaper/WhitepaperSection.module.css */
+.section {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1f36;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.sectionContent {
+  color: #444;
+  line-height: 1.6;
+}
+
+.sectionContent h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 24px 0 16px;
+  color: #1a1f36;
+}
+
+.sectionContent p {
+  margin-bottom: 16px;
+}
+
+.sectionContent ul,
+.sectionContent ol {
+  margin-bottom: 16px;
+  padding-left: 24px;
+}
+
+.sectionContent li {
+  margin-bottom: 8px;
+}
+
+.sectionContent strong {
+  font-weight: 600;
+  color: #333;
+}
