@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
+import { MarketingLayout } from "@/layouts/Marketing";
+import { Container } from "@/primitives/Container";
+import styles from "./page.module.css";
 
 const RiskManagement = () => {
   const [activeTab, setActiveTab] = useState("risk-overview");
@@ -386,631 +388,607 @@ const RiskManagement = () => {
   ];
 
   return (
-    <div className="w-full  mx-auto mt-8 md:mt-16 relative">
-      {/* Blockchain-themed background - subtle grid with animated block connections */}
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
+    <MarketingLayout>
+      <Container className={styles.riskContainer}>
+        {/* Blockchain-themed background - subtle grid with animated block connections */}
+        <div className={styles.riskBackground}>
+          <div
+            className={styles.backgroundPattern}
+            style={{
+              backgroundImage: `
             radial-gradient(circle at 10px 10px, rgba(99, 102, 241, 0.1) 2px, transparent 0),
             radial-gradient(circle at 30px 30px, rgba(45, 212, 191, 0.1) 2px, transparent 0),
             radial-gradient(circle at 50px 50px, rgba(245, 158, 11, 0.1) 2px, transparent 0),
             radial-gradient(circle at 70px 70px, rgba(139, 92, 246, 0.1) 2px, transparent 0)
           `,
-            backgroundSize: "80px 80px",
-          }}
-        ></div>
+              backgroundSize: "80px 80px",
+            }}
+          ></div>
 
-        {/* Animated blockchain lines */}
-        <svg
-          className="absolute inset-0 w-full h-full"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient
-              id="blockchain-gradient-1"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="#6366f1" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0.6" />
-            </linearGradient>
-            <linearGradient
-              id="blockchain-gradient-2"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.6" />
-            </linearGradient>
-          </defs>
+          {/* Animated blockchain lines */}
+          <svg
+            className={styles.blockchainSvg}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient
+                id="blockchain-gradient-1"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" stopColor="#6366f1" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0.6" />
+              </linearGradient>
+              <linearGradient
+                id="blockchain-gradient-2"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.6" />
+              </linearGradient>
+            </defs>
 
-          {/* Blockchain lines with animated dashes */}
-          <path
-            d="M0,100 L100,100 L100,200 L200,200 L200,300 L300,300 L300,400"
-            stroke="url(#blockchain-gradient-1)"
-            strokeWidth="2"
-            strokeDasharray="10,5"
-            fill="none"
-            className="blockchain-animation"
-          />
-          <path
-            d="M400,0 L400,100 L300,100 L300,200 L400,200 L400,300 L500,300"
-            stroke="url(#blockchain-gradient-2)"
-            strokeWidth="2"
-            strokeDasharray="10,5"
-            fill="none"
-            className="blockchain-animation"
-            style={{ animationDelay: "1s" }}
-          />
+            {/* Blockchain lines with animated dashes */}
+            <path
+              d="M0,100 L100,100 L100,200 L200,200 L200,300 L300,300 L300,400"
+              stroke="url(#blockchain-gradient-1)"
+              strokeWidth="2"
+              strokeDasharray="10,5"
+              fill="none"
+              className={styles.blockchainAnimation}
+            />
+            <path
+              d="M400,0 L400,100 L300,100 L300,200 L400,200 L400,300 L500,300"
+              stroke="url(#blockchain-gradient-2)"
+              strokeWidth="2"
+              strokeDasharray="10,5"
+              fill="none"
+              className={styles.blockchainAnimation}
+              style={{ animationDelay: "1s" }}
+            />
 
-          {/* Blockchain nodes/blocks */}
-          <rect
-            x="95"
-            y="95"
-            width="8"
-            height="8"
-            fill="#6366f1"
-            className="blockchain-pulse"
-          />
-          <rect
-            x="95"
-            y="195"
-            width="8"
-            height="8"
-            fill="#2dd4bf"
-            className="blockchain-pulse"
-            style={{ animationDelay: "0.6s" }}
-          />
-          <rect
-            x="195"
-            y="195"
-            width="8"
-            height="8"
-            fill="#f59e0b"
-            className="blockchain-pulse"
-            style={{ animationDelay: "1.2s" }}
-          />
-          <rect
-            x="195"
-            y="295"
-            width="8"
-            height="8"
-            fill="#8b5cf6"
-            className="blockchain-pulse"
-            style={{ animationDelay: "1.8s" }}
-          />
-          <rect
-            x="295"
-            y="295"
-            width="8"
-            height="8"
-            fill="#10b981"
-            className="blockchain-pulse"
-            style={{ animationDelay: "2.4s" }}
-          />
-          <rect
-            x="395"
-            y="95"
-            width="8"
-            height="8"
-            fill="#8b5cf6"
-            className="blockchain-pulse"
-            style={{ animationDelay: "3.0s" }}
-          />
-          <rect
-            x="295"
-            y="95"
-            width="8"
-            height="8"
-            fill="#f59e0b"
-            className="blockchain-pulse"
-            style={{ animationDelay: "3.6s" }}
-          />
-          <rect
-            x="395"
-            y="195"
-            width="8"
-            height="8"
-            fill="#6366f1"
-            className="blockchain-pulse"
-            style={{ animationDelay: "4.2s" }}
-          />
-          <rect
-            x="395"
-            y="295"
-            width="8"
-            height="8"
-            fill="#2dd4bf"
-            className="blockchain-pulse"
-            style={{ animationDelay: "4.8s" }}
-          />
-        </svg>
-      </div>
-
-      <div className=" bg-gray-900 bg-opacity-80 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-gray-800">
-        <h2 className="text-center font-bold text-xl sm:text-3xl mb-6">
-          <span className="text-[#6366f1]">Risk</span>{" "}
-          <span className="text-[#2dd4bf]">Management</span>{" "}
-          <span className="text-[#f59e0b]">Framework</span>
-        </h2>
-
-        {/* Tab navigation */}
-        <div className="flex justify-center mb-6 overflow-x-auto pb-2">
-          <div className="inline-flex rounded-md shadow-sm bg-gray-800 p-1">
-            <button
-              onClick={() => setActiveTab("risk-overview")}
-              className={`px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all ${
-                activeTab === "risk-overview"
-                  ? "bg-gray-700 text-white"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              Risk Overview
-            </button>
-            <button
-              onClick={() => setActiveTab("risk-approaches")}
-              className={`px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all ${
-                activeTab === "risk-approaches"
-                  ? "bg-gray-700 text-white"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              Risk Approaches
-            </button>
-            <button
-              onClick={() => setActiveTab("skills-matrix")}
-              className={`px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all ${
-                activeTab === "skills-matrix"
-                  ? "bg-gray-700 text-white"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              Skills Matrix
-            </button>
-            <button
-              onClick={() => setActiveTab("risk-policies")}
-              className={`px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all ${
-                activeTab === "risk-policies"
-                  ? "bg-gray-700 text-white"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              Risk Policies
-            </button>
-          </div>
+            {/* Blockchain nodes/blocks */}
+            <rect
+              x="95"
+              y="95"
+              width="8"
+              height="8"
+              fill="#6366f1"
+              className={styles.blockchainPulse}
+            />
+            <rect
+              x="95"
+              y="195"
+              width="8"
+              height="8"
+              fill="#2dd4bf"
+              className={styles.blockchainPulse}
+              style={{ animationDelay: "0.6s" }}
+            />
+            <rect
+              x="195"
+              y="195"
+              width="8"
+              height="8"
+              fill="#f59e0b"
+              className={styles.blockchainPulse}
+              style={{ animationDelay: "1.2s" }}
+            />
+            <rect
+              x="195"
+              y="295"
+              width="8"
+              height="8"
+              fill="#8b5cf6"
+              className={styles.blockchainPulse}
+              style={{ animationDelay: "1.8s" }}
+            />
+            <rect
+              x="295"
+              y="295"
+              width="8"
+              height="8"
+              fill="#10b981"
+              className={styles.blockchainPulse}
+              style={{ animationDelay: "2.4s" }}
+            />
+            <rect
+              x="395"
+              y="95"
+              width="8"
+              height="8"
+              fill="#8b5cf6"
+              className={styles.blockchainPulse}
+              style={{ animationDelay: "3.0s" }}
+            />
+            <rect
+              x="295"
+              y="95"
+              width="8"
+              height="8"
+              fill="#f59e0b"
+              className={styles.blockchainPulse}
+              style={{ animationDelay: "3.6s" }}
+            />
+            <rect
+              x="395"
+              y="195"
+              width="8"
+              height="8"
+              fill="#6366f1"
+              className={styles.blockchainPulse}
+              style={{ animationDelay: "4.2s" }}
+            />
+            <rect
+              x="395"
+              y="295"
+              width="8"
+              height="8"
+              fill="#2dd4bf"
+              className={styles.blockchainPulse}
+              style={{ animationDelay: "4.8s" }}
+            />
+          </svg>
         </div>
 
-        {/* Risk Overview Tab Content */}
-        {activeTab === "risk-overview" && (
-          <div className="animate-fadeIn">
-            <p className="text-center text-gray-300 text-sm mb-5 max-w-2xl mx-auto">
-              At Xogos Gaming, our risk management approach integrates
-              educational best practices with blockchain security to create a
-              comprehensive framework that protects our platform, users, and
-              assets.
-            </p>
+        <div className={styles.riskContent}>
+          <h2 className={styles.riskTitle}>
+            <span style={{ color: "#6366f1" }}>Risk</span>{" "}
+            <span style={{ color: "#2dd4bf" }}>Management</span>{" "}
+            <span style={{ color: "#f59e0b" }}>Framework</span>
+          </h2>
 
-            {/* Risk categories grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6">
-              {riskCategories.map((category) => (
-                <div
-                  key={category.id}
-                  className="relative overflow-hidden rounded-lg p-3 bg-gradient-to-br from-gray-800 to-gray-900 group hover:shadow-md hover:from-gray-750 hover:to-gray-850 transition-all cursor-pointer border border-transparent hover:border-gray-700"
-                >
-                  {/* Hover effect */}
-                  <div
-                    className="absolute inset-0 opacity-5 group-hover:opacity-15 transition-opacity duration-300"
-                    style={{ backgroundColor: category.color }}
-                  ></div>
-
-                  {/* Decorative blur */}
-                  <div
-                    className="absolute -top-8 -right-8 w-12 h-12 rounded-full blur-xl"
-                    style={{ backgroundColor: `${category.color}30` }}
-                  ></div>
-
-                  <h4
-                    className="font-semibold text-base mb-2 flex items-center"
-                    style={{ color: category.color }}
-                  >
-                    {category.icon}
-                    {category.name}
-                  </h4>
-
-                  <p className="text-xs text-gray-300">
-                    {category.description}
-                  </p>
-                </div>
-              ))}
+          {/* Tab navigation */}
+          <div className={styles.tabNavigation}>
+            <div className={styles.tabContainer}>
+              <button
+                onClick={() => setActiveTab("risk-overview")}
+                className={`${styles.tabButton} ${
+                  activeTab === "risk-overview" ? styles.activeTab : ""
+                }`}
+              >
+                Risk Overview
+              </button>
+              <button
+                onClick={() => setActiveTab("risk-approaches")}
+                className={`${styles.tabButton} ${
+                  activeTab === "risk-approaches" ? styles.activeTab : ""
+                }`}
+              >
+                Risk Approaches
+              </button>
+              <button
+                onClick={() => setActiveTab("skills-matrix")}
+                className={`${styles.tabButton} ${
+                  activeTab === "skills-matrix" ? styles.activeTab : ""
+                }`}
+              >
+                Skills Matrix
+              </button>
+              <button
+                onClick={() => setActiveTab("risk-policies")}
+                className={`${styles.tabButton} ${
+                  activeTab === "risk-policies" ? styles.activeTab : ""
+                }`}
+              >
+                Risk Policies
+              </button>
             </div>
+          </div>
 
-            {/* Risk mitigation approach */}
-            <div className="bg-gray-800 bg-opacity-60 rounded-lg p-4 mb-5 shadow-sm">
-              <h3 className="text-white font-semibold text-lg mb-3 text-center">
-                Our Risk Mitigation Approach
-              </h3>
+          {/* Risk Overview Tab Content */}
+          {activeTab === "risk-overview" && (
+            <div className={styles.tabContent}>
+              <p className={styles.riskDescription}>
+                At Xogos Gaming, our risk management approach integrates
+                educational best practices with blockchain security to create a
+                comprehensive framework that protects our platform, users, and
+                assets.
+              </p>
 
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                {mitigationStrategies.map((strategy) => (
-                  <div
-                    key={strategy.name}
-                    className="relative overflow-hidden rounded-lg p-3 bg-gray-900 bg-opacity-70 hover:bg-opacity-90 transition-all cursor-pointer"
-                  >
+              {/* Risk categories grid */}
+              <div className={styles.riskCategoriesGrid}>
+                {riskCategories.map((category) => (
+                  <div key={category.id} className={styles.categoryCard}>
+                    {/* Hover effect */}
                     <div
-                      className="h-1 rounded-full mb-2"
-                      style={{ backgroundColor: strategy.color }}
+                      className={styles.categoryHoverEffect}
+                      style={{ backgroundColor: category.color }}
                     ></div>
+
+                    {/* Decorative blur */}
+                    <div
+                      className={styles.categoryBlur}
+                      style={{ backgroundColor: `${category.color}30` }}
+                    ></div>
+
                     <h4
-                      className="font-semibold text-sm mb-1.5"
-                      style={{ color: strategy.color }}
+                      className={styles.categoryName}
+                      style={{ color: category.color }}
                     >
-                      {strategy.name}
+                      {category.icon}
+                      {category.name}
                     </h4>
-                    <p className="text-xs text-gray-300 mb-2">
-                      {strategy.description}
+
+                    <p className={styles.categoryDescription}>
+                      {category.description}
                     </p>
-                    <div className="text-xs text-gray-400">
-                      <span className="font-medium text-gray-500">
-                        Examples:
-                      </span>{" "}
-                      {strategy.examples.join(", ")}
+                  </div>
+                ))}
+              </div>
+
+              {/* Risk mitigation approach */}
+              <div className={styles.mitigationSection}>
+                <h3 className={styles.mitigationTitle}>
+                  Our Risk Mitigation Approach
+                </h3>
+
+                <div className={styles.mitigationGrid}>
+                  {mitigationStrategies.map((strategy) => (
+                    <div key={strategy.name} className={styles.strategyCard}>
+                      <div
+                        className={styles.strategyHeader}
+                        style={{ backgroundColor: strategy.color }}
+                      ></div>
+                      <h4
+                        className={styles.strategyName}
+                        style={{ color: strategy.color }}
+                      >
+                        {strategy.name}
+                      </h4>
+                      <p className={styles.strategyDescription}>
+                        {strategy.description}
+                      </p>
+                      <div className={styles.strategyExamples}>
+                        <span className={styles.examplesLabel}>Examples:</span>{" "}
+                        {strategy.examples.join(", ")}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Risk management process visualization */}
+              <div className={styles.processSection}>
+                <h3 className={styles.processTitle}>
+                  Our Risk Management Process
+                </h3>
+
+                <div className={styles.processFlow}>
+                  {/* Process flow diagram */}
+                  <div className={styles.processSteps}>
+                    {/* Connection lines for desktop */}
+                    <div className={styles.connectionLine}></div>
+
+                    {/* Process steps */}
+                    {[
+                      {
+                        name: "Identify",
+                        color: "#6366f1",
+                        description:
+                          "Identify and document risks across the ecosystem",
+                      },
+                      {
+                        name: "Assess",
+                        color: "#2dd4bf",
+                        description:
+                          "Evaluate risk likelihood and potential impact",
+                      },
+                      {
+                        name: "Plan",
+                        color: "#8b5cf6",
+                        description:
+                          "Develop strategies to address identified risks",
+                      },
+                      {
+                        name: "Implement",
+                        color: "#f59e0b",
+                        description: "Execute risk management strategies",
+                      },
+                      {
+                        name: "Monitor",
+                        color: "#10b981",
+                        description:
+                          "Continuously track and review risk status",
+                      },
+                    ].map((step, index) => (
+                      <div key={index} className={styles.processStep}>
+                        <div
+                          className={styles.stepNumber}
+                          style={{ borderColor: step.color }}
+                        >
+                          <span style={{ color: step.color }}>{index + 1}</span>
+                        </div>
+                        <h5
+                          className={styles.stepName}
+                          style={{ color: step.color }}
+                        >
+                          {step.name}
+                        </h5>
+                        <p className={styles.stepDescription}>
+                          {step.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className={styles.processNote}>
+                    Our risk management process is cyclical and continuous,
+                    ensuring we remain adaptable to emerging risks in the
+                    educational technology and blockchain spaces.
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Risk Approaches Tab Content */}
+          {activeTab === "risk-approaches" && (
+            <div className={styles.tabContent}>
+              <p className={styles.riskDescription}>
+                We employ multiple specialized approaches to manage different
+                aspects of risk across our educational gaming platform and
+                blockchain infrastructure.
+              </p>
+              {/* Risk approaches grid */}
+              <div className={styles.approachesGrid}>
+                {riskApproaches.map((approach) => (
+                  <div key={approach.id} className={styles.approachCard}>
+                    {/* Background effect */}
+                    <div
+                      className={styles.approachBackground}
+                      style={{ backgroundColor: approach.color }}
+                    ></div>
+
+                    {/* Top accent line */}
+                    <div
+                      className={styles.approachAccent}
+                      style={{ backgroundColor: approach.color }}
+                    ></div>
+
+                    <div className={styles.approachHeader}>
+                      <div
+                        className={styles.approachIcon}
+                        style={{
+                          backgroundColor: `${approach.color}20`,
+                          color: approach.color,
+                        }}
+                      >
+                        {approach.icon}
+                      </div>
+
+                      <h4
+                        className={styles.approachTitle}
+                        style={{ color: approach.color }}
+                      >
+                        {approach.title}
+                      </h4>
+                    </div>
+
+                    <p className={styles.approachDescription}>
+                      {approach.description}
+                    </p>
+
+                    <div className={styles.approachItems}>
+                      {approach.items.map((item, index) => (
+                        <div key={index} className={styles.approachItem}>
+                          <span
+                            className={styles.itemBullet}
+                            style={{ backgroundColor: approach.color }}
+                          ></span>
+                          <span className={styles.itemText}>{item}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
 
-            {/* Risk management process visualization */}
-            <div className="bg-gray-800 bg-opacity-60 rounded-lg p-4 shadow-sm">
-              <h3 className="text-white font-semibold text-lg mb-3 text-center">
-                Our Risk Management Process
-              </h3>
+              {/* Risk integration statement */}
+              <div className={styles.integrationSection}>
+                <h3 className={styles.integrationTitle}>
+                  Integrated Risk Management
+                </h3>
+                <p className={styles.integrationDescription}>
+                  Our risk management approaches don&apos;t operate in
+                  isolation. They form an integrated system that provides
+                  multiple layers of protection for our educational platform and
+                  blockchain assets.
+                </p>
 
-              <div className="relative">
-                {/* Process flow diagram */}
-                <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-6 relative">
-                  {/* Connection lines for desktop */}
-                  <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 bg-gradient-to-r from-[#6366f1] via-[#2dd4bf] to-[#f59e0b]"></div>
-
-                  {/* Process steps */}
-                  {[
-                    {
-                      name: "Identify",
-                      color: "#6366f1",
-                      description:
-                        "Identify and document risks across the ecosystem",
-                    },
-                    {
-                      name: "Assess",
-                      color: "#2dd4bf",
-                      description:
-                        "Evaluate risk likelihood and potential impact",
-                    },
-                    {
-                      name: "Plan",
-                      color: "#8b5cf6",
-                      description:
-                        "Develop strategies to address identified risks",
-                    },
-                    {
-                      name: "Implement",
-                      color: "#f59e0b",
-                      description: "Execute risk management strategies",
-                    },
-                    {
-                      name: "Monitor",
-                      color: "#10b981",
-                      description: "Continuously track and review risk status",
-                    },
-                  ].map((step, index) => (
-                    <div
-                      key={index}
-                      className="flex flex-col items-center mb-4 md:mb-0"
-                    >
-                      <div
-                        className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center mb-2 z-10 bg-gray-900"
-                        style={{ border: `2px solid ${step.color}` }}
-                      >
-                        <span
-                          className="font-bold text-sm"
-                          style={{ color: step.color }}
-                        >
-                          {index + 1}
-                        </span>
-                      </div>
-                      <h5
-                        className="font-medium text-sm mb-1"
-                        style={{ color: step.color }}
-                      >
-                        {step.name}
-                      </h5>
-                      <p className="text-xs text-gray-300 text-center max-w-[100px] md:max-w-[80px]">
-                        {step.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="text-gray-300 text-xs text-center">
-                  Our risk management process is cyclical and continuous,
-                  ensuring we remain adaptable to emerging risks in the
-                  educational technology and blockchain spaces.
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Risk Approaches Tab Content */}
-        {activeTab === "risk-approaches" && (
-          <div className="animate-fadeIn">
-            <p className="text-center text-gray-300 text-sm mb-5 max-w-2xl mx-auto">
-              We employ multiple specialized approaches to manage different
-              aspects of risk across our educational gaming platform and
-              blockchain infrastructure.
-            </p>
-            {/* Risk approaches grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-              {riskApproaches.map((approach) => (
-                <div
-                  key={approach.id}
-                  className="relative overflow-hidden rounded-lg p-3 bg-gradient-to-br from-gray-800 to-gray-900 group hover:shadow-md hover:from-gray-750 hover:to-gray-850 transition-all cursor-pointer border border-transparent hover:border-gray-700"
-                >
-                  {/* Background effect */}
-                  <div
-                    className="absolute inset-0 opacity-5 group-hover:opacity-15 transition-opacity duration-300"
-                    style={{ backgroundColor: approach.color }}
-                  ></div>
-
-                  {/* Top accent line */}
-                  <div
-                    className="absolute top-0 left-0 right-0 h-1"
-                    style={{ backgroundColor: approach.color }}
-                  ></div>
-
-                  <div className="flex items-start mb-2">
-                    <div
-                      className="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center mr-2"
+                <div className={styles.integrationTags}>
+                  {riskApproaches.map((approach) => (
+                    <span
+                      key={approach.id}
+                      className={styles.integrationTag}
                       style={{
                         backgroundColor: `${approach.color}20`,
                         color: approach.color,
                       }}
                     >
-                      {approach.icon}
-                    </div>
-
-                    <h4
-                      className="font-semibold text-base pt-1"
-                      style={{ color: approach.color }}
-                    >
                       {approach.title}
-                    </h4>
-                  </div>
-
-                  <p className="text-xs text-gray-300 mb-3 ml-10">
-                    {approach.description}
-                  </p>
-
-                  <div className="grid grid-cols-2 gap-2">
-                    {approach.items.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center text-xs p-2 rounded-md bg-gray-800 hover:bg-gray-750 transition-colors"
-                      >
-                        <span
-                          className="w-1.5 h-1.5 rounded-full mr-1 flex-shrink-0"
-                          style={{ backgroundColor: approach.color }}
-                        ></span>
-                        <span className="text-gray-300 text-xs">{item}</span>
-                      </div>
-                    ))}
-                  </div>
+                    </span>
+                  ))}
                 </div>
-              ))}
-            </div>
-
-            {/* Risk integration statement */}
-            <div className="mt-6 bg-gray-800 bg-opacity-60 rounded-lg p-4 shadow-sm">
-              <h3 className="text-white font-semibold text-lg mb-3 text-center">
-                Integrated Risk Management
-              </h3>
-              <p className="text-gray-300 text-xs text-center mb-3">
-                Our risk management approaches don't operate in isolation. They
-                form an integrated system that provides multiple layers of
-                protection for our educational platform and blockchain assets.
-              </p>
-
-              <div className="flex flex-wrap justify-center gap-2">
-                {riskApproaches.map((approach) => (
-                  <span
-                    key={approach.id}
-                    className="px-2 py-1 rounded-full text-xs hover:shadow-sm transition-all cursor-pointer"
-                    style={{
-                      backgroundColor: `${approach.color}20`,
-                      color: approach.color,
-                    }}
-                  >
-                    {approach.title}
-                  </span>
-                ))}
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Risk Policies Tab Content */}
-        {activeTab === "risk-policies" && (
-          <div className="animate-fadeIn">
-            <p className="text-center text-gray-300 text-sm mb-5 max-w-2xl mx-auto">
-              Our organization has established comprehensive policies to guide
-              risk management across all areas of operation, with special focus
-              on educational content and cryptocurrency security.
-            </p>
+          {/* Risk Policies Tab Content */}
+          {activeTab === "risk-policies" && (
+            <div className={styles.tabContent}>
+              <p className={styles.riskDescription}>
+                Our organization has established comprehensive policies to guide
+                risk management across all areas of operation, with special
+                focus on educational content and cryptocurrency security.
+              </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-              {[
-                {
-                  title: "Privacy Policy",
-                  description:
-                    "Guidelines for collecting, storing, and processing student and user data in compliance with FERPA, COPPA, and other regulations.",
-                  color: "#8b5cf6", // Violet
-                  icon: (
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"
-                      ></path>
-                    </svg>
-                  ),
-                  link: "/privacy",
-                },
-                {
-                  title: "Terms of Use",
-                  description:
-                    "Comprehensive terms governing the use of our educational platform, including user responsibilities and platform limitations.",
-                  color: "#6366f1", // Indigo
-                  icon: (
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                      ></path>
-                    </svg>
-                  ),
-                  link: "/terms",
-                },
-                {
-                  title: "Security Policy",
-                  description:
-                    "Outlines our approach to securing data, protecting blockchain assets, and maintaining infrastructure integrity.",
-                  color: "#2dd4bf", // Teal
-                  icon: (
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                      ></path>
-                    </svg>
-                  ),
-                  link: "/security",
-                },
-                {
-                  title: "Risk Register Policy",
-                  description:
-                    "Defines how we identify, categorize, and track risks across the organization, including review frequencies and ownership.",
-                  color: "#f59e0b", // Amber
-                  icon: (
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-                      ></path>
-                    </svg>
-                  ),
-                  link: "/risk-register",
-                },
-                {
-                  title: "Cryptocurrency Governance",
-                  description:
-                    "Outlines management of the iServ and iPlay token economies, including security, distribution, and conversion policies.",
-                  color: "#10b981", // Emerald
-                  icon: (
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M13 10V3L4 14h7v7l9-11h-7z"
-                      ></path>
-                    </svg>
-                  ),
-                  link: "/crypto-governance",
-                },
-                {
-                  title: "Educational Content Standards",
-                  description:
-                    "Guidelines ensuring educational content meets quality standards, accuracy requirements, and age-appropriate design.",
-                  color: "#ec4899", // Pink
-                  icon: (
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                      ></path>
-                    </svg>
-                  ),
-                  link: "/content-standards",
-                },
-              ].map((policy, index) => (
-                <Link key={index} href={policy.link} className="block">
-                  <div className="relative overflow-hidden rounded-lg p-3 bg-gradient-to-br from-gray-800 to-gray-900 group hover:shadow-md hover:from-gray-750 hover:to-gray-850 transition-all cursor-pointer border border-transparent hover:border-gray-700">
+              <div className={styles.policiesGrid}>
+                {[
+                  {
+                    title: "Privacy Policy",
+                    description:
+                      "Guidelines for collecting, storing, and processing student and user data in compliance with FERPA, COPPA, and other regulations.",
+                    color: "#8b5cf6", // Violet
+                    icon: (
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"
+                        ></path>
+                      </svg>
+                    ),
+                    link: "/privacy",
+                  },
+                  {
+                    title: "Terms of Use",
+                    description:
+                      "Comprehensive terms governing the use of our educational platform, including user responsibilities and platform limitations.",
+                    color: "#6366f1", // Indigo
+                    icon: (
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        ></path>
+                      </svg>
+                    ),
+                    link: "/terms",
+                  },
+                  {
+                    title: "Security Policy",
+                    description:
+                      "Outlines our approach to securing data, protecting blockchain assets, and maintaining infrastructure integrity.",
+                    color: "#2dd4bf", // Teal
+                    icon: (
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                        ></path>
+                      </svg>
+                    ),
+                    link: "/security",
+                  },
+                  {
+                    title: "Risk Register Policy",
+                    description:
+                      "Defines how we identify, categorize, and track risks across the organization, including review frequencies and ownership.",
+                    color: "#f59e0b", // Amber
+                    icon: (
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                        ></path>
+                      </svg>
+                    ),
+                    link: "/risk-register",
+                  },
+                  {
+                    title: "Cryptocurrency Governance",
+                    description:
+                      "Outlines management of the iServ and iPlay token economies, including security, distribution, and conversion policies.",
+                    color: "#10b981", // Emerald
+                    icon: (
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M13 10V3L4 14h7v7l9-11h-7z"
+                        ></path>
+                      </svg>
+                    ),
+                    link: "/crypto-governance",
+                  },
+                  {
+                    title: "Educational Content Standards",
+                    description:
+                      "Guidelines ensuring educational content meets quality standards, accuracy requirements, and age-appropriate design.",
+                    color: "#ec4899", // Pink
+                    icon: (
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                        ></path>
+                      </svg>
+                    ),
+                    link: "/content-standards",
+                  },
+                ].map((policy, index) => (
+                  <a
+                    key={index}
+                    href={policy.link}
+                    className={styles.policyCard}
+                  >
                     {/* Background effect */}
                     <div
-                      className="absolute inset-0 opacity-5 group-hover:opacity-15 transition-opacity duration-300"
+                      className={styles.policyBackground}
                       style={{ backgroundColor: policy.color }}
                     ></div>
 
                     {/* Left accent line */}
                     <div
-                      className="absolute left-0 top-0 bottom-0 w-1"
+                      className={styles.policyAccent}
                       style={{ backgroundColor: policy.color }}
                     ></div>
 
-                    <div className="flex items-start mb-2">
+                    <div className={styles.policyHeader}>
                       <div
-                        className="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center mr-2"
+                        className={styles.policyIcon}
                         style={{
                           backgroundColor: `${policy.color}20`,
                           color: policy.color,
@@ -1020,19 +998,19 @@ const RiskManagement = () => {
                       </div>
 
                       <h4
-                        className="font-semibold text-base pt-1"
+                        className={styles.policyTitle}
                         style={{ color: policy.color }}
                       >
                         {policy.title}
                       </h4>
                     </div>
 
-                    <p className="text-xs text-gray-300 ml-10">
+                    <p className={styles.policyDescription}>
                       {policy.description}
                     </p>
 
                     <div
-                      className="mt-3 ml-10 flex items-center text-xs"
+                      className={styles.policyLink}
                       style={{ color: policy.color }}
                     >
                       <span>View Policy</span>
@@ -1051,12 +1029,12 @@ const RiskManagement = () => {
                         ></path>
                       </svg>
                     </div>
-                  </div>
-                </Link>
-              ))}
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* Animation styles */}
         <style jsx>{`
@@ -1104,8 +1082,8 @@ const RiskManagement = () => {
             }
           }
         `}</style>
-      </div>
-    </div>
+      </Container>
+    </MarketingLayout>
   );
 };
 
