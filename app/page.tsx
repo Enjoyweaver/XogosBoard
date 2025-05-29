@@ -298,17 +298,83 @@ export default function HomePage() {
             <div
               className={`${styles.heroRight} ${isLoaded ? styles.visible : ""}`}
             >
-              <div className={styles.heroImageContainer}>
-                <div className={styles.heroLogoDisplay}>
-                  <Image
-                    src="/images/fullLogo.jpeg"
-                    alt="Xogos Gaming Logo"
-                    fill
-                    className={styles.heroMainLogo}
-                    priority
-                  />
+              <div className={styles.gameBoyContainer}>
+                <div className={styles.gameBoyBody}>
+                  {/* Top Section */}
+                  <div className={styles.gameBoyTop}>
+                    <div className={styles.speakerGrill}>
+                      {Array.from({ length: 6 }).map((_, i) => (
+                        <div key={i} className={styles.speakerHole}></div>
+                      ))}
+                    </div>
+                    <div className={styles.nintendoLogo}>XOGOS</div>
+                  </div>
+
+                  {/* Screen Section */}
+                  <div className={styles.screenSection}>
+                    <div className={styles.screenBezel}>
+                      <div className={styles.screenInner}>
+                        <div className={styles.gameScreen}>
+                          <div className={styles.screenReflection}></div>
+                          <div className={styles.logoDisplay}>
+                            <Image
+                              src="/images/fullLogo.jpeg"
+                              alt="Xogos Gaming Logo"
+                              fill
+                              className={styles.gameLogo}
+                              priority
+                            />
+                          </div>
+                          <div className={styles.scanlines}></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.screenLabel}>XOGOS GAMING</div>
+                  </div>
+
+                  {/* Controls Section */}
+                  <div className={styles.controlsSection}>
+                    {/* D-Pad */}
+                    <div className={styles.dpadContainer}>
+                      <div className={styles.dpad}>
+                        <div
+                          className={`${styles.dpadButton} ${styles.dpadUp}`}
+                        ></div>
+                        <div
+                          className={`${styles.dpadButton} ${styles.dpadRight}`}
+                        ></div>
+                        <div
+                          className={`${styles.dpadButton} ${styles.dpadDown}`}
+                        ></div>
+                        <div
+                          className={`${styles.dpadButton} ${styles.dpadLeft}`}
+                        ></div>
+                        <div className={styles.dpadCenter}></div>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className={styles.actionButtons}>
+                      <div className={styles.actionButton}>
+                        <span>A</span>
+                      </div>
+                      <div className={styles.actionButton}>
+                        <span>B</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Section */}
+                  <div className={styles.gameBoyBottom}>
+                    <div className={styles.selectStart}>
+                      <div className={styles.miniButton}></div>
+                      <span className={styles.buttonLabel}>SELECT</span>
+                      <div className={styles.miniButton}></div>
+                      <span className={styles.buttonLabel}>START</span>
+                    </div>
+                    <div className={styles.powerLed}></div>
+                  </div>
                 </div>
-                <div className={styles.heroImageOverlay}></div>
               </div>
             </div>
           </div>

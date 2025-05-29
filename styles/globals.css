@@ -1,3 +1,5 @@
+/* /stles/globals.css */
+
 :root {
   /* Color palette */
   --color-cream: #fdf4e6;
@@ -10,7 +12,7 @@
   --color-black: #000000;
 
   /* Functional colors */
-  --color-bg-primary: var(--color-cream);
+  --color-bg-primary: #0d0d1a;
   --color-bg-secondary: #f8f1e4;
   --color-bg-accent: rgba(246, 162, 124, 0.08);
   --color-text-primary: var(--color-dark-red);
@@ -162,4 +164,27 @@ html.grabbing {
 
 html.grabbing * {
   user-select: none;
+}
+/* DEBUG - Add this temporarily to find the overflow */
+* {
+  box-sizing: border-box !important;
+}
+
+body * {
+  max-width: 100vw !important;
+}
+
+/* Also add this to see which element is extending */
+html {
+  overflow-x: auto !important;
+}
+
+body {
+  overflow-x: auto !important;
+}
+
+footer,
+footer * {
+  max-width: 100vw !important;
+  box-sizing: border-box !important;
 }

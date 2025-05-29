@@ -3,6 +3,9 @@
   padding-left: var(--space-8);
   margin-right: auto;
   margin-left: auto;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .containerSmall {
