@@ -562,14 +562,12 @@ const RiskManagement = () => {
               >
                 Risk Approaches
               </button>
-              <button
-                onClick={() => setActiveTab("skills-matrix")}
-                className={`${styles.tabButton} ${
-                  activeTab === "skills-matrix" ? styles.activeTab : ""
-                }`}
+              <a
+                href="/skillsmatrix"
+                className={`${styles.tabButton} ${styles.tabLink}`}
               >
                 Skills Matrix
-              </button>
+              </a>
               <button
                 onClick={() => setActiveTab("risk-policies")}
                 className={`${styles.tabButton} ${

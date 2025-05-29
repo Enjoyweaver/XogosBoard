@@ -130,6 +130,19 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
+.tabLink {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabLink:hover {
+  color: #e5e5e5;
+  background: rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+}
+
 .activeTab {
   color: white !important;
   background: linear-gradient(45deg, #e62739, #7928ca) !important;
