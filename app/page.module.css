@@ -20,6 +20,7 @@
   align-items: center;
   background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 50%, #16213e 100%);
   overflow: hidden;
+  overflow-x: hidden;
   padding: 80px 0;
 }
 

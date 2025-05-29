@@ -34,12 +34,12 @@ export function BoardroomHeader() {
           </Link>
           <div className={styles.navLinkContainer}>
             <Link
-              href="/"
+              href="/board"
               className={`${styles.navLink} ${
                 isActive("/") && !isActive("/board") ? styles.active : ""
               }`}
             >
-              Home
+              Board Room
             </Link>
             <Link
               href="/board"

@@ -4,6 +4,7 @@
 .boardPage {
   background: linear-gradient(135deg, #0d0d1a, #1a1a2e);
   min-height: 100vh;
+  margin-top: 2rem;
   width: 100%;
 }
 

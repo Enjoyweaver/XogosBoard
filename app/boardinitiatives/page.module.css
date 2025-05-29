@@ -6,6 +6,7 @@
   font-family: "Inter", sans-serif;
   position: relative;
   overflow: hidden;
+  margin-top: 2rem;
 }
 
 /* Base styling for sections */
@@ -15,6 +16,7 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  margin-top: 2rem;
 }
 
 /* Hero section styles */

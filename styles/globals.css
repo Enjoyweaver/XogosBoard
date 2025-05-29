@@ -182,9 +182,3 @@ html {
 body {
   overflow-x: auto !important;
 }
-
-footer,
-footer * {
-  max-width: 100vw !important;
-  box-sizing: border-box !important;
-}
