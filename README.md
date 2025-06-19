@@ -12,9 +12,13 @@ File structure
   /signin
   /text
   /whiteboard
-  /boardmembers      // New directory for the board members page
-    -BoardMembers.tsx // Place the BoardMembers.tsx file here
+  /boardmembers
+    -BoardMembers.tsx
     -page.tsx
+  /boardinitiatives
+  /tokenomics
+- page.tsx (current one)
+
 /components
 /data
 /icons
@@ -32,4 +36,30 @@ auth.config.ts
 liveblocks.config.ts
 liveblocks.server.config.ts
 package.json
+```
+
+/app /api /board (old app/page.tsx file that is now here) /dashboard /signin
+/text /whiteboard /boardmembers  
+ -BoardMembers.tsx -page.tsx /boardinitiatives /tokenomics
+
+- page.tsx (new one you just creaated using the Xogos Gaming home page content.)
+
+```
+app/
+├── services/
+│   └── rss-feed.service.ts
+├── components/
+│   └── RSS/
+│       ├── RSSFeedSection.tsx
+│       └── RSSFeedSection.module.css
+├── api/
+│   └── rss-feeds/
+│       └── [category]/
+│           └── route.ts
+├── board/
+│   └── market-insights/
+│       ├── page.tsx
+│       └── page.module.css
+└── lib/
+    └── redis.ts
 ```

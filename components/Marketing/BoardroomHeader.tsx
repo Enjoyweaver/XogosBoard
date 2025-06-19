@@ -71,6 +71,9 @@ export function BoardroomHeader() {
             >
               Tokenomics
             </Link>
+            <Link href="/board/market-insights" className={styles.navLink}>
+              Market Insights
+            </Link>
           </div>
         </div>
       </Container>

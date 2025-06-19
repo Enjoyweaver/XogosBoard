@@ -1,0 +1,262 @@
+/* app/components/RSS/RSSFeedSection.module.css */
+.feedSection {
+  padding: 60px 0;
+  background: rgba(26, 26, 46, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  margin: 40px 0;
+}
+
+.feedHeader {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.feedTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #e5e5e5;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.feedTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #e62739, #7928ca);
+  border-radius: 2px;
+}
+
+.feedDescription {
+  font-size: 1.1rem;
+  color: rgba(229, 229, 229, 0.8);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Loading and Error States */
+.loadingState,
+.errorState,
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  color: rgba(229, 229, 229, 0.8);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 20px;
+  border: 3px solid rgba(229, 229, 229, 0.1);
+  border-top-color: #e62739;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.retryButton {
+  background: linear-gradient(45deg, #e62739, #7928ca);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.retryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(230, 39, 57, 0.3);
+}
+
+/* Feed Grid */
+.feedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 30px;
+  padding: 0 20px;
+}
+
+.feedCard {
+  background: rgba(13, 13, 26, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.feedCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.feedCard.hasCommentary {
+  border-color: rgba(230, 39, 57, 0.3);
+}
+
+.feedContent {
+  padding: 25px;
+}
+
+.feedMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 0.85rem;
+  color: rgba(229, 229, 229, 0.6);
+}
+
+.feedSource {
+  font-weight: 600;
+  color: #e62739;
+}
+
+.feedItemTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.feedLink {
+  color: #e5e5e5;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.feedLink:hover {
+  color: #e62739;
+}
+
+.feedSnippet {
+  color: rgba(229, 229, 229, 0.8);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.feedTags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.feedTag {
+  background: rgba(230, 39, 57, 0.1);
+  color: rgba(229, 229, 229, 0.9);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Commentary Section */
+.commentary {
+  background: rgba(13, 13, 26, 0.8);
+  padding: 20px 25px;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.commentary.positive {
+  border-top-color: #4caf50;
+}
+
+.commentary.negative {
+  border-top-color: #f44336;
+}
+
+.commentary.neutral {
+  border-top-color: #ff9800;
+}
+
+.commentaryHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.commentaryIcon {
+  font-size: 1.2rem;
+}
+
+.commentaryAuthor {
+  font-weight: 600;
+  color: #e5e5e5;
+}
+
+.commentaryRole {
+  font-size: 0.85rem;
+  color: rgba(229, 229, 229, 0.6);
+}
+
+.commentaryContent {
+  color: rgba(229, 229, 229, 0.9);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.addCommentaryBtn {
+  width: 100%;
+  padding: 15px;
+  background: rgba(230, 39, 57, 0.1);
+  border: 1px solid rgba(230, 39, 57, 0.3);
+  color: #e62739;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.addCommentaryBtn:hover {
+  background: rgba(230, 39, 57, 0.2);
+  border-color: #e62739;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .feedGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .feedTitle {
+    font-size: 2rem;
+  }
+
+  .feedCard {
+    margin: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .feedSection {
+    padding: 40px 0;
+  }
+
+  .feedContent {
+    padding: 20px;
+  }
+
+  .commentary {
+    padding: 15px 20px;
+  }
+}

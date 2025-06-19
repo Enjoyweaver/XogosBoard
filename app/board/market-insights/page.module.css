@@ -1,0 +1,160 @@
+/* app/board/market-insights/page.module.css */
+.insightsPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.section {
+  padding: 4rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.heroInfo {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.heroTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #e5e5e5, rgba(229, 229, 229, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  display: inline-block;
+}
+
+.heroTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #e62739, #7928ca);
+  border-radius: 2px;
+}
+
+.heroLead {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: rgba(229, 229, 229, 0.8);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* CTA Section */
+.ctaSection {
+  margin-top: 80px;
+  padding: 80px 2rem;
+  background: rgba(26, 26, 46, 0.6);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ctaContent {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #e5e5e5;
+  margin-bottom: 1rem;
+}
+
+.ctaDescription {
+  font-size: 1.1rem;
+  color: rgba(229, 229, 229, 0.8);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.subscribeForm {
+  display: flex;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.emailInput {
+  flex: 1;
+  padding: 14px 20px;
+  background: rgba(13, 13, 26, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #e5e5e5;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.emailInput:focus {
+  outline: none;
+  border-color: #e62739;
+  background: rgba(13, 13, 26, 0.9);
+}
+
+.emailInput::placeholder {
+  color: rgba(229, 229, 229, 0.5);
+}
+
+.subscribeButton {
+  padding: 14px 32px;
+  background: linear-gradient(45deg, #e62739, #7928ca);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.subscribeButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(230, 39, 57, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .heroLead {
+    font-size: 1.1rem;
+  }
+
+  .ctaTitle {
+    font-size: 2rem;
+  }
+
+  .subscribeForm {
+    flex-direction: column;
+  }
+
+  .subscribeButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .section {
+    padding: 3rem 1rem;
+  }
+}
