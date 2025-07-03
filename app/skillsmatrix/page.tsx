@@ -1,12 +1,33 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MarketingLayout } from "@/layouts/Marketing";
 import { Container } from "@/primitives/Container";
 import styles from "./page.module.css";
 
+interface Director {
+  id: number;
+  name: string;
+  title: string;
+}
+
+interface Skill {
+  id: string;
+  name: string;
+  target: number;
+}
+
+interface SkillCategory {
+  name: string;
+  color: string;
+  skills: Skill[];
+}
+
+interface Ratings {
+  [key: string]: number;
+}
+
 const SkillsMatrix = () => {
-  // Board directors data
-  const [directors, setDirectors] = useState([
+  const [directors, setDirectors] = useState<Director[]>([
     { id: 1, name: "Michael Weaver", title: "President" },
     { id: 2, name: "Zack Edwards", title: "CEO" },
     { id: 3, name: "Braden Perry", title: "Legal Director" },
@@ -16,7 +37,7 @@ const SkillsMatrix = () => {
     { id: 7, name: "Open Position", title: "Compliance Director" },
   ]);
 
-  const skillCategories = [
+  const skillCategories: SkillCategory[] = [
     {
       name: "Core Governance Skills",
       color: "#e62739",
@@ -75,16 +96,15 @@ const SkillsMatrix = () => {
     },
   ];
 
-  // Initialize ratings
-  const [ratings, setRatings] = useState({});
+  const [ratings, setRatings] = useState<Ratings>({});
 
-  React.useEffect(() => {
-    const initialRatings = {};
+  useEffect(() => {
+    const initialRatings: Ratings = {};
     directors.forEach((director) => {
       skillCategories.forEach((category) => {
         category.skills.forEach((skill) => {
           const key = `${director.id}-${skill.id}`;
-          if (ratings[key] === undefined) {
+          if ((ratings as Ratings)[key] === undefined) {
             initialRatings[key] = 0;
           }
         });
@@ -96,28 +116,32 @@ const SkillsMatrix = () => {
     }
   }, [directors, skillCategories]);
 
-  const handleRatingChange = (directorId, skillId, value) => {
+  const handleRatingChange = (
+    directorId: number,
+    skillId: string,
+    value: number
+  ) => {
     const key = `${directorId}-${skillId}`;
     setRatings((prev) => ({ ...prev, [key]: value }));
   };
 
-  const getRatingColor = (rating) => {
+  const getRatingColor = (rating: number): string => {
     switch (rating) {
       case 4:
-        return "#16a34a"; // Green - Expert
+        return "#16a34a";
       case 3:
-        return "#22c55e"; // Light Green - Proficient
+        return "#22c55e";
       case 2:
-        return "#eab308"; // Yellow - Basic
+        return "#eab308";
       case 1:
-        return "#f97316"; // Orange - Limited
+        return "#f97316";
       case 0:
       default:
-        return "#dc2626"; // Red - None
+        return "#dc2626";
     }
   };
 
-  const getRatingText = (rating) => {
+  const getRatingText = (rating: number): string => {
     switch (rating) {
       case 4:
         return "Expert";
@@ -133,7 +157,7 @@ const SkillsMatrix = () => {
     }
   };
 
-  const analyzeGaps = (skillId) => {
+  const analyzeGaps = (skillId: string): { status: string; text: string } => {
     const proficientCount = directors.reduce((count, director) => {
       const key = `${director.id}-${skillId}`;
       return ratings[key] >= 3 ? count + 1 : count;
@@ -153,10 +177,11 @@ const SkillsMatrix = () => {
         };
       }
     }
+
     return { status: "unknown", text: "" };
   };
 
-  const getPriorityAreas = () => {
+  const getPriorityAreas = (): Skill[] => {
     return skillCategories.flatMap((category) =>
       category.skills.filter((skill) => {
         const proficientCount = directors.reduce((count, director) => {

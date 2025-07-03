@@ -55,7 +55,7 @@ export function BoardroomHeader() {
                 isActive("/boardinitiatives") ? styles.active : ""
               }`}
             >
-              Board Initiatives
+              Initiatives
             </Link>
             <Link
               href="/risk"

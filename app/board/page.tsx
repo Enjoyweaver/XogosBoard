@@ -1,142 +1,486 @@
+"use client";
+
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { ComponentProps, ReactNode } from "react";
-import { auth } from "@/auth";
-import { DASHBOARD_URL } from "@/constants";
+import React, { useEffect, useState } from "react";
 import { MarketingLayout } from "@/layouts/Marketing";
-import { LinkButton } from "@/primitives/Button";
-import { Container } from "@/primitives/Container";
 import styles from "./page.module.css";
 
-interface FeatureProps extends Omit<ComponentProps<"div">, "title"> {
-  description: ReactNode;
-  title: ReactNode;
-  link?: string;
-}
+// Real board members with proper seating positions
+const boardMembers = [
+  {
+    name: "Michael Weaver",
+    title: "President",
+    role: "Insurance & Risk",
+    imagePath: "/images/weaver.jpg",
+    seatPosition: "head", // Head of table
+    status: "present",
+  },
+  {
+    name: "Zack Edwards",
+    title: "CEO",
+    role: "Executive Oversight",
+    imagePath: "/images/zack.jpg",
+    seatPosition: "rightOne", // Right of head
+    status: "present",
+  },
+  {
+    name: "Braden Perry",
+    title: "Legal Director",
+    role: "Legal & Regulatory",
+    imagePath: "/images/board/braden-perry.jpg",
+    seatPosition: "leftOne", // Left of head
+    status: "present",
+  },
+  {
+    name: "Terrance Gatsby",
+    title: "Crypto & Exchanges Director",
+    role: "Cryptocurrency Integration",
+    imagePath: "/images/board/terrance-gatsby.jpg",
+    seatPosition: "rightTwo", // Right middle
+    status: "present",
+  },
+  {
+    name: "Kevin Stursberg",
+    title: "Accounting Director",
+    role: "Financial Oversight",
+    imagePath: "/images/board/kevin-stursberg.jpg",
+    seatPosition: "leftTwo", // Left middle
+    status: "present",
+  },
+  {
+    name: "McKayla Reece",
+    title: "Education Director",
+    role: "Educational Strategy",
+    imagePath: "/images/board/mckayla-reece.jpg",
+    seatPosition: "leftThree", // Left far
+    status: "present",
+  },
+  {
+    name: "Open Position",
+    title: "Compliance Director",
+    role: "Regulatory Oversight",
+    imagePath: null,
+    seatPosition: "rightThree", // Right far
+    status: "vacant",
+  },
+];
 
-function Feature({
-  title,
-  description,
-  link,
-  className,
-  ...props
-}: FeatureProps) {
-  const content = (
-    <>
-      <h4 className={styles.featureTitle}>{title}</h4>
-      <p className={styles.featureDescription}>{description}</p>
-    </>
-  );
-  return (
-    <div className={`${styles.featureCard} ${className || ""}`} {...props}>
-      {link ? <Link href={link}>{content}</Link> : content}
-    </div>
-  );
-}
+// Factual platform metrics from whitepaper
+const platformMetrics = [
+  { label: "iServ Max Supply", value: "106,000,000 Tokens", trend: "fixed" },
+  { label: "Daily iPlay Cap", value: "4 Tokens Per Student", trend: "stable" },
+  {
+    label: "Savings Multiplier",
+    value: "2X Maximum (180 Days)",
+    trend: "active",
+  },
+  {
+    label: "Platform Status",
+    value: "PRE-LAUNCH DEVELOPMENT",
+    trend: "progress",
+  },
+  {
+    label: "Token Economy",
+    value: "DUAL-TOKEN ARCHITECTURE",
+    trend: "designed",
+  },
+  { label: "Governance", value: "3-TIER SYSTEM", trend: "structured" },
+  {
+    label: "Meeting Schedule",
+    value: "LAST THURSDAY MONTHLY",
+    trend: "regular",
+  },
+];
 
-export default async function BoardPage() {
-  const session = await auth();
-  if (session) {
-    redirect(DASHBOARD_URL);
-  }
+// Real documents from the system
+const boardDocuments = [
+  {
+    name: "Xogos Dual-Token Economy Whitepaper",
+    type: "Strategic",
+    status: "Published",
+    date: "December 2024",
+    link: "/docs/tokenomics",
+    icon: "📊",
+  },
+  {
+    name: "Technical Architecture Specification",
+    type: "Technical",
+    status: "Final",
+    date: "December 2024",
+    link: "/docs/technical",
+    icon: "⚙️",
+  },
+  {
+    name: "Enterprise Risk Management",
+    type: "Risk",
+    status: "Active",
+    date: "January 2025",
+    link: "/risk",
+    icon: "⚠️",
+  },
+  {
+    name: "Board Initiatives Framework",
+    type: "Governance",
+    status: "In Progress",
+    date: "January 2025",
+    link: "/boardinitiatives",
+    icon: "📋",
+  },
+];
+
+export default function BoardPage() {
+  const [currentTime, setCurrentTime] = useState("");
+  const [nextMeeting, setNextMeeting] = useState<Date | null>(null);
+  const [timeToMeeting, setTimeToMeeting] = useState("");
+  const [isMeetingActive, setIsMeetingActive] = useState(false);
+  const [selectedMember, setSelectedMember] = useState<string | null>(null);
+  const [tickerPosition, setTickerPosition] = useState(0);
+
+  // Calculate next board meeting (last Thursday of month at 5 PM ET)
+  const getNextMeeting = () => {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth();
+
+    // Find last Thursday of current month
+    const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
+    const lastThursday = new Date(lastDayOfMonth);
+    lastThursday.setDate(
+      lastDayOfMonth.getDate() - ((lastDayOfMonth.getDay() + 3) % 7)
+    );
+    lastThursday.setHours(17, 0, 0, 0); // 5 PM ET
+
+    // If meeting already passed this month, get next month
+    if (now > lastThursday) {
+      const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+      const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+      const nextMonthLastDay = new Date(nextYear, nextMonth + 1, 0);
+      const nextLastThursday = new Date(nextMonthLastDay);
+      nextLastThursday.setDate(
+        nextMonthLastDay.getDate() - ((nextMonthLastDay.getDay() + 3) % 7)
+      );
+      nextLastThursday.setHours(17, 0, 0, 0);
+      return nextLastThursday;
+    }
+
+    return lastThursday;
+  };
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+
+      // Update current Eastern Time
+      setCurrentTime(
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          timeZone: "America/New_York",
+        })
+      );
+
+      // Calculate next meeting
+      const meeting = getNextMeeting();
+      setNextMeeting(meeting);
+
+      // Check if currently in meeting window
+      const timeDiff = meeting.getTime() - now.getTime();
+      const isActive = timeDiff > -7200000 && timeDiff < 0; // Within 2 hours after start
+      setIsMeetingActive(isActive);
+
+      // Calculate countdown
+      if (timeDiff > 0) {
+        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+
+        if (days > 0) {
+          setTimeToMeeting(`${days}d ${hours}h ${minutes}m`);
+        } else if (hours > 0) {
+          setTimeToMeeting(`${hours}h ${minutes}m`);
+        } else {
+          setTimeToMeeting(`${minutes}m`);
+        }
+      } else {
+        setTimeToMeeting("Meeting in session");
+      }
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+
+    // Ticker animation
+    const tickerInterval = setInterval(() => {
+      setTickerPosition((prev) => (prev >= 100 ? -100 : prev + 0.5));
+    }, 50);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(tickerInterval);
+    };
+  }, []);
+
   return (
     <MarketingLayout>
-      <div className={styles.boardPage}>
-        <Container className={styles.section}>
-          <div className={styles.heroInfo}>
-            <h1 className={styles.heroTitle}>Xogos Gaming</h1>
-            <h1 className={styles.heroTitleSecondary}>Board of Directors</h1>
-            <p className={styles.heroLead}>
-              Where the board of directors collaborate and share relevant
-              information with the public.
-            </p>
+      <div className={styles.boardRoom}>
+        {/* Live Streaming Stats Ticker */}
+        <div className={styles.liveStatsTicker}>
+          <div className={styles.tickerBar}>
+            <div
+              className={styles.tickerContent}
+              style={{ transform: `translateX(${tickerPosition}%)` }}
+            >
+              {[...platformMetrics, ...platformMetrics].map((metric, index) => (
+                <div key={index} className={styles.tickerItem}>
+                  <span className={styles.tickerLabel}>{metric.label}:</span>
+                  <span
+                    className={`${styles.tickerValue} ${styles[metric.trend]}`}
+                  >
+                    {metric.value}
+                  </span>
+                  <span className={styles.tickerSeparator}>•</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className={styles.heroActions}>
-            <LinkButton href="/boardmembers">
-              Meet the Board of Directors
-            </LinkButton>
+        </div>
+
+        {/* Room Atmosphere */}
+        <div className={styles.roomAtmosphere}>
+          <div className={styles.ceilingLights}></div>
+          <div className={styles.ambientGlow}></div>
+          <div className={styles.roomShadows}></div>
+        </div>
+
+        {/* Board Room Header */}
+        <div className={styles.roomHeader}>
+          <div className={styles.roomInfo}>
+            <h1 className={styles.roomTitle}>Xogos Gaming Board Room</h1>
+            <div className={styles.meetingStatus}>
+              <div className={styles.statusIndicator}>
+                <div
+                  className={`${styles.statusLight} ${isMeetingActive ? styles.active : styles.inactive}`}
+                ></div>
+                <span className={styles.statusText}>
+                  {isMeetingActive
+                    ? "Board Meeting in Session"
+                    : "Room Available"}
+                </span>
+              </div>
+              <div className={styles.timeDisplay}>
+                <div className={styles.currentTime}>
+                  <span className={styles.timeLabel}>Eastern Time:</span>
+                  <span className={styles.timeValue}>{currentTime}</span>
+                </div>
+                <div className={styles.nextMeeting}>
+                  <span className={styles.meetingLabel}>Next Meeting:</span>
+                  <span className={styles.meetingValue}>
+                    {nextMeeting
+                      ? `${nextMeeting.toLocaleDateString("en-US", { month: "short", day: "numeric" })} at 5:00 PM ET`
+                      : "Calculating..."}
+                  </span>
+                </div>
+                {timeToMeeting && !isMeetingActive && (
+                  <div className={styles.countdown}>
+                    <span className={styles.countdownLabel}>Countdown:</span>
+                    <span className={styles.countdownValue}>
+                      {timeToMeeting}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
-        </Container>
-        <Container className={styles.section}>
-          <h2 className={styles.sectionTitle}>Focus Areas</h2>
-          <div className={styles.featuresGrid}>
-            <Feature
-              title="Education"
-              description={
-                <>
-                  Create educational content in the form of tools, guides, and
-                  games.
-                </>
-              }
-            />
-            <Feature
-              title="Integrating Cryptocurrency"
-              description={
-                <>
-                  Integrating cryptocurrency into our platform in several
-                  aspects, in addition to being a form of payment.
-                </>
-              }
-            />
-            <Feature
-              title="Legal and Regulatory Compliance"
-              description={
-                <>
-                  Understanding legal and regulatory compliance, and ensuring
-                  our practices are not only compliant, but lead by example.
-                </>
-              }
-            />
+        </div>
+
+        {/* Main Board Room Layout */}
+        <div className={styles.roomContainer}>
+          {/* Conference Table Section */}
+          <div className={styles.conferenceArea}>
+            <div className={styles.tableContainer}>
+              {/* Conference Table */}
+              <div className={styles.conferenceTable}>
+                <div className={styles.tableTop}>
+                  <div className={styles.tableLogo}>
+                    <span className={styles.logoText}>XOGOS</span>
+                    <div className={styles.logoUnderline}></div>
+                  </div>
+                </div>
+
+                {/* Board Member Seats - Properly Positioned */}
+                {boardMembers.map((member, index) => (
+                  <div
+                    key={index}
+                    className={`${styles.boardSeat} ${styles[member.seatPosition]}`}
+                    onClick={() =>
+                      setSelectedMember(
+                        selectedMember === member.name ? null : member.name
+                      )
+                    }
+                  >
+                    {/* Executive Chair */}
+                    <div className={styles.executiveChair}>
+                      <div className={styles.chairBack}></div>
+                      <div className={styles.chairSeat}>
+                        {member.imagePath ? (
+                          <div className={styles.memberPresence}>
+                            <img
+                              src={member.imagePath}
+                              alt={member.name}
+                              className={styles.memberPhoto}
+                            />
+                            <div
+                              className={`${styles.presenceIndicator} ${styles[member.status]}`}
+                            ></div>
+                          </div>
+                        ) : (
+                          <div className={styles.vacantSeat}>
+                            <div className={styles.vacantIcon}>+</div>
+                            <span className={styles.vacantText}>
+                              Open Position
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      <div className={styles.chairBase}></div>
+                    </div>
+
+                    {/* Name Plate */}
+                    <div className={styles.namePlate}>
+                      <div className={styles.memberName}>{member.name}</div>
+                      <div className={styles.memberTitle}>{member.title}</div>
+                    </div>
+
+                    {/* Member Details Popup */}
+                    {selectedMember === member.name && (
+                      <div className={styles.memberDetailsPopup}>
+                        <div className={styles.popupHeader}>
+                          <h3>{member.name}</h3>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedMember(null);
+                            }}
+                            className={styles.closeButton}
+                          >
+                            ×
+                          </button>
+                        </div>
+                        <div className={styles.popupContent}>
+                          <p>
+                            <strong>Title:</strong> {member.title}
+                          </p>
+                          <p>
+                            <strong>Focus Area:</strong> {member.role}
+                          </p>
+                          <p>
+                            <strong>Status:</strong>{" "}
+                            {member.status === "present"
+                              ? "Present"
+                              : "Vacant Position"}
+                          </p>
+                          <Link
+                            href="/boardmembers"
+                            className={styles.viewProfileButton}
+                          >
+                            View Full Profile →
+                          </Link>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+
+                {/* Table Center Piece */}
+                <div className={styles.tableCenter}>
+                  <div className={styles.conferencePhone}>
+                    <div className={styles.phoneBase}></div>
+                    <div className={styles.phoneDisplay}>SECURE LINE</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </Container>
-        <Container className={styles.section}>
-          <h2 className={styles.sectionTitle}>
-            Current and Future Initiatives
-          </h2>
-          <div className={styles.featuresGrid}>
-            <Feature
-              title="Education Games"
-              description={
-                <>
-                  Provide digital games that combine blockchain technology that
-                  pick up where the teach left off.
-                </>
-              }
-            />
-            <Feature
-              title="Cryptocurrency Adoption"
-              description={
-                <>
-                  Utilizing cryptocurrency in ways that advance our
-                  understanding and comprehension of the technology, while
-                  onboarding more users.
-                </>
-              }
-            />
-            <Feature
-              title="Education and Crypto Lobbying"
-              description={
-                <>
-                  Creating a product that allows us to advocate for
-                  cryptocurrency adoption, and especially within the education
-                  sector.
-                </>
-              }
-            />
-            <Feature
-              title="Tokenomics Dashboard"
-              description={<>View the numbers and details the iServ token</>}
-              link="/tokenomics"
-            />
-            <Feature
-              title="Tokenomics Visual"
-              description={
-                <>View the diagram and details the Xogos Gaming system</>
-              }
-              link="/tokenomicsvisual"
-            />
+
+          {/* Side Panels */}
+          <div className={styles.sidePanels}>
+            {/* Documents & Resources Panel */}
+            <div className={styles.documentsPanel}>
+              <h3 className={styles.panelTitle}>Board Documents</h3>
+              <div className={styles.documentGrid}>
+                {boardDocuments.map((doc, index) => (
+                  <Link
+                    key={index}
+                    href={doc.link}
+                    className={styles.documentCard}
+                  >
+                    <div className={styles.docIcon}>{doc.icon}</div>
+                    <div className={styles.docInfo}>
+                      <div className={styles.docName}>{doc.name}</div>
+                      <div className={styles.docMeta}>
+                        <span className={styles.docType}>{doc.type}</span>
+                        <span className={styles.docStatus}>{doc.status}</span>
+                      </div>
+                      <div className={styles.docDate}>{doc.date}</div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Meeting Information Panel */}
+            <div className={styles.meetingPanel}>
+              <h3 className={styles.panelTitle}>Meeting Information</h3>
+              <div className={styles.meetingDetails}>
+                <div className={styles.scheduleInfo}>
+                  <h4>Regular Schedule</h4>
+                  <p>Last Thursday of every month</p>
+                  <p>5:00 PM Eastern Time</p>
+                  <p>Duration: Approximately 2 hours</p>
+                </div>
+                {nextMeeting && (
+                  <div className={styles.nextMeetingInfo}>
+                    <h4>Next Meeting</h4>
+                    <p className={styles.meetingDate}>
+                      {nextMeeting.toLocaleDateString("en-US", {
+                        weekday: "long",
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </p>
+                    <p className={styles.meetingTime}>5:00 PM Eastern Time</p>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
-        </Container>
+        </div>
+
+        {/* Action Bar */}
+        <div className={styles.actionBar}>
+          <div className={styles.quickActions}>
+            <Link href="/boardmembers" className={styles.actionButton}>
+              <span className={styles.actionIcon}>👥</span>
+              <span className={styles.actionText}>View Directors</span>
+            </Link>
+            <Link href="/boardinitiatives" className={styles.actionButton}>
+              <span className={styles.actionIcon}>📋</span>
+              <span className={styles.actionText}>Board Initiatives</span>
+            </Link>
+            <Link href="/risk" className={styles.actionButton}>
+              <span className={styles.actionIcon}>⚠️</span>
+              <span className={styles.actionText}>Risk Management</span>
+            </Link>
+            <Link href="/tokenomics" className={styles.actionButton}>
+              <span className={styles.actionIcon}>📊</span>
+              <span className={styles.actionText}>Tokenomics</span>
+            </Link>
+          </div>
+        </div>
       </div>
     </MarketingLayout>
   );
