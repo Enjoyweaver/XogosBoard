@@ -88,7 +88,7 @@ const boardMembers = [
     name: "Braden Perry",
     title: "Legal Director",
     role: "Legal & Regulatory",
-    imagePath: "/images/board/board/braden-perry.jpg",
+    imagePath: "/images/board/braden.jpg",
     responsibilities: [
       "Oversee all legal aspects of operations",
       "Ensure compliance with regulatory obligations",
@@ -125,7 +125,7 @@ const boardMembers = [
     name: "Terrance Gatsby",
     title: "Crypto & Exchanges Director",
     role: "Cryptocurrency Integration",
-    imagePath: "/images/board/board/terrance-gatsby.jpg",
+    imagePath: "/images/board/terrance.jpg",
     responsibilities: [
       "Oversee digital currency integration",
       "Ensure security of cryptocurrency transactions",
@@ -162,7 +162,7 @@ const boardMembers = [
     name: "Kevin Stursberg",
     title: "Accounting Director",
     role: "Financial Oversight",
-    imagePath: "/images/board/board/kevin-stursberg.jpg",
+    imagePath: "/images/board/kevin.jpg",
     responsibilities: [
       "Oversee financial reporting and operations",
       "Ensure accuracy in financial statements",
@@ -236,7 +236,7 @@ const boardMembers = [
     name: "McKayla Reece",
     title: "Education Director",
     role: "Educational Strategy",
-    imagePath: "/images/board/board/mckayla-reece.jpg",
+    imagePath: "/images/board/mckayla.jpg",
     responsibilities: [
       "Create educational content strategies",
       "Align game content with curriculum standards",
