@@ -1,81 +1,41 @@
 :root {
   /* Color palette */
-  --color-cream: #fdf4e6;
+  --color-cream: #0d0d1a; /* Changed from #fdf4e6 to dark blue */
   --color-gold: #e6bb84;
-  --color-dark-red: #441510;
-  --color-red: #951e0f;
-  --color-bright-red: #db2e12;
-  --color-orange: #e46816;
+  --color-dark-red: #e5e5e5; /* Changed from #441510 to light text color */
+  --color-red: #ff3e3e; /* Changed from #951e0f to bright red */
+  --color-bright-red: #ff3e3e; /* Changed from #db2e12 to bright red */
+  --color-orange: #ff7e3e; /* Changed from #e46816 to bright orange */
   --color-peach: #f6a27c;
   --color-black: #000000;
 
   /* Functional colors */
-  --color-bg-primary: var(--color-cream);
-  --color-bg-secondary: #f8f1e4;
-  --color-bg-accent: rgba(246, 162, 124, 0.08);
-  --color-text-primary: var(--color-dark-red);
-  --color-text-secondary: #221008;
-  --color-text-accent: var(--color-red);
-  --color-border: rgba(68, 21, 16, 0.1);
-  --color-accent: var(--color-red);
-  --color-button-primary: var(--color-red);
-  --color-button-hover: var(--color-bright-red);
+  --color-bg-primary: #0d0d1a; /* Changed from var(--color-cream) to dark blue */
+  --color-bg-secondary: #1a1a2e; /* Changed from #f8f1e4 to darker blue */
+  --color-bg-accent: rgba(255, 62, 62, 0.1); /* Changed to red accent */
+  --color-text-primary: #e5e5e5; /* Changed from var(--color-dark-red) to light text */
+  --color-text-secondary: rgba(
+    229,
+    229,
+    229,
+    0.7
+  ); /* Changed to light text with opacity */
+  --color-text-accent: #ff3e3e; /* Changed from var(--color-red) to bright red */
+  --color-border: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Changed from rgba(68, 21, 16, 0.1) */
+  --color-accent: #ff3e3e; /* Changed from var(--color-red) */
+  --color-button-primary: #ff3e3e; /* Changed from var(--color-red) */
+  --color-button-hover: #ff7e3e; /* Changed from var(--color-bright-red) */
 
-  /* Space and size variables */
-  --space-0: 0;
-  --space-1: 0.125rem;
-  --space-2: 0.25rem;
-  --space-3: 0.375rem;
-  --space-4: 0.5rem;
-  --space-5: 0.625rem;
-  --space-6: 0.75rem;
-  --space-7: 0.875rem;
-  --space-8: 1rem;
-  --space-9: 1.25rem;
-  --space-10: 1.5rem;
-  --space-11: 1.75rem;
-  --space-12: 2rem;
-  --space-13: 2.25rem;
-  --space-14: 2.5rem;
-  --space-15: 3rem;
-  --space-16: 3.5rem;
-  --space-17: 4rem;
-  --space-18: 4.5rem;
-  --space-19: 5rem;
-  --space-20: 6rem;
-  --space-21: 7rem;
-  --space-22: 8rem;
-  --space-23: 9rem;
-  --space-24: 10rem;
-
-  --size-2xs: 0.625rem;
-  --size-xs: 0.75rem;
-  --size-sm: 0.875rem;
-  --size: 1rem;
-  --size-lg: 1.125rem;
-  --size-xl: 1.25rem;
-  --size-2xl: 1.5rem;
-  --size-3xl: 2rem;
-  --size-4xl: 3rem;
-
-  --radius-xs: 0.3rem;
-  --radius-sm: 0.4rem;
-  --radius: 0.7rem;
-  --radius-lg: 0.8rem;
-
-  --shadow-sm: 0 2px 8px rgba(68, 21, 16, 0.04);
-  --shadow: 0 4px 16px rgba(68, 21, 16, 0.06);
-  --shadow-lg: 0 8px 24px rgba(68, 21, 16, 0.08);
-  --shadow-accent: 0 4px 16px rgba(149, 30, 15, 0.16);
-
-  --transition: 0.15s ease-in-out;
-  --transition-linear: 0.15s linear;
-  --header-height: 60px;
-  --z-above: 100;
-  --z-overlay: 200;
-  --z-badge: 1000;
-  --opacity-hover: 0.8;
-  --opacity-disabled: 0.5;
+  /* Shadow updates */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --shadow-accent: 0 4px 16px rgba(255, 62, 62, 0.2);
 }
 
 /* Font imports */
@@ -163,4 +123,10 @@ html.grabbing {
 
 html.grabbing * {
   user-select: none;
+}
+
+html,
+body {
+  background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 100%);
+  color: #e5e5e5;
 }
