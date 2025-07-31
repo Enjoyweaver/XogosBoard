@@ -28,12 +28,12 @@ interface Ratings {
 
 const SkillsMatrix = () => {
   const [directors, setDirectors] = useState<Director[]>([
-    { id: 1, name: "Michael Weaver", title: "President" },
+    { id: 1, name: "Michael Weaver", title: "President, Insurance & Risk" },
     { id: 2, name: "Zack Edwards", title: "CEO" },
     { id: 3, name: "Braden Perry", title: "Legal Director" },
-    { id: 4, name: "Terrance Gatsby", title: "Crypto Director" },
+    { id: 4, name: "Terrance Gatsby", title: "Communications Director" },
     { id: 5, name: "Kevin Stursberg", title: "Accounting Director" },
-    { id: 6, name: "McKayla Reece", title: "Education Director" },
+    { id: 6, name: "McKayla Reece", title: "Marketing & Education Director" },
     { id: 7, name: "Open Position", title: "Compliance Director" },
   ]);
 
