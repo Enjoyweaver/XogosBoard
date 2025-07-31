@@ -159,6 +159,43 @@ const boardMembers = [
     ],
   },
   {
+    name: "McKayla Reece",
+    title: "Education Director",
+    role: "Educational Strategy",
+    imagePath: "/images/board/mckayla.jpg",
+    responsibilities: [
+      "Create educational content strategies",
+      "Align game content with curriculum standards",
+      "Evaluate real-world preparedness of the platform",
+    ],
+    contributions: [
+      "Define new educational topics for each grade level",
+      "Lead teacher/school pilot programs for Xogos",
+    ],
+    initiatives: [
+      {
+        title: "Educational Content Roadmap",
+        description:
+          "Expand game-based curricula to cover more advanced financial topics, civics, or trades education, matching the latest K-12 guidelines and potential DOE shifts.",
+        objectives: [
+          "Launch 2 advanced-subject game modules per year",
+          "Collaborate with pilot schools for immediate feedback",
+          "Measure student performance gains with in-game analytics",
+        ],
+      },
+      {
+        title: "Pilot Program for Curriculum Integration",
+        description:
+          "Bring Xogos tools directly into classrooms with a pilot group of teachers, focusing on bridging any gap if the Department of Education is downsized.",
+        objectives: [
+          "Recruit 20 teachers across 4 states to test the platform",
+          "Publish a short study on improved student engagement",
+          "Adapt teacher dashboards to new local or state requirements",
+        ],
+      },
+    ],
+  },
+  {
     name: "Kevin Stursberg",
     title: "Accounting Director",
     role: "Financial Oversight",
@@ -228,43 +265,6 @@ const boardMembers = [
           "Launch mandatory compliance e-learning for all staff",
           "Update modules every six months to reflect new laws",
           "Maintain 100% completion rate among managers and dev leads",
-        ],
-      },
-    ],
-  },
-  {
-    name: "McKayla Reece",
-    title: "Education Director",
-    role: "Educational Strategy",
-    imagePath: "/images/board/mckayla.jpg",
-    responsibilities: [
-      "Create educational content strategies",
-      "Align game content with curriculum standards",
-      "Evaluate real-world preparedness of the platform",
-    ],
-    contributions: [
-      "Define new educational topics for each grade level",
-      "Lead teacher/school pilot programs for Xogos",
-    ],
-    initiatives: [
-      {
-        title: "Educational Content Roadmap",
-        description:
-          "Expand game-based curricula to cover more advanced financial topics, civics, or trades education, matching the latest K-12 guidelines and potential DOE shifts.",
-        objectives: [
-          "Launch 2 advanced-subject game modules per year",
-          "Collaborate with pilot schools for immediate feedback",
-          "Measure student performance gains with in-game analytics",
-        ],
-      },
-      {
-        title: "Pilot Program for Curriculum Integration",
-        description:
-          "Bring Xogos tools directly into classrooms with a pilot group of teachers, focusing on bridging any gap if the Department of Education is downsized.",
-        objectives: [
-          "Recruit 20 teachers across 4 states to test the platform",
-          "Publish a short study on improved student engagement",
-          "Adapt teacher dashboards to new local or state requirements",
         ],
       },
     ],
