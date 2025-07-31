@@ -58,7 +58,10 @@ const BoardMembers: React.FC = () => {
             </div>
           </div>
           <div className={styles.memberImage}>
-            <img src="/weaver.jpg" alt="President - Michael Weaver" />
+            <img
+              src="/images/board/weaver.jpg"
+              alt="President - Michael Weaver"
+            />
           </div>
         </div>
 
@@ -91,7 +94,10 @@ const BoardMembers: React.FC = () => {
             </div>
           </div>
           <div className={styles.memberImage}>
-            <img src="/Zack.jpg" alt=" CEO - Zack Edwards (CEO)" />
+            <img
+              src="/images/board//Zack.jpg"
+              alt=" CEO - Zack Edwards (CEO)"
+            />
           </div>
         </div>
 
@@ -123,7 +129,7 @@ const BoardMembers: React.FC = () => {
             </div>
           </div>
           <div className={styles.memberImage}>
-            <img src="/icon.jpg" alt="Legal - Braden Perry" />
+            <img src="/images/board/braden.jpg" alt="Legal - Braden Perry" />
           </div>
         </div>
 
@@ -156,7 +162,7 @@ const BoardMembers: React.FC = () => {
             </div>
           </div>
           <div className={styles.memberImage}>
-            <img src="/icon.jpg" alt="Crypto & Exchanges - Matt La Rose" />
+            <img src="/icon.jpg" alt="Crypto & Exchanges - open" />
           </div>
         </div>
 
@@ -189,7 +195,10 @@ const BoardMembers: React.FC = () => {
             </div>
           </div>
           <div className={styles.memberImage}>
-            <img src="/icon.jpg" alt="Accounting - Kevin Stursberg" />
+            <img
+              src="/images/board/kevin.jpg"
+              alt="Accounting - Kevin Stursberg"
+            />
           </div>
         </div>
 
@@ -223,7 +232,7 @@ const BoardMembers: React.FC = () => {
           </div>
           <div className={styles.memberImage}>
             <img
-              src="/icon.jpg"
+              src="/images/board/terrance.jpg"
               alt="Compliance and Regulation – Terrance Gatsby"
             />
           </div>
@@ -257,7 +266,7 @@ const BoardMembers: React.FC = () => {
             </div>
           </div>
           <div className={styles.memberImage}>
-            <img src="/icon.jpg" alt="Education – McKayla" />
+            <img src="/images/board/mckayla.jpg" alt="Education – McKayla" />
           </div>
         </div>
       </div>

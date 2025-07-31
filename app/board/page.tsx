@@ -11,23 +11,23 @@ const boardMembers = [
     name: "Michael Weaver",
     title: "President",
     role: "Insurance & Risk",
-    imagePath: "/images/weaver.jpg",
-    seatPosition: "head", // Head of table
+    imagePath: "/images/board/weaver.jpg",
+    seatPosition: "rightOne",
     status: "present",
   },
   {
     name: "Zack Edwards",
     title: "CEO",
     role: "Executive Oversight",
-    imagePath: "/images/zack.jpg",
-    seatPosition: "rightOne", // Right of head
+    imagePath: "/images/board/zack.jpg",
+    seatPosition: "head",
     status: "present",
   },
   {
     name: "Braden Perry",
     title: "Legal Director",
     role: "Legal & Regulatory",
-    imagePath: "/images/board/braden-perry.jpg",
+    imagePath: "/images/board/braden.jpg",
     seatPosition: "leftOne", // Left of head
     status: "present",
   },
@@ -35,7 +35,7 @@ const boardMembers = [
     name: "Terrance Gatsby",
     title: "Crypto & Exchanges Director",
     role: "Cryptocurrency Integration",
-    imagePath: "/images/board/terrance-gatsby.jpg",
+    imagePath: "/images/board/terrance.jpg",
     seatPosition: "rightTwo", // Right middle
     status: "present",
   },
@@ -43,7 +43,7 @@ const boardMembers = [
     name: "Kevin Stursberg",
     title: "Accounting Director",
     role: "Financial Oversight",
-    imagePath: "/images/board/kevin-stursberg.jpg",
+    imagePath: "/images/board/kevin.jpg",
     seatPosition: "leftTwo", // Left middle
     status: "present",
   },
@@ -51,7 +51,7 @@ const boardMembers = [
     name: "McKayla Reece",
     title: "Education Director",
     role: "Educational Strategy",
-    imagePath: "/images/board/mckayla-reece.jpg",
+    imagePath: "/images/board/mckayla.jpg",
     seatPosition: "leftThree", // Left far
     status: "present",
   },

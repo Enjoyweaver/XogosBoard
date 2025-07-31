@@ -1,0 +1,419 @@
+/* Timeline Page Styles */
+
+.timelinePage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 100%);
+  color: #e5e5e5;
+  font-family: "Inter", sans-serif;
+  position: relative;
+  overflow: hidden;
+  padding-top: 2rem;
+}
+
+/* Add these styles to page.module.css */
+.container {
+  width: 95%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding-top: 80px; /* Ensure content is below header */
+}
+
+.heroSection {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-top: 1rem;
+}
+
+.heroTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+/* Monthly summary styles */
+.monthlySummary {
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #e5e5e5;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+/* Expand toggle button */
+.expandToggle {
+  text-align: center;
+  color: #e62739;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.expandToggle:hover {
+  text-decoration: underline;
+}
+
+/* Add styles for summary/expand functionality */
+.itemSummary {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: rgba(229, 229, 229, 0.8);
+  margin-bottom: 0.5rem;
+}
+
+.expandButton {
+  background: none;
+  border: none;
+  color: #e62739;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.expandButton:hover {
+  text-decoration: underline;
+}
+
+.expandedContent {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.heroTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #e62739, #7928ca);
+  border-radius: 2px;
+}
+
+.heroLead {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: rgba(229, 229, 229, 0.8);
+  max-width: 800px;
+  margin: 2rem auto 0;
+}
+
+/* Timeline Container */
+.timelineContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+/* Timeline connector line */
+.timelineContainer::before {
+  content: "";
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #e62739, #7928ca);
+  z-index: 0;
+}
+
+/* Column styling */
+.timelineColumn {
+  background: rgba(26, 26, 46, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.timelineColumn:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Month header */
+.monthHeader {
+  padding: 1.5rem;
+  background: rgba(13, 13, 26, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+  position: relative;
+}
+
+.monthTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #e5e5e5;
+}
+
+.monthStatus {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(230, 39, 57, 0.1);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e62739;
+}
+
+/* Month-specific colors */
+.timelineColumn:nth-child(1) .monthStatus {
+  background: rgba(230, 39, 57, 0.1);
+  color: #e62739;
+}
+
+.timelineColumn:nth-child(2) .monthStatus {
+  background: rgba(121, 40, 202, 0.1);
+  color: #7928ca;
+}
+
+.timelineColumn:nth-child(3) .monthStatus {
+  background: rgba(45, 212, 191, 0.1);
+  color: #2dd4bf;
+}
+
+.timelineColumn:nth-child(4) .monthStatus {
+  background: rgba(250, 204, 21, 0.1);
+  color: #facc15;
+}
+
+/* Items container */
+.itemsContainer {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Timeline item */
+.timelineItem {
+  background: rgba(13, 13, 26, 0.4);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.timelineItem:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.itemTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #e5e5e5;
+}
+
+.itemDescription {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(229, 229, 229, 0.8);
+  margin-bottom: 1rem;
+}
+
+.itemMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.itemOwner {
+  color: rgba(229, 229, 229, 0.7);
+  font-weight: 500;
+}
+
+.itemStatus {
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+/* Status colors */
+.inprogress {
+  background: rgba(45, 212, 191, 0.1);
+  color: #2dd4bf;
+}
+
+.ongoing {
+  background: rgba(121, 40, 202, 0.1);
+  color: #7928ca;
+}
+
+.planned {
+  background: rgba(250, 204, 21, 0.1);
+  color: #facc15;
+}
+
+.preparation {
+  background: rgba(14, 165, 233, 0.1);
+  color: #0ea5e9;
+}
+
+.starting {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+
+.scheduled {
+  background: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+}
+
+.upcoming {
+  background: rgba(236, 72, 153, 0.1);
+  color: #ec4899;
+}
+
+.planning {
+  background: rgba(250, 204, 21, 0.1);
+  color: #facc15;
+}
+
+.research {
+  background: rgba(14, 165, 233, 0.1);
+  color: #0ea5e9;
+}
+
+.initialoutreach {
+  background: rgba(249, 115, 22, 0.1);
+  color: #f97316;
+}
+
+.strategydevelopment {
+  background: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+}
+
+.researchphase {
+  background: rgba(14, 165, 233, 0.1);
+  color: #0ea5e9;
+}
+
+/* Timeline Footer */
+.timelineFooter {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 2rem;
+  background: rgba(26, 26, 46, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footerText {
+  margin-bottom: 1.5rem;
+  color: rgba(229, 229, 229, 0.8);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.footerLink {
+  color: #e62739;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.footerLink:hover {
+  color: #f97316;
+  text-decoration: underline;
+}
+
+.backButton {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(45deg, #e62739, #7928ca);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.backButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(230, 39, 57, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .timelineContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .timelineContainer::before {
+    display: none;
+  }
+
+  .heroTitle {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .timelineContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .heroLead {
+    font-size: 1.1rem;
+  }
+
+  .monthTitle {
+    font-size: 1.5rem;
+  }
+
+  .monthStatus {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .heroSection {
+    padding-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .itemTitle {
+    font-size: 1.1rem;
+  }
+
+  .itemMeta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}

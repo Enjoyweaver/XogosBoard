@@ -1,3 +1,4 @@
+// components/Marketing/BoardroomHeader.tsx
 "use client"; // Mark this file as a Client Component in Next 13+
 
 import Link from "next/link";
@@ -36,15 +37,15 @@ export function BoardroomHeader() {
             <Link
               href="/board"
               className={`${styles.navLink} ${
-                isActive("/") && !isActive("/board") ? styles.active : ""
+                isActive("/board") && !isActive("/board/") ? styles.active : ""
               }`}
             >
               Board Room
             </Link>
             <Link
-              href="/board"
+              href="/boardmembers"
               className={`${styles.navLink} ${
-                isActive("/board") ? styles.active : ""
+                isActive("/boardmembers") ? styles.active : ""
               }`}
             >
               Members
@@ -56,6 +57,14 @@ export function BoardroomHeader() {
               }`}
             >
               Initiatives
+            </Link>
+            <Link
+              href="/timeline"
+              className={`${styles.navLink} ${
+                isActive("/timeline") ? styles.active : ""
+              }`}
+            >
+              Timeline
             </Link>
             <Link
               href="/risk"
@@ -71,7 +80,12 @@ export function BoardroomHeader() {
             >
               Tokenomics
             </Link>
-            <Link href="/board/market-insights" className={styles.navLink}>
+            <Link
+              href="/board/market-insights"
+              className={`${styles.navLink} ${
+                isActive("/board/market-insights") ? styles.active : ""
+              }`}
+            >
               Market Insights
             </Link>
           </div>
