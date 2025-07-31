@@ -14,7 +14,7 @@ const boardMembers = [
     name: "Michael Weaver",
     title: "President",
     role: "Insurance & Risk",
-    imagePath: "/images/weaver.jpg",
+    imagePath: "/images/board/weaver.jpg",
     responsibilities: [
       "Lead the board in strategic initiatives",
       "Oversee insurance coverage and risk management",
@@ -51,7 +51,7 @@ const boardMembers = [
     name: "Zack Edwards",
     title: "CEO",
     role: "Executive Oversight",
-    imagePath: "/images/zack.jpg",
+    imagePath: "/images/board/zack.jpg",
     responsibilities: [
       "Execute day-to-day company management",
       "Implement the board's strategic vision",
@@ -88,7 +88,7 @@ const boardMembers = [
     name: "Braden Perry",
     title: "Legal Director",
     role: "Legal & Regulatory",
-    imagePath: "/images/board/braden-perry.jpg",
+    imagePath: "/images/board/board/braden-perry.jpg",
     responsibilities: [
       "Oversee all legal aspects of operations",
       "Ensure compliance with regulatory obligations",
@@ -125,7 +125,7 @@ const boardMembers = [
     name: "Terrance Gatsby",
     title: "Crypto & Exchanges Director",
     role: "Cryptocurrency Integration",
-    imagePath: "/images/board/terrance-gatsby.jpg",
+    imagePath: "/images/board/board/terrance-gatsby.jpg",
     responsibilities: [
       "Oversee digital currency integration",
       "Ensure security of cryptocurrency transactions",
@@ -162,7 +162,7 @@ const boardMembers = [
     name: "Kevin Stursberg",
     title: "Accounting Director",
     role: "Financial Oversight",
-    imagePath: "/images/board/kevin-stursberg.jpg",
+    imagePath: "/images/board/board/kevin-stursberg.jpg",
     responsibilities: [
       "Oversee financial reporting and operations",
       "Ensure accuracy in financial statements",
@@ -199,7 +199,7 @@ const boardMembers = [
     name: "Open Position",
     title: "Compliance & Regulation Director",
     role: "Regulatory Oversight",
-    imagePath: "/images/board/placeholder.jpg",
+    imagePath: "/images/board/board/placeholder.jpg",
     responsibilities: [
       "Monitor compliance with SEC and educational regulations",
       "Establish internal compliance protocols",
@@ -236,7 +236,7 @@ const boardMembers = [
     name: "McKayla Reece",
     title: "Education Director",
     role: "Educational Strategy",
-    imagePath: "/images/board/mckayla-reece.jpg",
+    imagePath: "/images/board/board/mckayla-reece.jpg",
     responsibilities: [
       "Create educational content strategies",
       "Align game content with curriculum standards",
