@@ -189,9 +189,14 @@ export default function TimelinePage() {
     twoMonthsAhead: false,
     threeMonthsAhead: false,
   });
+  type SectionName =
+    | "currentMonth"
+    | "nextMonth"
+    | "twoMonthsAhead"
+    | "threeMonthsAhead";
 
   // Toggle section expansion
-  const toggleSection = (section) => {
+  const toggleSection = (section: SectionName) => {
     setExpandedSections((prev) => ({
       ...prev,
       [section]: !prev[section],
