@@ -123,7 +123,7 @@ const boardDocuments = [
     type: "Governance",
     status: "In Progress",
     date: "January 2025",
-    link: "/boardinitiatives",
+    link: "/initiatives",
     icon: "📋",
   },
 ];
@@ -463,19 +463,19 @@ export default function BoardPage() {
         {/* Action Bar */}
         <div className={styles.actionBar}>
           <div className={styles.quickActions}>
-            <Link href="/boardmembers" className={styles.actionButton}>
+            <Link href="/board/members" className={styles.actionButton}>
               <span className={styles.actionIcon}>👥</span>
               <span className={styles.actionText}>View Directors</span>
             </Link>
-            <Link href="/boardinitiatives" className={styles.actionButton}>
+            <Link href="/board/initiatives" className={styles.actionButton}>
               <span className={styles.actionIcon}>📋</span>
               <span className={styles.actionText}>Board Initiatives</span>
             </Link>
-            <Link href="/risk" className={styles.actionButton}>
+            <Link href="/board/risk" className={styles.actionButton}>
               <span className={styles.actionIcon}>⚠️</span>
               <span className={styles.actionText}>Risk Management</span>
             </Link>
-            <Link href="/tokenomics" className={styles.actionButton}>
+            <Link href="/board/tokenomics" className={styles.actionButton}>
               <span className={styles.actionIcon}>📊</span>
               <span className={styles.actionText}>Tokenomics</span>
             </Link>

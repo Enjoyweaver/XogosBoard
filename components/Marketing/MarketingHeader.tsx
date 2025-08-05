@@ -63,7 +63,7 @@ export function MarketingHeader({
               <Link href="/events" className={styles.navLink}>
                 Events
               </Link>
-              <Link href="/board" className={styles.navLink}>
+              <Link href="/board" className={styles.boardButton}>
                 Board Room
               </Link>
             </div>

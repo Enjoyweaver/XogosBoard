@@ -1,5 +1,4 @@
-// components/Marketing/BoardroomHeader.tsx
-"use client"; // Mark this file as a Client Component in Next 13+
+"use client";
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -21,6 +20,11 @@ export function BoardroomHeader() {
   // Helper to determine active link
   const isActive = (path: string) => {
     if (typeof window !== "undefined") {
+      // Use exact matching for the main board room
+      if (path === "/board") {
+        return window.location.pathname === "/board";
+      }
+      // Use startsWith for other paths
       return window.location.pathname.startsWith(path);
     }
     return false;
@@ -36,57 +40,46 @@ export function BoardroomHeader() {
           <div className={styles.navLinkContainer}>
             <Link
               href="/board"
-              className={`${styles.navLink} ${
-                isActive("/board") && !isActive("/board/") ? styles.active : ""
-              }`}
+              className={`${styles.navLink} ${isActive("/board") ? styles.active : ""}`}
             >
               Board Room
             </Link>
             <Link
-              href="/boardmembers"
-              className={`${styles.navLink} ${
-                isActive("/boardmembers") ? styles.active : ""
-              }`}
+              href="/board/members"
+              className={`${styles.navLink} ${isActive("/board/members") ? styles.active : ""}`}
             >
               Members
             </Link>
             <Link
-              href="/boardinitiatives"
-              className={`${styles.navLink} ${
-                isActive("/boardinitiatives") ? styles.active : ""
-              }`}
+              href="/board/initiatives"
+              className={`${styles.navLink} ${isActive("/board/initiatives") ? styles.active : ""}`}
             >
               Initiatives
             </Link>
             <Link
-              href="/timeline"
-              className={`${styles.navLink} ${
-                isActive("/timeline") ? styles.active : ""
-              }`}
-            >
-              Timeline
-            </Link>
-            <Link
-              href="/risk"
-              className={`${styles.navLink} ${isActive("/risk") ? styles.active : ""}`}
+              href="/board/risk"
+              className={`${styles.navLink} ${isActive("/board/risk") ? styles.active : ""}`}
             >
               Risk
             </Link>
             <Link
-              href="/tokenomics"
-              className={`${styles.navLink} ${
-                isActive("/tokenomics") ? styles.active : ""
-              }`}
+              href="/board/tokenomics"
+              className={`${styles.navLink} ${isActive("/board/tokenomics") ? styles.active : ""}`}
             >
               Tokenomics
             </Link>
             <Link
               href="/board/market-insights"
-              className={`${styles.navLink} ${
-                isActive("/board/market-insights") ? styles.active : ""
-              }`}
+              className={`${styles.navLink} ${isActive("/board/insights") ? styles.active : ""}`}
             >
-              Market Insights
+              Insights
+            </Link>
+          </div>
+        </div>
+        <div className={styles.actionButtons}>
+          <div className={styles.buttonGroup}>
+            <Link href="/" className={styles.backButton}>
+              Back to Main Site
             </Link>
           </div>
         </div>

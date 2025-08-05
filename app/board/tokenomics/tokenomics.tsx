@@ -3,8 +3,8 @@
 import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
 import { AdminABI } from "@/ABIs/Admin";
-import { iServABI } from "../../ABIs/iServ";
-import { TrackerABI } from "../../ABIs/Tracker";
+import { iServABI } from "../../../ABIs/iServ";
+import { TrackerABI } from "../../../ABIs/Tracker";
 import {
   adminAddress,
   blockExplorerAddress,
@@ -12,7 +12,7 @@ import {
   iServAddress,
   rpcUrls,
   trackerAddress,
-} from "../../config/config";
+} from "../../../config/config";
 import styles from "./dashboard.module.css";
 
 interface TransferInfo {

@@ -1,4 +1,4 @@
-"use client"; // required if you’re using hooks in a layout
+"use client";
 
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
@@ -14,7 +14,7 @@ export function MarketingLayout({
 }: ComponentProps<"div">) {
   const pathname = usePathname();
 
-  // If the path starts with "/board", show BoardroomHeader; otherwise show MarketingHeader
+  // Show BoardroomHeader for all board-related paths
   const showBoardroomHeader = pathname?.startsWith("/board");
 
   return (
