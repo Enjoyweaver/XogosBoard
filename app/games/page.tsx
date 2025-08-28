@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 // eslint-disable-next-line import/order, sort-imports
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MarketingLayout } from "@/layouts/Marketing";
 import { Container } from "@/primitives/Container";
 import styles from "./page.module.css";
@@ -23,10 +23,6 @@ export default function GamesPage() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [activeGame, setActiveGame] = useState<Game | null>(null);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   // Games data
   const games: Game[] = [
