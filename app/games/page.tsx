@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
 import React, { useEffect, useState } from "react";
 import { MarketingLayout } from "@/layouts/Marketing";
 import { Container } from "@/primitives/Container";
