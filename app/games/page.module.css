@@ -1,0 +1,834 @@
+/* Main Page Layout */
+.gamesPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 100%);
+  color: #e5e5e5;
+  font-family: "Inter", sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Elements */
+.pageBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gridPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.bgGlow1 {
+  position: absolute;
+  top: -200px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  background: #ff3e3e;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.12;
+}
+
+.bgGlow2 {
+  position: absolute;
+  bottom: -300px;
+  left: -200px;
+  width: 800px;
+  height: 800px;
+  background: #7928ca;
+  border-radius: 50%;
+  filter: blur(150px);
+  opacity: 0.1;
+}
+
+.bgGlow3 {
+  position: absolute;
+  top: 40%;
+  right: 20%;
+  width: 400px;
+  height: 400px;
+  background: #ff7e3e;
+  border-radius: 50%;
+  filter: blur(130px);
+  opacity: 0.08;
+}
+
+.pixelOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='1' height='1' fill='%23ffffff' fill-opacity='0.01'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Common Section Styles */
+.sectionContainer {
+  padding: 60px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.sectionHeading {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.sectionTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, #e5e5e5, rgba(229, 229, 229, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  display: inline-block;
+}
+
+.sectionDecoration {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #ff3e3e, #ff7e3e);
+  margin: 0 auto;
+  border-radius: 4px;
+}
+
+/* Hero Section */
+.heroSection {
+  padding: 160px 0 100px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.heroTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.heroTitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.highlightText {
+  position: relative;
+  color: #ff7e3e;
+  z-index: 1;
+}
+
+.highlightText::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: rgba(255, 126, 62, 0.2);
+  z-index: -1;
+  transform: skewX(-5deg);
+}
+
+.heroSubtitle {
+  font-size: 1.4rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  color: rgba(229, 229, 229, 0.8);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s;
+}
+
+.heroSubtitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Featured Games Section */
+.featuredSection {
+  padding: 40px 0;
+  position: relative;
+}
+
+.featuredGamesSlider {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin: 0 auto;
+}
+
+.featuredGameCard {
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.featuredGameCard:hover {
+  transform: translateY(-8px);
+}
+
+.gameImageContainer {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  aspect-ratio: 16/9;
+}
+
+.gameImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.featuredGameCard:hover .gameImage {
+  transform: scale(1.05);
+}
+
+.gameOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0) 60%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 15px;
+}
+
+.gameSubject {
+  background: linear-gradient(135deg, #ff3e3e, #ff7e3e);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 4px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.gameTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #e5e5e5;
+  position: relative;
+  display: inline-block;
+}
+
+.gameTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(to right, #ff3e3e, #ff7e3e);
+}
+
+.gameDescription {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  color: rgba(229, 229, 229, 0.8);
+  font-size: 0.95rem;
+}
+
+.gameDetailsButton {
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid rgba(255, 126, 62, 0.5);
+  border-radius: 4px;
+  color: #ff7e3e;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gameDetailsButton:hover {
+  background: rgba(255, 126, 62, 0.1);
+  border-color: #ff7e3e;
+}
+
+/* Filter Section */
+.filterSection {
+  padding: 20px 0;
+}
+
+.filterContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.filterTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #e5e5e5;
+  margin: 0;
+}
+
+.filterButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filterButton {
+  padding: 8px 16px;
+  background: rgba(13, 13, 26, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: rgba(229, 229, 229, 0.7);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filterButton:hover,
+.filterButton.active {
+  background: rgba(255, 126, 62, 0.2);
+  border-color: rgba(255, 126, 62, 0.5);
+  color: #e5e5e5;
+}
+
+.filterButton.active {
+  border-color: #ff7e3e;
+  color: #ff7e3e;
+}
+
+/* All Games Section */
+.allGamesSection {
+  padding: 40px 0 80px;
+}
+
+.gamesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.gameCard {
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.gameCard:hover {
+  transform: translateY(-8px);
+}
+
+/* What Are Xogos Games Like Section */
+.aboutGamesSection {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 80px 0;
+  position: relative;
+}
+
+.aboutGamesSection::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.3), transparent);
+  z-index: -1;
+}
+
+.aboutGamesContent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+.gameDescription {
+  position: relative;
+}
+
+.gameDescription h3 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #e5e5e5;
+  position: relative;
+  display: inline-block;
+}
+
+.gameDescription h3::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(to right, #ff3e3e, #ff7e3e);
+}
+
+.gameDescription p {
+  line-height: 1.7;
+  color: rgba(229, 229, 229, 0.8);
+}
+
+/* CTA Section */
+.ctaSection {
+  padding: 100px 0;
+  position: relative;
+}
+
+.ctaContainer {
+  position: relative;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.ctaContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 126, 62, 0.5),
+    transparent
+  );
+}
+
+.ctaContainer::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 126, 62, 0.5),
+    transparent
+  );
+}
+
+.ctaTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #ff3e3e, #ff7e3e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.ctaText {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+  color: rgba(229, 229, 229, 0.9);
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.primaryButton {
+  display: inline-block;
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #ff3e3e, #ff7e3e);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(255, 62, 62, 0.2);
+}
+
+.primaryButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(255, 62, 62, 0.3);
+}
+
+.secondaryButton {
+  display: inline-block;
+  padding: 15px 30px;
+  background: transparent;
+  color: #e5e5e5;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.secondaryButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.ctaDecoration {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.pixelElement {
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 126, 62, 0.2);
+  border-radius: 4px;
+}
+
+.pixelElement:nth-child(1) {
+  animation: float 4s ease-in-out infinite;
+}
+
+.pixelElement:nth-child(2) {
+  animation: float 4s ease-in-out infinite 1s;
+}
+
+.pixelElement:nth-child(3) {
+  animation: float 4s ease-in-out infinite 2s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Game Modal */
+.gameModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.gameModalContent {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.95),
+    rgba(13, 13, 26, 0.95)
+  );
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.closeModalButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.closeModalButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.gameModalHeader {
+  position: relative;
+}
+
+.gameModalImageContainer {
+  position: relative;
+  width: 100%;
+  height: 250px;
+}
+
+.gameModalImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gameModalInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.gameModalTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.gameModalSubject {
+  background: linear-gradient(135deg, #ff3e3e, #ff7e3e);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.gameModalBody {
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.gameModalDescription {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(229, 229, 229, 0.9);
+  margin-bottom: 30px;
+}
+
+.gameModalFeatures {
+  margin-bottom: 30px;
+}
+
+.gameModalSubtitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #e5e5e5;
+}
+
+.gameFeaturesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gameFeatureItem {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 10px;
+  color: rgba(229, 229, 229, 0.8);
+}
+
+.gameFeatureItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #ff3e3e, #ff7e3e);
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+
+.gameModalCTA {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.gamePlayButton {
+  padding: 12px 30px;
+  background: linear-gradient(135deg, #ff3e3e, #ff7e3e);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.gamePlayButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(255, 62, 62, 0.2);
+}
+
+.gameWishlistButton {
+  padding: 12px 30px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.gameWishlistButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .heroTitle {
+    font-size: 3.5rem;
+  }
+
+  .featuredGamesSlider {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .gamesGrid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .aboutGamesContent {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.8rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1.2rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .featuredGamesSlider {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .filterContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ctaContainer {
+    padding: 40px 20px;
+  }
+
+  .ctaTitle {
+    font-size: 2rem;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .gameModalTitle {
+    font-size: 1.6rem;
+  }
+
+  .gameModalCTA {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 2.2rem;
+  }
+
+  .sectionContainer {
+    padding: 40px 0;
+  }
+
+  .gameTitle {
+    font-size: 1.2rem;
+  }
+
+  .gameModalImageContainer {
+    height: 180px;
+  }
+
+  .gameModalBody {
+    padding: 20px;
+  }
+}

@@ -274,46 +274,56 @@
   color: #e62739 !important;
 }
 
-.boardButton {
+/* Style the sign-in button exactly like a nav link */
+.actionButtons .navLink {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(229, 229, 229, 0.9);
+  text-decoration: none;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
-  min-width: 180px;
-  height: 44px;
-  padding: 0 1.25rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  font-family: "Montserrat", sans-serif;
-  border-radius: 8px;
-  background: linear-gradient(45deg, #e62739, #7928ca) !important;
-  color: white !important;
-  border: none !important;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: all 0.3s ease;
-  text-decoration: none;
+  background: transparent;
+  border: none;
 }
 
-.boardButton::before {
+.actionButtons .navLink:hover {
+  color: #e62739;
+}
+
+.actionButtons .navLink::after {
   content: "";
   position: absolute;
-  top: 0;
+  width: 0;
+  height: 2px;
+  bottom: 0;
   left: 0;
+  background: linear-gradient(90deg, #e62739, #7928ca);
+  transition: width 0.3s ease;
+}
+
+.actionButtons .navLink:hover::after {
   width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, #7928ca, #e62739);
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
 }
 
-.boardButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(230, 39, 57, 0.3);
+.signInIcon {
+  width: 16px;
+  height: 16px;
 }
 
-.boardButton:hover::before {
-  opacity: 1;
+.signInContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+.signInIcon {
+  width: 16px;
+  height: 16px;
 }
