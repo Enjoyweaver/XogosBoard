@@ -163,82 +163,296 @@ with Xogos Gaming's mission.
 
 # Xogos Gaming - Among Us Clone
 
-## Project Structure
+Gaming Folder - Emotion Quest Game Project Structure
+README.md
+Project Overview
+Emotion Quest is a multiplayer educational game inspired by Among Us, focusing on emotional intelligence and coping mechanisms. Players control emotion-based monsters navigating various environments while completing therapeutic mini-games and social interactions.
 
-```
+Game Concept
+Setting: Schools, malls, homes, and other relatable environments
+Characters: Three monster types based on emotions
+Objective: Educational gameplay focused on emotional regulation and coping strategies
+Target Audience: Students/young people learning emotional management
+Complete File Structure
 Gaming/
-├── README.md                  # Project documentation
-├── package.json               # Dependencies and scripts
-├── tsconfig.json              # TypeScript configuration
-├── .env.example               # Environment variables template
-├── public/                    # Static assets
-│   ├── assets/
-│   │   ├── audio/             # Game sounds
-│   │   ├── images/            # Game images
-│   │   │   ├── characters/    # Character sprites
-│   │   │   ├── maps/          # Map assets
-│   │   │   └── ui/            # UI elements
-│   │   └── animations/        # Character animations
-│   └── favicon.ico            # Site favicon
-├── src/
-│   ├── components/            # React components
-│   │   ├── ui/                # Generic UI components
-│   │   │   ├── Button.tsx
-│   │   │   ├── Modal.tsx
-│   │   │   └── ...
-│   │   ├── game/              # Game-specific components
-│   │   │   ├── Character.tsx  # Player character
-│   │   │   ├── Map.tsx        # Game map
-│   │   │   ├── Task.tsx       # Task interface
-│   │   │   ├── Voting.tsx     # Voting interface
-│   │   │   └── ...
-│   │   └── layout/            # Layout components
-│   │       ├── GameLayout.tsx
-│   │       └── Lobby.tsx
-│   ├── hooks/                 # Custom React hooks
-│   │   ├── useGameState.ts    # Game state management
-│   │   ├── usePlayerControls.ts # Player movement controls
-│   │   └── ...
-│   ├── lib/                   # Utility functions
-│   │   ├── api.ts             # API client
-│   │   ├── game-logic.ts      # Core game logic
-│   │   └── socket.ts          # WebSocket client
-│   ├── pages/                 # Page components
-│   │   ├── index.tsx          # Home/landing page
-│   │   ├── lobby.tsx          # Game lobby
-│   │   ├── game.tsx           # Main game
-│   │   └── ...
-│   ├── styles/                # CSS/styling
-│   │   ├── globals.css
-│   │   └── ...
-│   ├── types/                 # TypeScript type definitions
-│   │   ├── game.ts            # Game-related types
-│   │   └── ...
-│   ├── config/                # Game configuration
-│   │   ├── maps.ts            # Map configurations
-│   │   ├── tasks.ts           # Task definitions
-│   │   └── roles.ts           # Role definitions
-│   └── game-engine/           # Core game engine
-│       ├── physics.ts         # Physics engine
-│       ├── collision.ts       # Collision detection
-│       ├── tasks.ts           # Task management
-│       └── roles.ts           # Role management
-└── server/                    # Backend server
-    ├── index.ts               # Server entry point
-    ├── socket-handler.ts      # WebSocket handler
-    ├── game-state.ts          # Server-side game state
-    ├── room-manager.ts        # Game room management
-    ├── db/                    # Database interactions
-    │   ├── models/            # Database models
-    │   │   ├── User.ts
-    │   │   ├── Game.ts
-    │   │   └── ...
-    │   └── index.ts           # DB connection
-    └── api/                   # REST API routes
-        ├── auth.ts            # Authentication routes
-        ├── games.ts           # Game-related routes
-        └── users.ts           # User-related routes
-```
+├── README.md
+├── package.json
+├── .gitignore
+├── .env.example
+│
+├── client/                          # Frontend Application
+│   ├── public/
+│   │   ├── index.html
+│   │   ├── favicon.ico
+│   │   └── assets/
+│   │       ├── images/
+│   │       │   ├── monsters/         # Character sprites and animations
+│   │       │   │   ├── happy/
+│   │       │   │   │   ├── happy-idle.png              # Standing still (64x64px)
+│   │       │   │   │   ├── happy-walk-spritesheet.png  # 4 frames walking (256x64px)
+│   │       │   │   │   ├── happy-run-spritesheet.png   # 4 frames running (256x64px)
+│   │       │   │   │   ├── happy-task.png              # Doing mini-game (64x64px)
+│   │       │   │   │   ├── happy-celebrate.png         # Task completed (64x64px)
+│   │       │   │   │   ├── happy-help.png              # Helping others (64x64px)
+│   │       │   │   │   └── happy-frozen.png            # When tagged by Panic (64x64px)
+│   │       │   │   │
+│   │       │   │   ├── love/
+│   │       │   │   │   ├── love-idle.png               # Standing still (64x64px)
+│   │       │   │   │   ├── love-walk-spritesheet.png   # 4 frames walking (256x64px)
+│   │       │   │   │   ├── love-run-spritesheet.png    # 4 frames running (256x64px)
+│   │       │   │   │   ├── love-task.png               # Doing mini-game (64x64px)
+│   │       │   │   │   ├── love-celebrate.png          # Task completed (64x64px)
+│   │       │   │   │   ├── love-help.png               # Helping/unfreezing others (64x64px)
+│   │       │   │   │   └── love-frozen.png             # When tagged by Panic (64x64px)
+│   │       │   │   │
+│   │       │   │   ├── sad/
+│   │       │   │   │   ├── sad-idle.png                # Standing still - blue color (64x64px)
+│   │       │   │   │   ├── sad-walk-spritesheet.png    # 4 frames walking (256x64px)
+│   │       │   │   │   ├── sad-run-spritesheet.png     # 4 frames running (256x64px)
+│   │       │   │   │   ├── sad-task.png                # Doing therapeutic mini-game (64x64px)
+│   │       │   │   │   ├── sad-learning.png            # Color getting slightly brighter (64x64px)
+│   │       │   │   │   ├── sad-progress-25.png         # 25% brighter - learning progress (64x64px)
+│   │       │   │   │   ├── sad-progress-50.png         # 50% brighter - more progress (64x64px)
+│   │       │   │   │   ├── sad-progress-75.png         # 75% brighter - almost happy (64x64px)
+│   │       │   │   │   ├── sad-transformed.png         # Final yellow form - learned coping (64x64px)
+│   │       │   │   │   └── sad-frozen.png              # When tagged by Panic (64x64px)
+│   │       │   │   │
+│   │       │   │   ├── mad/
+│   │       │   │   │   ├── mad-idle.png                # Standing still - red color (64x64px)
+│   │       │   │   │   ├── mad-walk-spritesheet.png    # 4 frames walking (256x64px)
+│   │       │   │   │   ├── mad-run-spritesheet.png     # 4 frames running (256x64px)
+│   │       │   │   │   ├── mad-task.png                # Doing anger management mini-game (64x64px)
+│   │       │   │   │   ├── mad-learning.png            # Color getting calmer (64x64px)
+│   │       │   │   │   ├── mad-progress-25.png         # 25% calmer - orange tones (64x64px)
+│   │       │   │   │   ├── mad-progress-50.png         # 50% calmer - yellow-orange (64x64px)
+│   │       │   │   │   ├── mad-progress-75.png         # 75% calmer - mostly yellow (64x64px)
+│   │       │   │   │   ├── mad-transformed.png         # Final calm yellow form (64x64px)
+│   │       │   │   │   └── mad-frozen.png              # When tagged by Panic (64x64px)
+│   │       │   │   │
+│   │       │   │   ├── panic/
+│   │       │   │   │   ├── panic-idle.png              # Standing still - white/gray (64x64px)
+│   │       │   │   │   ├── panic-walk-spritesheet.png  # 4 frames walking (256x64px)
+│   │       │   │   │   ├── panic-run-spritesheet.png   # 4 frames running (256x64px)
+│   │       │   │   │   ├── panic-hunt.png              # Hunting/chasing mode (64x64px)
+│   │       │   │   │   ├── panic-freeze-action.png     # Tagging animation (64x64px)
+│   │       │   │   │   └── panic-victory.png           # After eliminating player (64x64px)
+│   │       │   │   │
+│   │       │   │   └── effects/
+│   │       │   │       ├── freeze-effect.png           # Ice overlay when frozen (64x64px)
+│   │       │   │       ├── unfreeze-sparkles.png       # Sparkle effect when unfrozen (64x64px)
+│   │       │   │       ├── task-indicator.png          # Shows available tasks (32x32px)
+│   │       │   │       ├── progress-bar-bg.png         # Background for emotion meter (128x16px)
+│   │       │   │       ├── progress-bar-fill.png       # Fill for emotion meter (128x16px)
+│   │       │   │       ├── transformation-glow.png     # Glow effect during color change (80x80px)
+│   │       │   │       └── celebration-particles.png   # Particle effects for success (varied sizes)
+│   │       │   ├── environments/     # Map backgrounds and tiles
+│   │       │   ├── ui/              # UI elements and icons
+│   │       │   └── minigames/       # Mini-game specific graphics
+│   │       ├── sounds/
+│   │       │   ├── sfx/             # Sound effects
+│   │       │   ├── music/           # Background music
+│   │       │   └── voice/           # Voice clips and narration
+│   │       └── fonts/
+│   │
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Game/
+│   │   │   │   ├── GameCanvas.js    # Main game rendering
+│   │   │   │   ├── Player.js        # Player character component
+│   │   │   │   ├── Monster.js       # Monster entity component
+│   │   │   │   ├── Map.js           # Game map rendering
+│   │   │   │   └── TaskMarker.js    # Task location indicators
+│   │   │   ├── UI/
+│   │   │   │   ├── GameHUD.js       # Heads-up display
+│   │   │   │   ├── TaskProgress.js  # Task completion tracking
+│   │   │   │   ├── EmotionMeter.js  # Emotional state indicator
+│   │   │   │   ├── Chat.js          # In-game communication
+│   │   │   │   └── Scoreboard.js    # Player statistics
+│   │   │   ├── Minigames/
+│   │   │   │   ├── AnxietyCoping.js     # Breathing exercises
+│   │   │   │   ├── SadnessReframe.js    # Cognitive reframing
+│   │   │   │   ├── AngerManagement.js   # Anger regulation
+│   │   │   │   ├── StressRelief.js      # Stress management
+│   │   │   │   └── MinigameWrapper.js   # Common minigame logic
+│   │   │   ├── Menus/
+│   │   │   │   ├── MainMenu.js      # Starting screen
+│   │   │   │   ├── LobbyMenu.js     # Pre-game lobby
+│   │   │   │   ├── SettingsMenu.js  # Game preferences
+│   │   │   │   └── CharacterSelect.js # Monster selection
+│   │   │   └── Common/
+│   │   │       ├── Button.js        # Reusable button component
+│   │   │       ├── Modal.js         # Modal dialogs
+│   │   │       └── LoadingSpinner.js
+│   │   │
+│   │   ├── game/
+│   │   │   ├── engine/
+│   │   │   │   ├── GameEngine.js    # Core game loop
+│   │   │   │   ├── InputHandler.js  # Keyboard/mouse input
+│   │   │   │   ├── CollisionDetection.js # Physics and collisions
+│   │   │   │   ├── AnimationManager.js # Sprite animations
+│   │   │   │   └── SoundManager.js  # Audio management
+│   │   │   ├── entities/
+│   │   │   │   ├── PositiveMonster.js   # Happy, Love characters
+│   │   │   │   ├── NegativeMonster.js   # Sad, Mad characters
+│   │   │   │   ├── PanicMonster.js      # Panic character
+│   │   │   │   └── BaseMonster.js       # Shared monster logic
+│   │   │   ├── maps/
+│   │   │   │   ├── School.js        # School environment
+│   │   │   │   ├── Mall.js          # Shopping mall environment
+│   │   │   │   ├── Home.js          # House environment
+│   │   │   │   └── BaseMap.js       # Common map functionality
+│   │   │   └── systems/
+│   │   │       ├── TaskSystem.js    # Task management
+│   │   │       ├── EmotionSystem.js # Emotional state tracking
+│   │   │       ├── FreezeSystem.js  # Freeze/unfreeze mechanics
+│   │   │       └── ProgressSystem.js # Color transformation logic
+│   │   │
+│   │   ├── services/
+│   │   │   ├── SocketService.js     # WebSocket communication
+│   │   │   ├── GameStateService.js  # State management
+│   │   │   ├── AuthService.js       # User authentication
+│   │   │   └── ProgressService.js   # Player progress tracking
+│   │   │
+│   │   ├── utils/
+│   │   │   ├── constants.js         # Game constants
+│   │   │   ├── helpers.js           # Utility functions
+│   │   │   └── validators.js        # Input validation
+│   │   │
+│   │   ├── styles/
+│   │   │   ├── global.css           # Global styles
+│   │   │   ├── components/          # Component-specific styles
+│   │   │   └── themes/              # Color themes and variables
+│   │   │
+│   │   ├── App.js                   # Main application component
+│   │   ├── index.js                 # Application entry point
+│   │   └── config.js                # Frontend configuration
+│   │
+│   ├── package.json
+│   └── webpack.config.js
+│
+├── server/                          # Backend Application
+│   ├── src/
+│   │   ├── controllers/
+│   │   │   ├── auth.js              # Authentication endpoints
+│   │   │   ├── game.js              # Game management
+│   │   │   ├── player.js            # Player data management
+│   │   │   ├── room.js              # Game room management
+│   │   │   └── progress.js          # Progress tracking
+│   │   │
+│   │   ├── middleware/
+│   │   │   ├── auth.js              # Authentication middleware
+│   │   │   ├── validation.js        # Request validation
+│   │   │   ├── rateLimiting.js      # Rate limiting
+│   │   │   └── errorHandling.js     # Error management
+│   │   │
+│   │   ├── models/
+│   │   │   ├── User.js              # User data model
+│   │   │   ├── GameSession.js       # Game instance model
+│   │   │   ├── PlayerProgress.js    # Individual progress
+│   │   │   ├── Room.js              # Game room model
+│   │   │   └── TaskCompletion.js    # Task completion records
+│   │   │
+│   │   ├── services/
+│   │   │   ├── GameLogic.js         # Core game rules
+│   │   │   ├── RoomManager.js       # Room creation/management
+│   │   │   ├── PlayerManager.js     # Player state management
+│   │   │   ├── TaskValidator.js     # Task completion validation
+│   │   │   └── EmotionTracker.js    # Emotional progress tracking
+│   │   │
+│   │   ├── sockets/
+│   │   │   ├── gameEvents.js        # Game-related socket events
+│   │   │   ├── playerEvents.js      # Player interaction events
+│   │   │   ├── chatEvents.js        # Chat functionality
+│   │   │   └── roomEvents.js        # Room management events
+│   │   │
+│   │   ├── routes/
+│   │   │   ├── auth.js              # Authentication routes
+│   │   │   ├── api.js               # General API routes
+│   │   │   ├── game.js              # Game-specific routes
+│   │   │   └── admin.js             # Administrative routes
+│   │   │
+│   │   ├── utils/
+│   │   │   ├── database.js          # Database connection
+│   │   │   ├── logger.js            # Logging utility
+│   │   │   ├── encryption.js        # Data encryption
+│   │   │   └── constants.js         # Server constants
+│   │   │
+│   │   ├── config/
+│   │   │   ├── database.js          # Database configuration
+│   │   │   ├── server.js            # Server configuration
+│   │   │   └── game.js              # Game configuration
+│   │   │
+│   │   └── app.js                   # Express application setup
+│   │
+│   ├── package.json
+│   └── server.js                    # Server entry point
+│
+├── database/
+│   ├── migrations/
+│   │   ├── 001_create_users.js      # User table creation
+│   │   ├── 002_create_game_sessions.js # Game session tables
+│   │   ├── 003_create_player_progress.js # Progress tracking
+│   │   └── 004_create_rooms.js      # Room management tables
+│   │
+│   ├── seeds/
+│   │   ├── users.js                 # Sample user data
+│   │   ├── tasks.js                 # Predefined tasks
+│   │   └── maps.js                  # Map configurations
+│   │
+│   └── schema.sql                   # Complete database schema
+│
+├── docs/
+│   ├── API.md                       # API documentation
+│   ├── GAME_MECHANICS.md           # Game rules and mechanics
+│   ├── DEPLOYMENT.md               # Deployment instructions
+│   └── THERAPEUTIC_DESIGN.md       # Educational design principles
+│
+└── tests/
+    ├── client/
+    │   ├── components/              # Component tests
+    │   ├── game/                    # Game logic tests
+    │   └── services/                # Service tests
+    │
+    ├── server/
+    │   ├── controllers/             # Controller tests
+    │   ├── services/                # Service tests
+    │   └── models/                  # Model tests
+    │
+    └── integration/
+        ├── gameplay.test.js         # End-to-end gameplay tests
+        └── multiplayer.test.js      # Multiplayer functionality tests
+Technical Requirements
+Frontend Needs
+Framework: React.js with Canvas/WebGL for game rendering
+Real-time Communication: Socket.IO client
+Game Engine: Custom 2D engine or Phaser.js integration
+State Management: Redux or Context API for game state
+Audio: Web Audio API for sound effects and music
+Authentication: JWT token handling
+Responsive Design: Multi-device support
+Backend Requirements
+Runtime: Node.js with Express.js
+Real-time: Socket.IO for multiplayer communication
+Authentication: JWT with bcrypt for password hashing
+Database ORM: Sequelize or Prisma for database operations
+Session Management: Redis for game session storage
+API Security: Rate limiting, input validation, CORS
+File Upload: Multer for avatar/customization assets
+Database Storage
+User Management: Registration, authentication, profiles
+Game Sessions: Active games, player assignments, room states
+Progress Tracking: Task completions, emotional growth metrics
+Therapeutic Data: Coping strategy usage, learning outcomes
+Social Features: Friend lists, achievements, leaderboards
+Analytics: Gameplay patterns, educational effectiveness metrics
+Key Features Implementation
+Multiplayer Synchronization: Real-time position updates, game state sync
+Task System: Mini-game integration, progress validation
+Emotion Mechanics: Color transformation system, freeze/unfreeze logic
+Educational Analytics: Learning outcome tracking, adaptive difficulty
+Accessibility: Screen reader support, colorblind-friendly design
+Moderation: Chat filtering, reporting system, admin controls
+
 
 ## Core Components Description
 

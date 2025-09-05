@@ -1,0 +1,353 @@
+/* Game Header Styles */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 90px;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, var(--theme-color, #f59e0b) 0%, rgba(13, 13, 26, 0.95) 100%);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header.scrolled {
+  height: 80px;
+  background: rgba(13, 13, 26, 0.95);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.logoAndNav {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex: 1;
+}
+
+/* Game Info Section */
+.gameInfo {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.backLink:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateX(-2px);
+}
+
+.backArrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.backLink:hover .backArrow {
+  transform: translateX(-3px);
+}
+
+.backText {
+  font-size: 0.9rem;
+}
+
+.gameDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.gameTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.gameSubject {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navLinkContainer {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navLink {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.navLink:hover {
+  color: white;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: var(--theme-color, #f59e0b);
+  transition: width 0.3s ease;
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.playButton {
+  background: linear-gradient(135deg, var(--theme-color, #f59e0b), #d97706);
+  color: white;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+  border: none;
+  cursor: pointer;
+}
+
+.playButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+  background: linear-gradient(135deg, #d97706, var(--theme-color, #f59e0b));
+}
+
+/* Mobile Menu Toggle */
+.mobileMenuToggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 200;
+}
+
+.hamburgerLine {
+  width: 100%;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+/* Progress Bar */
+.progressContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  width: 0%;
+  background: var(--theme-color, #f59e0b);
+  transition: width 0.3s ease;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 1024px) {
+  .navLinkContainer {
+    gap: 1.5rem;
+  }
+
+  .logoAndNav {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .logoAndNav {
+    gap: 1rem;
+  }
+
+  .gameTitle {
+    font-size: 1.2rem;
+  }
+
+  .backText {
+    display: none;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 400px;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--theme-color, #f59e0b) 0%, rgba(13, 13, 26, 0.98) 30%);
+    backdrop-filter: blur(15px);
+    z-index: 100;
+    transition: right 0.3s ease;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 120px 2rem 2rem;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav.mobileOpen {
+    right: 0;
+  }
+
+  .navLinkContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .navLink {
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .buttonGroup {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 2rem;
+    gap: 1rem;
+  }
+
+  .playButton {
+    width: 100%;
+    text-align: center;
+    padding: 15px 24px;
+  }
+
+  .mobileMenuToggle {
+    display: flex;
+  }
+
+  .mobileOpen .hamburgerLine:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+  }
+
+  .mobileOpen .hamburgerLine:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobileOpen .hamburgerLine:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .gameInfo {
+    gap: 1rem;
+  }
+
+  .gameTitle {
+    font-size: 1rem;
+  }
+
+  .gameSubject {
+    font-size: 0.7rem;
+  }
+
+  .backLink {
+    padding: 0.4rem 0.8rem;
+  }
+
+  .nav {
+    width: 90%;
+  }
+}
+
+/* Special styling for different game themes */
+.header[style*="--theme-color: #f59e0b"] {
+  /* Panic Attack orange theme */
+}
+
+.header[style*="--theme-color: #ff6b6b"] {
+  /* Mad monster red theme */
+}
+
+.header[style*="--theme-color: #4ecdc4"] {
+  /* Happy monster teal theme */
+}
+
+.header[style*="--theme-color: #ff69b4"] {
+  /* Love monster pink theme */
+}
