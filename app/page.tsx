@@ -117,12 +117,11 @@ export default function HomePage() {
     setIsLoaded(true);
   }, []);
 
-  // Mock data
   const stats = [
-    { value: "10K+", label: "Students" },
-    { value: "24", label: "Educational Games" },
-    { value: "$250K", label: "Scholarship Funds" },
-    { value: "15", label: "Partner Schools" },
+    { value: "100%", label: "Learning While Playing" },
+    { value: "180 Days", label: "Path to Double Rewards" },
+    { value: "Real $$$", label: "For College Education" },
+    { value: "Every Day", label: "Progress Toward College" },
   ];
 
   const features = [
@@ -175,40 +174,40 @@ export default function HomePage() {
 
   const games = [
     {
-      title: "Math Kingdom",
+      title: "Totally Medieval",
       releaseDate: "November 2024",
       subject: "Mathematics",
       description:
         "Master numerical concepts through medieval strategic gameplay. Build kingdoms, manage resources, and solve math problems.",
       status: "upcoming" as const,
-      imageUrl: "/images/game1.jpg",
+      imageUrl: "/images/games/TotallyMedieval.jpg",
     },
     {
-      title: "Historical Legends",
+      title: "Battles and Thrones Simulator",
       releaseDate: "January 2025",
       subject: "History",
       description:
-        "Explore historical periods and learn about important events and figures through interactive storytelling and challenges.",
+        "Lead historical kingdoms through epic battles and political intrigue. This simulation game teaches strategic thinking and historical context as players navigate alliances, conflicts, and resource management based on real historical scenarios.",
       status: "upcoming" as const,
-      imageUrl: "/images/game2.jpg",
+      imageUrl: "/images/games/BattleThrones.jpg",
     },
     {
-      title: "Science Explorer",
+      title: "Bug and Seek",
       releaseDate: "Available Now",
       subject: "Science",
       description:
-        "Conduct virtual experiments and solve scientific puzzles in this hands-on learning adventure.",
+        "A nature-based exploration game where students become the new owners of a broken-down insectarium. Players explore real-world ecosystems to catch up to 220 real-life bugs, each with fun facts and humor built into every codex entry.",
       status: "active" as const,
-      imageUrl: "/images/game3.jpg",
+      imageUrl: "/images/games/BugandSeek.jpg",
     },
     {
-      title: "Financial Quest",
+      title: "Debt-Free Millionaire",
       releaseDate: "In Development",
       subject: "Financial Literacy",
       description:
-        "Learn financial concepts and money management skills through real-world simulations and challenges.",
+        "A career-readiness and financial literacy simulation that teaches students how to manage money, plan a career, and make life decisions that impact their future. Players choose a career, earn a salary, budget monthly expenses, and work toward financial freedom.",
       status: "beta" as const,
-      imageUrl: "/images/game4.jpg",
+      imageUrl: "/images/games/DebtFreeMil.jpg",
     },
   ];
 
@@ -500,8 +499,7 @@ export default function HomePage() {
           <div className={styles.stepsContainer}>
             <div className={styles.step}>
               <div className={styles.stepNumber}>1</div>
-              <div className={styles.stepLeft}></div>
-              <div className={styles.stepRight}>
+              <div className={styles.stepLeft}>
                 <div className={styles.stepContent}>
                   <h3 className={styles.stepTitle}>Play Educational Games</h3>
                   <p className={styles.stepDescription}>
@@ -513,6 +511,7 @@ export default function HomePage() {
                   </p>
                 </div>
               </div>
+              <div className={styles.stepRight}></div>
             </div>
 
             <div className={styles.step}>
@@ -533,8 +532,7 @@ export default function HomePage() {
 
             <div className={styles.step}>
               <div className={styles.stepNumber}>3</div>
-              <div className={styles.stepLeft}></div>
-              <div className={styles.stepRight}>
+              <div className={styles.stepLeft}>
                 <div className={styles.stepContent}>
                   <h3 className={styles.stepTitle}>Convert to Scholarships</h3>
                   <p className={styles.stepDescription}>
@@ -546,6 +544,7 @@ export default function HomePage() {
                   </p>
                 </div>
               </div>
+              <div className={styles.stepRight}></div>
             </div>
           </div>
         </section>

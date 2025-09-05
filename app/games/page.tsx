@@ -2,6 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+<<<<<<< HEAD
+=======
+// eslint-disable-next-line import/order, sort-imports
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
 import React, { useEffect, useState } from "react";
 import { MarketingLayout } from "@/layouts/Marketing";
 import { Container } from "@/primitives/Container";
@@ -15,8 +19,11 @@ interface Game {
   description: string;
   imagePath: string;
   featured?: boolean;
+<<<<<<< HEAD
   status: "active" | "beta" | "upcoming";
   features?: string[];
+=======
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
 }
 
 export default function GamesPage() {
@@ -29,6 +36,7 @@ export default function GamesPage() {
     setIsLoaded(true);
   }, []);
 
+<<<<<<< HEAD
   // Games data based on whitepaper and existing content
   const games: Game[] = [
     {
@@ -100,12 +108,18 @@ export default function GamesPage() {
       ]
     },
     {
+=======
+  // Games data
+  const games: Game[] = [
+    {
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
       id: "totally-medieval",
       title: "Totally Medieval",
       subject: "Math",
       description:
         "Build your medieval kingdom while mastering math skills through strategic resource management and castle building. Players solve increasingly complex math problems to acquire resources, build structures, and defend their kingdoms from rivals.",
       imagePath: "/images/games/TotallyMedieval.jpg",
+<<<<<<< HEAD
       status: "upcoming",
       features: [
         "Kingdom building mechanics",
@@ -114,6 +128,9 @@ export default function GamesPage() {
         "Strategic gameplay",
         "Medieval theme"
       ]
+=======
+      featured: true,
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
     },
     {
       id: "battles-and-thrones",
@@ -122,6 +139,7 @@ export default function GamesPage() {
       description:
         "Lead historical kingdoms through epic battles and political intrigue. This simulation game teaches strategic thinking and historical context as players navigate alliances, conflicts, and resource management based on real historical scenarios.",
       imagePath: "/images/games/BattleThrones.jpg",
+<<<<<<< HEAD
       status: "upcoming",
       features: [
         "Political simulation",
@@ -130,6 +148,25 @@ export default function GamesPage() {
         "Strategic warfare",
         "Diplomatic gameplay"
       ]
+=======
+    },
+    {
+      id: "prydes-gym",
+      title: "Prydes Gym",
+      subject: "Physical Education",
+      description:
+        "A virtual fitness adventure that encourages real-world physical activity. Players create workout routines, set fitness goals, and track progress through an engaging interface that makes exercise fun and rewarding.",
+      imagePath: "/images/games/PrydesGym.jpg",
+    },
+    {
+      id: "debt-free-millionaire",
+      title: "Debt-Free Millionaire",
+      subject: "Personal Finance",
+      description:
+        "A career-readiness and financial literacy simulation that teaches students how to manage money, plan a career, and make life decisions that impact their future. Players choose a career, earn a salary, budget monthly expenses, build credit, and work toward financial freedom. Through real-world scenarios and gamified rewards, students gain essential knowledge about banking, taxes, insurance, debt, investing, and saving.",
+      imagePath: "/images/games/DebtFreeMil.jpg",
+      featured: true,
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
     },
     {
       id: "panic-attack",
@@ -138,6 +175,7 @@ export default function GamesPage() {
       description:
         "An innovative game that teaches stress management and mental health awareness. Players navigate through challenges while learning coping strategies, emotional intelligence, and healthy habits that can be applied in real-life situations.",
       imagePath: "/images/games/PanicAttack.jpg",
+<<<<<<< HEAD
       status: "beta",
       features: [
         "Stress management techniques",
@@ -146,6 +184,8 @@ export default function GamesPage() {
         "Mental health awareness",
         "Mindfulness exercises"
       ]
+=======
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
     },
     {
       id: "lightning-round",
@@ -154,6 +194,7 @@ export default function GamesPage() {
       description:
         "A fast-paced quiz game that tests and improves historical knowledge through quick-fire questions, timed challenges, and competitive multiplayer modes. Perfect for classroom use or independent learning.",
       imagePath: "/images/games/Lightning.jpg",
+<<<<<<< HEAD
       status: "beta",
       features: [
         "Fast-paced quiz format",
@@ -163,6 +204,36 @@ export default function GamesPage() {
         "Historical knowledge base"
       ]
     }
+=======
+    },
+    {
+      id: "time-quest",
+      title: "Time Quest",
+      subject: "History",
+      description:
+        "A competitive history adventure where players travel through time to complete missions in different historical periods. Designed to reinforce historical facts, geography, and cause-and-effect thinking, Time Quest allows players to collect knowledge, compete with others, and alter their strategy as timelines evolve. The game makes history feel immersive, personal, and engaging.",
+      imagePath: "/images/games/TimeQuest.jpg",
+      featured: true,
+    },
+    {
+      id: "historical-conquest-digital",
+      title: "Historical Conquest Digital",
+      subject: "History",
+      description:
+        "A turn-based strategy card game where players build civilizations using real historical figures, events, and innovations. By collecting and deploying cards like Harriet Tubman, Julius Caesar, or the Black Plague, students learn history through dynamic gameplay. The game reinforces timelines, global context, and critical thinking as students pit historical figures and concepts against one another in battle.",
+      imagePath: "/images/games/HistoricalConquest.jpg",
+      featured: true,
+    },
+    {
+      id: "bug-and-seek",
+      title: "Bug and Seek",
+      subject: "Science",
+      description:
+        "A nature-based exploration game where students become the new owners of a broken-down insectarium. Players explore real-world ecosystems to catch up to 220 real-life bugs, each with fun facts and humor built into every codex entry. The game teaches entomology, biology, ecology, and environmental science while also weaving in problem-solving through quests, economic simulation, and museum restoration.",
+      imagePath: "/images/games/BugandSeek.jpg",
+      featured: true,
+    },
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
   ];
 
   const subjects = Array.from(new Set(games.map((game) => game.subject)));
@@ -174,6 +245,7 @@ export default function GamesPage() {
   const featuredGames = games.filter((game) => game.featured);
 
   const handleGameClick = (game: Game) => {
+<<<<<<< HEAD
   setActiveGame(game);
 };
 
@@ -182,11 +254,16 @@ const handleLearnMore = (gameId: string) => {
     window.location.href = "/games/panic-attack";
   }
 };
+=======
+    setActiveGame(game);
+  };
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
 
   const closeGameDetails = () => {
     setActiveGame(null);
   };
 
+<<<<<<< HEAD
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
@@ -200,6 +277,8 @@ const handleLearnMore = (gameId: string) => {
     }
   };
 
+=======
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
   return (
     <MarketingLayout>
       <div className={styles.gamesPage}>
@@ -224,7 +303,11 @@ const handleLearnMore = (gameId: string) => {
               <p
                 className={`${styles.heroSubtitle} ${isLoaded ? styles.visible : ""}`}
               >
+<<<<<<< HEAD
                 Where learning meets play, turning education into an adventure that rewards real achievement
+=======
+                Where learning meets play, turning education into an adventure
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
               </p>
             </div>
           </Container>
@@ -237,9 +320,12 @@ const handleLearnMore = (gameId: string) => {
               <div className={styles.sectionHeading}>
                 <h2 className={styles.sectionTitle}>Featured Games</h2>
                 <div className={styles.sectionDecoration}></div>
+<<<<<<< HEAD
                 <p className={styles.sectionSubtitle}>
                   Discover our core educational games designed to make learning engaging and rewarding
                 </p>
+=======
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
               </div>
 
               <div className={styles.featuredGamesSlider}>
@@ -259,6 +345,7 @@ const handleLearnMore = (gameId: string) => {
                       />
                       <div className={styles.gameOverlay}>
                         <div className={styles.gameSubject}>{game.subject}</div>
+<<<<<<< HEAD
                         <div className={`${styles.gameStatus} ${getStatusBadge(game.status).className}`}>
                           {getStatusBadge(game.status).text}
                         </div>
@@ -275,6 +362,19 @@ const handleLearnMore = (gameId: string) => {
                         View Details
                       </button>
                     </div>
+=======
+                      </div>
+                    </div>
+                    <h3 className={styles.gameTitle}>{game.title}</h3>
+                    <p className={styles.gameDescription}>
+                      {game.description.length > 120
+                        ? `${game.description.substring(0, 120)}...`
+                        : game.description}
+                    </p>
+                    <button className={styles.gameDetailsButton}>
+                      View Details
+                    </button>
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
                   </div>
                 ))}
               </div>
@@ -308,6 +408,7 @@ const handleLearnMore = (gameId: string) => {
           </Container>
         </section>
 
+<<<<<<< HEAD
         {/* All Games Grid */}
         <section className={styles.gamesGridSection}>
           <Container>
@@ -343,10 +444,50 @@ const handleLearnMore = (gameId: string) => {
                   </div>
                 </div>
               ))}
+=======
+        {/* All Games Section */}
+        <section className={styles.allGamesSection}>
+          <Container>
+            <div className={styles.sectionContainer}>
+              <div className={styles.sectionHeading}>
+                <h2 className={styles.sectionTitle}>
+                  {selectedSubject ? `${selectedSubject} Games` : "All Games"}
+                </h2>
+                <div className={styles.sectionDecoration}></div>
+              </div>
+
+              <div className={styles.gamesGrid}>
+                {filteredGames.map((game, index) => (
+                  <div
+                    key={index}
+                    className={styles.gameCard}
+                    onClick={() => handleGameClick(game)}
+                  >
+                    <div className={styles.gameImageContainer}>
+                      <Image
+                        src={game.imagePath}
+                        alt={game.title}
+                        width={280}
+                        height={160}
+                        className={styles.gameImage}
+                      />
+                      <div className={styles.gameOverlay}>
+                        <div className={styles.gameSubject}>{game.subject}</div>
+                      </div>
+                    </div>
+                    <h3 className={styles.gameTitle}>{game.title}</h3>
+                    <button className={styles.gameDetailsButton}>
+                      View Details
+                    </button>
+                  </div>
+                ))}
+              </div>
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
             </div>
           </Container>
         </section>
 
+<<<<<<< HEAD
         {/* Call to Action Section */}
         <section className={styles.ctaSection}>
           <Container>
@@ -355,6 +496,16 @@ const handleLearnMore = (gameId: string) => {
               <p className={styles.ctaDescription}>
                 Join thousands of students who are already earning while they learn. 
                 Start your educational gaming journey today and unlock real scholarship opportunities.
+=======
+        {/* CTA Section */}
+        <section className={styles.ctaSection}>
+          <Container>
+            <div className={styles.ctaContainer}>
+              <h2 className={styles.ctaTitle}>Ready to Start Playing?</h2>
+              <p className={styles.ctaText}>
+                Join Xogos today and transform learning into an exciting
+                adventure while earning rewards for your future.
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
               </p>
               <div className={styles.ctaButtons}>
                 <Link href="/membership" className={styles.primaryButton}>
@@ -375,8 +526,13 @@ const handleLearnMore = (gameId: string) => {
 
         {/* Game Details Modal */}
         {activeGame && (
+<<<<<<< HEAD
           <div className={styles.gameModal} onClick={closeGameDetails}>
             <div className={styles.gameModalContent} onClick={(e) => e.stopPropagation()}>
+=======
+          <div className={styles.gameModal}>
+            <div className={styles.gameModalContent}>
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
               <button
                 className={styles.closeModalButton}
                 onClick={closeGameDetails}
@@ -388,6 +544,7 @@ const handleLearnMore = (gameId: string) => {
                   <Image
                     src={activeGame.imagePath}
                     alt={activeGame.title}
+<<<<<<< HEAD
                     width={500}
                     height={280}
                     className={styles.gameModalImage}
@@ -401,6 +558,18 @@ const handleLearnMore = (gameId: string) => {
                 </div>
                 <div className={styles.gameModalInfo}>
                   <h2 className={styles.gameModalTitle}>{activeGame.title}</h2>
+=======
+                    width={400}
+                    height={225}
+                    className={styles.gameModalImage}
+                  />
+                </div>
+                <div className={styles.gameModalInfo}>
+                  <h2 className={styles.gameModalTitle}>{activeGame.title}</h2>
+                  <span className={styles.gameModalSubject}>
+                    {activeGame.subject}
+                  </span>
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
                 </div>
               </div>
               <div className={styles.gameModalBody}>
@@ -408,6 +577,7 @@ const handleLearnMore = (gameId: string) => {
                   {activeGame.description}
                 </p>
 
+<<<<<<< HEAD
                 {activeGame.features && (
                   <div className={styles.gameModalFeatures}>
                     <h3 className={styles.gameModalSubtitle}>Key Features</h3>
@@ -443,6 +613,34 @@ const handleLearnMore = (gameId: string) => {
 >
   Learn More
 </button>
+=======
+                <div className={styles.gameModalFeatures}>
+                  <h3 className={styles.gameModalSubtitle}>Key Features</h3>
+                  <ul className={styles.gameFeaturesList}>
+                    <li className={styles.gameFeatureItem}>
+                      Interactive learning experience
+                    </li>
+                    <li className={styles.gameFeatureItem}>
+                      Earn iPlay coins for scholarships
+                    </li>
+                    <li className={styles.gameFeatureItem}>
+                      Track progress and achievements
+                    </li>
+                    <li className={styles.gameFeatureItem}>
+                      Compete with friends
+                    </li>
+                    <li className={styles.gameFeatureItem}>
+                      Regular content updates
+                    </li>
+                  </ul>
+                </div>
+
+                <div className={styles.gameModalCTA}>
+                  <button className={styles.gamePlayButton}>Play Now</button>
+                  <button className={styles.gameWishlistButton}>
+                    Add to Wishlist
+                  </button>
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10
                 </div>
               </div>
             </div>
@@ -451,4 +649,8 @@ const handleLearnMore = (gameId: string) => {
       </div>
     </MarketingLayout>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6a771f7662f0881c57014302520f2a9e9f5dff10

@@ -38,6 +38,8 @@ export function MarketingHeader({
                 width={100}
                 height={40}
                 className={styles.logoImg}
+                style={{ objectFit: "contain" }}
+                priority
               />
             </div>
           </Link>
@@ -63,22 +65,24 @@ export function MarketingHeader({
               <Link href="/events" className={styles.navLink}>
                 Events
               </Link>
-              <Link href="/board" className={styles.boardButton}>
+              <Link href="/board" className={styles.navLink}>
                 Board Room
               </Link>
+              <button
+                className={styles.navLink}
+                onClick={async () => {
+                  await signIn();
+                }}
+              >
+                <div className={styles.signInContainer}>
+                  <SignInIcon className={styles.signInIcon} />
+                  <span>Board Sign-in</span>
+                </div>
+              </button>
             </div>
           </nav>
         </div>
         <div className={styles.actionButtons}>
-          <button
-            className={styles.boardButton}
-            onClick={async () => {
-              await signIn();
-            }}
-          >
-            <SignInIcon />
-            <span>Board Sign-in</span>
-          </button>
           <button
             className={clsx(
               styles.mobileMenuToggle,
