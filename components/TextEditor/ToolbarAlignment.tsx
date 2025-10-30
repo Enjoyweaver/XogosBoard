@@ -18,8 +18,12 @@ export function ToolbarAlignment({ editor }: Props) {
       <Button
         variant="subtle"
         className={styles.toolbarButton}
-        onClick={() => editor.chain().focus().setTextAlign("left").run()}
-        disabled={!editor.can().chain().focus().setTextAlign("left").run()}
+        onClick={() =>
+          (editor.chain().focus() as any).setTextAlign("left").run()
+        }
+        disabled={
+          !(editor.can().chain().focus() as any).setTextAlign("left").run()
+        }
         data-active={
           editor.isActive({ textAlign: "left" }) ? "is-active" : undefined
         }
@@ -31,8 +35,12 @@ export function ToolbarAlignment({ editor }: Props) {
       <Button
         variant="subtle"
         className={styles.toolbarButton}
-        onClick={() => editor.chain().focus().setTextAlign("center").run()}
-        disabled={!editor.can().chain().focus().setTextAlign("center").run()}
+        onClick={() =>
+          (editor.chain().focus() as any).setTextAlign("center").run()
+        }
+        disabled={
+          !(editor.can().chain().focus() as any).setTextAlign("center").run()
+        }
         data-active={
           editor.isActive({ textAlign: "center" }) ? "is-active" : undefined
         }
@@ -44,8 +52,12 @@ export function ToolbarAlignment({ editor }: Props) {
       <Button
         variant="subtle"
         className={styles.toolbarButton}
-        onClick={() => editor.chain().focus().setTextAlign("right").run()}
-        disabled={!editor.can().chain().focus().setTextAlign("right").run()}
+        onClick={() =>
+          (editor.chain().focus() as any).setTextAlign("right").run()
+        }
+        disabled={
+          !(editor.can().chain().focus() as any).setTextAlign("right").run()
+        }
         data-active={
           editor.isActive({ textAlign: "right" }) ? "is-active" : undefined
         }
@@ -57,8 +69,12 @@ export function ToolbarAlignment({ editor }: Props) {
       <Button
         variant="subtle"
         className={styles.toolbarButton}
-        onClick={() => editor.chain().focus().setTextAlign("justify").run()}
-        disabled={!editor.can().chain().focus().setTextAlign("justify").run()}
+        onClick={() =>
+          (editor.chain().focus() as any).setTextAlign("justify").run()
+        }
+        disabled={
+          !(editor.can().chain().focus() as any).setTextAlign("justify").run()
+        }
         data-active={
           editor.isActive({ textAlign: "justify" }) ? "is-active" : undefined
         }
