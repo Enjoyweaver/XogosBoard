@@ -1,7 +1,7 @@
 "use client";
 
 import { ClientSideSuspense } from "@liveblocks/react";
-import LiveblocksProvider from "@liveblocks/yjs";
+import { getYjsProviderForRoom } from "@liveblocks/yjs";
 import { CharacterCount } from "@tiptap/extension-character-count";
 import Collaboration from "@tiptap/extension-collaboration";
 import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
@@ -42,15 +42,14 @@ export function Editor() {
   const [doc, setDoc] = useState<Y.Doc>();
   const [provider, setProvider] = useState<any>();
 
-  // Set up Liveblocks Yjs provider
+  // Set up Liveblocks Yjs provider with modern pattern
   useEffect(() => {
-    const yDoc = new Y.Doc();
-    const yProvider = new LiveblocksProvider(room, yDoc);
+    const yProvider = getYjsProviderForRoom(room);
+    const yDoc = yProvider.getYDoc();
     setDoc(yDoc);
     setProvider(yProvider);
 
     return () => {
-      yDoc?.destroy();
       yProvider?.destroy();
     };
   }, [room]);
