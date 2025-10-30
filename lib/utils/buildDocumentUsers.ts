@@ -18,7 +18,7 @@ export async function buildDocumentUsers(result: RoomData, userId: string) {
     if (user) {
       users.push({
         ...user,
-        access: roomAccessesToDocumentAccess(accessValue, true),
+        access: roomAccessesToDocumentAccess(accessValue as any, true),
         isCurrentUser: id === userId,
       });
     }

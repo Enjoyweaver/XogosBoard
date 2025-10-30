@@ -42,14 +42,14 @@ export function buildDocument(room: RoomData): Document {
   const groups: Document["accesses"]["groups"] = {};
   Object.entries(room.groupsAccesses).map(([id, accessValue]) => {
     if (accessValue) {
-      groups[id] = roomAccessesToDocumentAccess(accessValue);
+      groups[id] = roomAccessesToDocumentAccess(accessValue as any);
     }
   });
 
   const users: Document["accesses"]["users"] = {};
   Object.entries(room.usersAccesses).map(([id, accessValue]) => {
     if (accessValue) {
-      users[id] = roomAccessesToDocumentAccess(accessValue);
+      users[id] = roomAccessesToDocumentAccess(accessValue as any);
     }
   });
 
