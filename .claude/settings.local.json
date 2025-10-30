@@ -4,7 +4,8 @@
       "WebSearch",
       "WebFetch(domain:liveblocks.io)",
       "Bash(pnpm typecheck:*)",
-      "Bash(pnpm add:*)"
+      "Bash(pnpm add:*)",
+      "Bash(yarn build:*)"
     ],
     "deny": [],
     "ask": []
