@@ -135,7 +135,7 @@ function TiptapEditor({ doc, provider }: EditorProps) {
             class: "tiptap-paragraph",
           },
         },
-      }),
+      }) as any,
       CharacterCount,
       Highlight.configure({
         HTMLAttributes: {
