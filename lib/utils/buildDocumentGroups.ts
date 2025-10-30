@@ -17,7 +17,7 @@ export async function buildDocumentGroups(result: RoomData) {
     if (group) {
       groups.push({
         ...group,
-        access: roomAccessesToDocumentAccess(accessValue, false),
+        access: roomAccessesToDocumentAccess(accessValue as any, false),
       });
     }
   }

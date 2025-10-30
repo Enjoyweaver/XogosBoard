@@ -5,7 +5,9 @@
       "WebFetch(domain:liveblocks.io)",
       "Bash(pnpm typecheck:*)",
       "Bash(pnpm add:*)",
-      "Bash(yarn build:*)"
+      "Bash(yarn build:*)",
+      "Bash(npx prettier:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
