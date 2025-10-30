@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  Composer,
-  ComposerSubmitComment,
-  Thread,
-} from "@liveblocks/react-ui";
+import { Composer, ComposerSubmitComment, Thread } from "@liveblocks/react-ui";
 import { Editor } from "@tiptap/react";
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { CommentIcon } from "@/icons";

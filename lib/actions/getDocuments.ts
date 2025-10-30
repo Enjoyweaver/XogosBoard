@@ -1,6 +1,5 @@
 "use server";
 
-import { RoomData } from "@liveblocks/node";
 import { auth } from "@/auth";
 import {
   buildDocuments,

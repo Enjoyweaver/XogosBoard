@@ -46,8 +46,8 @@ export default function GamesPage() {
         "Real historical figures and events",
         "Collectible deck system",
         "Multiplayer battles",
-        "Timeline learning"
-      ]
+        "Timeline learning",
+      ],
     },
     {
       id: "debt-free-millionaire",
@@ -63,8 +63,8 @@ export default function GamesPage() {
         "Budget management",
         "Credit building system",
         "Investment strategies",
-        "Real-world scenarios"
-      ]
+        "Real-world scenarios",
+      ],
     },
     {
       id: "time-quest",
@@ -80,8 +80,8 @@ export default function GamesPage() {
         "Chronological challenges",
         "Historical missions",
         "Competitive multiplayer",
-        "Educational achievements"
-      ]
+        "Educational achievements",
+      ],
     },
     {
       id: "bug-and-seek",
@@ -97,8 +97,8 @@ export default function GamesPage() {
         "Ecosystem exploration",
         "Museum restoration",
         "Scientific facts database",
-        "Environmental education"
-      ]
+        "Environmental education",
+      ],
     },
     {
       id: "totally-medieval",
@@ -114,8 +114,8 @@ export default function GamesPage() {
         "Progressive math challenges",
         "Resource management",
         "Strategic gameplay",
-        "Medieval theme"
-      ]
+        "Medieval theme",
+      ],
     },
     {
       id: "battles-and-thrones",
@@ -130,8 +130,8 @@ export default function GamesPage() {
         "Alliance management",
         "Historical accuracy",
         "Strategic warfare",
-        "Diplomatic gameplay"
-      ]
+        "Diplomatic gameplay",
+      ],
     },
     {
       id: "prydes-gym",
@@ -146,8 +146,8 @@ export default function GamesPage() {
         "Fitness goal tracking",
         "Real-world activity sync",
         "Progress achievements",
-        "Motivational challenges"
-      ]
+        "Motivational challenges",
+      ],
     },
     {
       id: "panic-attack",
@@ -162,8 +162,8 @@ export default function GamesPage() {
         "Emotional intelligence training",
         "Coping strategy development",
         "Mental health awareness",
-        "Mindfulness exercises"
-      ]
+        "Mindfulness exercises",
+      ],
     },
     {
       id: "lightning-round",
@@ -178,9 +178,9 @@ export default function GamesPage() {
         "Timed challenges",
         "Multiplayer competition",
         "Classroom integration",
-        "Historical knowledge base"
-      ]
-    }
+        "Historical knowledge base",
+      ],
+    },
   ];
 
   const subjects = Array.from(new Set(games.map((game) => game.subject)));
@@ -242,7 +242,8 @@ export default function GamesPage() {
               <p
                 className={`${styles.heroSubtitle} ${isLoaded ? styles.visible : ""}`}
               >
-                Where learning meets play, turning education into an adventure that rewards real achievement
+                Where learning meets play, turning education into an adventure
+                that rewards real achievement
               </p>
             </div>
           </Container>
@@ -256,7 +257,8 @@ export default function GamesPage() {
                 <h2 className={styles.sectionTitle}>Featured Games</h2>
                 <div className={styles.sectionDecoration}></div>
                 <p className={styles.sectionSubtitle}>
-                  Discover our core educational games designed to make learning engaging and rewarding
+                  Discover our core educational games designed to make learning
+                  engaging and rewarding
                 </p>
               </div>
 
@@ -277,7 +279,9 @@ export default function GamesPage() {
                       />
                       <div className={styles.gameOverlay}>
                         <div className={styles.gameSubject}>{game.subject}</div>
-                        <div className={`${styles.gameStatus} ${getStatusBadge(game.status).className}`}>
+                        <div
+                          className={`${styles.gameStatus} ${getStatusBadge(game.status).className}`}
+                        >
                           {getStatusBadge(game.status).text}
                         </div>
                       </div>
@@ -345,8 +349,12 @@ export default function GamesPage() {
                       className={styles.gameCardImage}
                     />
                     <div className={styles.gameCardOverlay}>
-                      <div className={styles.gameCardSubject}>{game.subject}</div>
-                      <div className={`${styles.gameCardStatus} ${getStatusBadge(game.status).className}`}>
+                      <div className={styles.gameCardSubject}>
+                        {game.subject}
+                      </div>
+                      <div
+                        className={`${styles.gameCardStatus} ${getStatusBadge(game.status).className}`}
+                      >
                         {getStatusBadge(game.status).text}
                       </div>
                     </div>
@@ -371,8 +379,9 @@ export default function GamesPage() {
             <div className={styles.ctaContent}>
               <h2 className={styles.ctaTitle}>Ready to Start Learning?</h2>
               <p className={styles.ctaDescription}>
-                Join thousands of students who are already earning while they learn.
-                Start your educational gaming journey today and unlock real scholarship opportunities.
+                Join thousands of students who are already earning while they
+                learn. Start your educational gaming journey today and unlock
+                real scholarship opportunities.
               </p>
               <div className={styles.ctaButtons}>
                 <Link href="/membership" className={styles.primaryButton}>
@@ -394,7 +403,10 @@ export default function GamesPage() {
         {/* Game Details Modal */}
         {activeGame && (
           <div className={styles.gameModal} onClick={closeGameDetails}>
-            <div className={styles.gameModalContent} onClick={(e) => e.stopPropagation()}>
+            <div
+              className={styles.gameModalContent}
+              onClick={(e) => e.stopPropagation()}
+            >
               <button
                 className={styles.closeModalButton}
                 onClick={closeGameDetails}
@@ -411,8 +423,12 @@ export default function GamesPage() {
                     className={styles.gameModalImage}
                   />
                   <div className={styles.gameModalOverlay}>
-                    <div className={styles.gameModalSubject}>{activeGame.subject}</div>
-                    <div className={`${styles.gameModalStatus} ${getStatusBadge(activeGame.status).className}`}>
+                    <div className={styles.gameModalSubject}>
+                      {activeGame.subject}
+                    </div>
+                    <div
+                      className={`${styles.gameModalStatus} ${getStatusBadge(activeGame.status).className}`}
+                    >
                       {getStatusBadge(activeGame.status).text}
                     </div>
                   </div>
@@ -441,12 +457,18 @@ export default function GamesPage() {
 
                 <div className={styles.gameModalActions}>
                   {activeGame.status === "active" && (
-                    <Link href="/membership" className={styles.modalPrimaryButton}>
+                    <Link
+                      href="/membership"
+                      className={styles.modalPrimaryButton}
+                    >
                       Play Now
                     </Link>
                   )}
                   {activeGame.status === "beta" && (
-                    <Link href="/membership" className={styles.modalSecondaryButton}>
+                    <Link
+                      href="/membership"
+                      className={styles.modalSecondaryButton}
+                    >
                       Join Beta
                     </Link>
                   )}

@@ -32,5 +32,10 @@
     "hardhat/scripts/vypercontracts.js",
     "hardhat/scripts/solidity.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "hardhat/contracts/**/*",
+    "hardhat/ignition/**/*",
+    "hardhat/test/**/*"
+  ]
 }

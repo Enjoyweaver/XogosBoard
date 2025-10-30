@@ -10,10 +10,10 @@ interface GameHeaderProps {
   themeColor?: string;
 }
 
-export function GameHeader({ 
-  gameTitle, 
-  gameSubject, 
-  themeColor = "#f59e0b" 
+export function GameHeader({
+  gameTitle,
+  gameSubject,
+  themeColor = "#f59e0b",
 }: GameHeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -39,9 +39,9 @@ export function GameHeader({
   }, []);
 
   return (
-    <header 
+    <header
       className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}
-      style={{ '--theme-color': themeColor } as React.CSSProperties}
+      style={{ "--theme-color": themeColor } as React.CSSProperties}
     >
       <div className={styles.container}>
         <div className={styles.logoAndNav}>
@@ -58,7 +58,9 @@ export function GameHeader({
           </div>
 
           {/* Navigation */}
-          <nav className={`${styles.nav} ${isMobileMenuOpen ? styles.mobileOpen : ""}`}>
+          <nav
+            className={`${styles.nav} ${isMobileMenuOpen ? styles.mobileOpen : ""}`}
+          >
             <div className={styles.navLinkContainer}>
               <Link href="/" className={styles.navLink}>
                 Home
@@ -99,7 +101,7 @@ export function GameHeader({
 
       {/* Progress Bar */}
       <div className={styles.progressContainer}>
-        <div 
+        <div
           className={styles.progressBar}
           style={{ backgroundColor: themeColor }}
         ></div>
