@@ -16,7 +16,7 @@ export function ToolbarMedia({ editor }: Props) {
       return;
     }
 
-    editor.chain().setImage({ src: url }).run();
+    (editor.chain() as any).setImage({ src: url }).run();
   }
 
   function addYouTube(url: string) {
@@ -24,7 +24,7 @@ export function ToolbarMedia({ editor }: Props) {
       return;
     }
 
-    editor.chain().setYoutubeVideo({ src: url }).run();
+    (editor.chain() as any).setYoutubeVideo({ src: url }).run();
   }
 
   return (
@@ -32,8 +32,10 @@ export function ToolbarMedia({ editor }: Props) {
       <Button
         className={styles.toolbarButton}
         variant="subtle"
-        onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-        disabled={!editor.can().chain().focus().toggleCodeBlock().run()}
+        onClick={() => (editor.chain().focus() as any).toggleCodeBlock().run()}
+        disabled={
+          !(editor.can().chain().focus() as any).toggleCodeBlock().run()
+        }
         data-active={editor.isActive("codeBlock") ? "is-active" : undefined}
         aria-label="Code block"
       >
@@ -44,7 +46,7 @@ export function ToolbarMedia({ editor }: Props) {
         <Button
           className={styles.toolbarButton}
           variant="subtle"
-          disabled={!editor.can().chain().setImage({ src: "" }).run()}
+          disabled={!(editor.can().chain() as any).setImage({ src: "" }).run()}
           data-active={editor.isActive("image") ? "is-active" : undefined}
           aria-label="Image"
         >
@@ -58,7 +60,9 @@ export function ToolbarMedia({ editor }: Props) {
         <Button
           className={styles.toolbarButton}
           variant="subtle"
-          disabled={!editor.can().chain().setImage({ src: "" }).run()}
+          disabled={
+            !(editor.can().chain() as any).setYoutubeVideo({ src: "" }).run()
+          }
           data-active={editor.isActive("youtube") ? "is-active" : undefined}
           aria-label="YouTube"
         >

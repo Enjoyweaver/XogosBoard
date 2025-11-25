@@ -23,19 +23,19 @@ export function ToolbarHeadings({ editor }: Props) {
 
       switch (value) {
         case "p":
-          editor.chain().focus().setParagraph().run();
+          (editor.chain().focus() as any).setParagraph().run();
           break;
 
         case "h1":
-          editor.chain().focus().setHeading({ level: 1 }).run();
+          (editor.chain().focus() as any).setHeading({ level: 1 }).run();
           break;
 
         case "h2":
-          editor.chain().focus().setHeading({ level: 2 }).run();
+          (editor.chain().focus() as any).setHeading({ level: 2 }).run();
           break;
 
         case "h3":
-          editor.chain().focus().setHeading({ level: 3 }).run();
+          (editor.chain().focus() as any).setHeading({ level: 3 }).run();
           break;
       }
     },

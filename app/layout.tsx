@@ -3,9 +3,9 @@ import { Inter } from "next/font/google";
 import { Providers } from "@/app/Providers";
 import { auth } from "@/auth";
 import "../styles/normalize.css";
-import "@liveblocks/react-comments/styles.css";
-import "@liveblocks/react-comments/styles/dark/media-query.css";
 import "../styles/globals.css";
+import "@liveblocks/react-ui/styles.css";
+import "@liveblocks/react-ui/styles/dark/media-query.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

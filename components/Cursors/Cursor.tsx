@@ -27,7 +27,7 @@ export function Cursor({
   return (
     <div
       className={clsx(className, styles.cursor)}
-      style={{ transform: `translate(${x}px, ${y}px`, ...style }}
+      style={{ transform: `translate(${x}px, ${y}px)`, ...style }}
       {...props}
     >
       <svg

@@ -1,4 +1,4 @@
-import { RoomInfo } from "@liveblocks/node";
+import { RoomData } from "@liveblocks/node";
 import { Document, DocumentRoomMetadata } from "@/types";
 import { roomAccessesToDocumentAccess } from "./convertAccessType";
 
@@ -7,7 +7,7 @@ import { roomAccessesToDocumentAccess } from "./convertAccessType";
  *
  * @param rooms - Liveblocks rooms
  */
-export function buildDocuments(rooms: RoomInfo[]): Document[] {
+export function buildDocuments(rooms: RoomData[]): Document[] {
   if (!rooms) return [];
 
   return rooms.map((x) => {
@@ -15,7 +15,7 @@ export function buildDocuments(rooms: RoomInfo[]): Document[] {
   });
 }
 
-export function buildDocument(room: RoomInfo): Document {
+export function buildDocument(room: RoomData): Document {
   let name: Document["name"] = "Untitled";
   let owner: Document["owner"] = "";
   let draft: Document["draft"] = false;
@@ -42,14 +42,14 @@ export function buildDocument(room: RoomInfo): Document {
   const groups: Document["accesses"]["groups"] = {};
   Object.entries(room.groupsAccesses).map(([id, accessValue]) => {
     if (accessValue) {
-      groups[id] = roomAccessesToDocumentAccess(accessValue);
+      groups[id] = roomAccessesToDocumentAccess(accessValue as any);
     }
   });
 
   const users: Document["accesses"]["users"] = {};
   Object.entries(room.usersAccesses).map(([id, accessValue]) => {
     if (accessValue) {
-      users[id] = roomAccessesToDocumentAccess(accessValue);
+      users[id] = roomAccessesToDocumentAccess(accessValue as any);
     }
   });
 

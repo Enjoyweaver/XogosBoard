@@ -13,8 +13,8 @@ export function ToolbarInline({ editor }: Props) {
       <Button
         variant="subtle"
         className={styles.toolbarButton}
-        onClick={() => editor.chain().focus().toggleBold().run()}
-        disabled={!editor.can().chain().focus().toggleBold().run()}
+        onClick={() => (editor.chain().focus() as any).toggleBold().run()}
+        disabled={!(editor.can().chain().focus() as any).toggleBold().run()}
         data-active={editor.isActive("bold") ? "is-active" : undefined}
         aria-label="Bold"
       >
@@ -24,8 +24,8 @@ export function ToolbarInline({ editor }: Props) {
       <Button
         variant="subtle"
         className={styles.toolbarButton}
-        onClick={() => editor.chain().focus().toggleItalic().run()}
-        disabled={!editor.can().chain().focus().toggleItalic().run()}
+        onClick={() => (editor.chain().focus() as any).toggleItalic().run()}
+        disabled={!(editor.can().chain().focus() as any).toggleItalic().run()}
         data-active={editor.isActive("italic") ? "is-active" : undefined}
         aria-label="Italic"
       >
@@ -35,8 +35,8 @@ export function ToolbarInline({ editor }: Props) {
       <Button
         variant="subtle"
         className={styles.toolbarButton}
-        onClick={() => editor.chain().focus().toggleStrike().run()}
-        disabled={!editor.can().chain().focus().toggleStrike().run()}
+        onClick={() => (editor.chain().focus() as any).toggleStrike().run()}
+        disabled={!(editor.can().chain().focus() as any).toggleStrike().run()}
         data-active={editor.isActive("strike") ? "is-active" : undefined}
         aria-label="Strikethrough"
       >

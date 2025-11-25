@@ -7,14 +7,22 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "typecheck": "tsc --project tsconfig.json --noEmit"
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "supabase": "supabase",
+    "claude": "claude",
+    "claude:auth": "claude auth",
+    "claude:help": "claude --help",
+    "cc:fix": "claude 'Read build/troubleshooting/workflow.md then help me fix:'",
+    "cc:db": "claude 'Read build/technical/database/mapping/mappings.md then'",
+    "cc:review": "claude 'Review this code against build/core/critical_rules.md:'"
   },
   "dependencies": {
-    "@liveblocks/client": "^1.11.0",
-    "@liveblocks/node": "^1.11.0",
-    "@liveblocks/react": "^1.11.0",
-    "@liveblocks/react-comments": "^1.11.0",
-    "@liveblocks/yjs": "^1.11.0",
+    "@anthropic-ai/claude-code": "^2.0.29",
+    "@liveblocks/client": "^3.0.0",
+    "@liveblocks/node": "^3.0.0",
+    "@liveblocks/react": "^3.0.0",
+    "@liveblocks/react-ui": "^3.0.0",
+    "@liveblocks/yjs": "^3.0.0",
     "@radix-ui/react-dialog": "^1.0.2",
     "@radix-ui/react-popover": "^1.0.2",
     "@radix-ui/react-select": "^1.1.1",
@@ -58,6 +66,7 @@
     "yjs": "^13.6.11"
   },
   "devDependencies": {
+    "@tiptap/core": "^2.6.6",
     "@types/base-64": "^1.0.0",
     "@types/node": "^18.11.9",
     "@types/react": "18.3.2",
@@ -71,6 +80,7 @@
     "eslint-plugin-unused-imports": "^3.0.0",
     "pino-pretty": "^13.0.0",
     "prettier": "^3.0.1",
+    "prosemirror-view": "^1.41.3",
     "typescript": "^5.4.3"
   }
 }

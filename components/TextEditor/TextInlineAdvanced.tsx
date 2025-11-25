@@ -20,8 +20,8 @@ export function ToolbarInlineAdvanced({ editor }: Props) {
       <Button
         variant="subtle"
         className={styles.toolbarButton}
-        onClick={() => editor.chain().focus().toggleCode().run()}
-        disabled={!editor.can().chain().focus().toggleCode().run()}
+        onClick={() => (editor.chain().focus() as any).toggleCode().run()}
+        disabled={!(editor.can().chain().focus() as any).toggleCode().run()}
         data-active={editor.isActive("code") ? "is-active" : undefined}
         aria-label="Code"
       >
@@ -31,8 +31,10 @@ export function ToolbarInlineAdvanced({ editor }: Props) {
       <Button
         variant="subtle"
         className={styles.toolbarButton}
-        onClick={() => editor.chain().focus().toggleHighlight().run()}
-        disabled={!editor.can().chain().focus().toggleHighlight().run()}
+        onClick={() => (editor.chain().focus() as any).toggleHighlight().run()}
+        disabled={
+          !(editor.can().chain().focus() as any).toggleHighlight().run()
+        }
         data-active={editor.isActive("highlight") ? "is-active" : undefined}
         aria-label="Highlight"
       >
@@ -51,7 +53,9 @@ export function ToolbarInlineAdvanced({ editor }: Props) {
         <Button
           variant="subtle"
           className={styles.toolbarButton}
-          disabled={!editor.can().chain().focus().setLink({ href: "" }).run()}
+          disabled={
+            !(editor.can().chain().focus() as any).setLink({ href: "" }).run()
+          }
           data-active={editor.isActive("link") ? "is-active" : undefined}
           aria-label="Link"
         >

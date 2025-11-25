@@ -23,9 +23,8 @@ export function SelectionMenu({ editor }: Props) {
 }
 
 export function shouldShowBubbleMenu(editor: Editor) {
-  const canBold = editor.can().chain().focus().toggleBold().run();
-  const canItalic = editor.can().chain().focus().toggleItalic().run();
-  const canStrike = editor.can().chain().focus().toggleStrike().run();
-  const canCode = editor.can().chain().focus().toggleCode().run();
-  return canBold || canItalic || canStrike || canCode;
+  // Show bubble menu if text is selected and editor is editable
+  const { from, to } = editor.state.selection;
+  const isTextSelected = from !== to;
+  return isTextSelected && editor.isEditable;
 }

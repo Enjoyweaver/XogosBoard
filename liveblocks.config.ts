@@ -5,7 +5,6 @@ import {
   createClient,
 } from "@liveblocks/client";
 import { createLiveblocksContext, createRoomContext } from "@liveblocks/react";
-import Router from "next/router";
 import { DOCUMENT_URL } from "@/constants";
 import { authorizeLiveblocks, getSpecificDocuments } from "@/lib/actions";
 import { getUsers } from "./lib/database";
@@ -21,13 +20,13 @@ const client = createClient({
     const { data, error } = await authorizeLiveblocks();
 
     if (error) {
-      Router.push({
-        query: {
-          ...Router.query,
-          error: encodeURIComponent(JSON.stringify(error)),
-        },
-      });
-      return;
+      console.error("Liveblocks authentication error:", error);
+      throw new Error(`Authentication failed: ${error.message}`);
+    }
+
+    if (!data) {
+      console.error("Liveblocks authentication returned no data");
+      throw new Error("Authentication failed: No data returned");
     }
 
     return data;
