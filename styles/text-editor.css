@@ -1,3 +1,130 @@
+/* Liveblocks/Collaboration CSS Variables - self-contained for collaboration components */
+:root {
+  /* Gray scale for collaboration components */
+  --color-gray-50: 250 250 250;
+  --color-gray-100: 244 244 245;
+  --color-gray-150: 236 236 238;
+  --color-gray-250: 220 220 224;
+  --color-gray-300: 212 212 216;
+  --color-gray-400: 161 161 170;
+  --color-gray-500: 113 113 122;
+  --color-gray-600: 82 82 91;
+  --color-gray-650: 73 73 81;
+  --color-gray-750: 51 51 56;
+  --color-gray-800: 39 39 42;
+  --color-gray-850: 32 32 35;
+  --color-gray-900: 24 24 27;
+  --color-gray-950: 18 18 21;
+  --color-white: 255 255 255;
+  --color-black: 0 0 0;
+
+  /* Spacing */
+  --space-1: 0.125rem;
+  --space-2: 0.25rem;
+  --space-3: 0.375rem;
+  --space-4: 0.5rem;
+  --space-5: 0.625rem;
+  --space-6: 0.75rem;
+  --space-7: 0.875rem;
+  --space-8: 1rem;
+  --space-10: 1.5rem;
+  --space-11: 1.75rem;
+  --space-12: 2rem;
+  --space-13: 2.25rem;
+  --space-14: 2.5rem;
+  --space-20: 6rem;
+  --space-22: 8rem;
+
+  /* Sizes */
+  --size-xs: 0.75rem;
+  --size-sm: 0.875rem;
+  --size-lg: 1.125rem;
+  --size-xl: 1.25rem;
+  --size-2xl: 1.5rem;
+  --size-3xl: 2rem;
+
+  /* Radius */
+  --radius-xs: 0.3rem;
+  --radius-sm: 0.4rem;
+  --radius: 0.7rem;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgb(var(--color-black) / 5%);
+  --shadow: 0 3px 10px rgb(var(--color-black) / 5%);
+  --shadow-lg: 0 4px 20px rgb(var(--color-black) / 5%);
+  --shadow-xl: 0 5px 30px rgb(var(--color-black) / 5%);
+
+  /* Transitions */
+  --transition: 0.15s ease-in-out;
+  --transition-linear: 0.15s linear;
+
+  /* Layout */
+  --header-height: 60px;
+  --z-above: 100;
+  --z-overlay: 200;
+  --opacity-hover: 0.8;
+  --opacity-disabled: 0.5;
+  --color-overlay: rgb(var(--color-black) / 60%);
+
+  /* Base colors */
+  --color-red: 239 67 67;
+
+  /* Colors for collaboration components */
+  --color-surface: rgb(var(--color-gray-100));
+  --color-surface-hover: rgb(var(--color-gray-150));
+  --color-surface-elevated: rgb(var(--color-white));
+  --color-border-contrasted: rgb(var(--color-gray-250));
+  --color-text: rgb(var(--color-gray-900));
+  --color-text-light: rgb(var(--color-gray-600));
+  --color-text-lighter: rgb(var(--color-gray-500));
+  --color-text-lightest: rgb(var(--color-gray-400));
+  --color-border-transparent: rgb(var(--color-gray-900) / 10%);
+
+  /* Tooltip colors */
+  --color-tooltip: rgb(var(--color-gray-950));
+  --color-tooltip-text: rgb(var(--color-white));
+  --color-tooltip-border: rgb(var(--color-gray-750));
+
+  /* Skeleton colors */
+  --color-skeleton: rgb(var(--color-gray-150));
+  --color-skeleton-shine: rgb(var(--color-gray-50));
+
+  /* Comment highlight colors */
+  --comment-highlight-composing: #ffff00;
+  --comment-highlight-composing-border: #ffff00;
+  --comment-highlight-complete: #ffffcd;
+  --comment-highlight-complete-border: #f4d037;
+  --comment-highlight-selected: #ffff00;
+  --comment-highlight-selected-border: #f4d037;
+}
+
+/* Dark theme overrides for collaboration */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-red: 248 113 113;
+    --color-surface: rgb(var(--color-gray-850));
+    --color-surface-hover: rgb(var(--color-gray-800));
+    --color-surface-elevated: rgb(var(--color-gray-950));
+    --color-border-contrasted: rgb(var(--color-gray-650));
+    --color-border-transparent: rgb(var(--color-white) / 10%);
+    --color-text: rgb(var(--color-white));
+    --color-text-light: rgb(var(--color-gray-300));
+    --color-text-lighter: rgb(var(--color-gray-400));
+    --color-text-lightest: rgb(var(--color-gray-500));
+
+    /* Skeleton colors - dark */
+    --color-skeleton: rgb(var(--color-gray-750));
+    --color-skeleton-shine: rgb(var(--color-gray-850));
+
+    --comment-highlight-composing: #0079a2;
+    --comment-highlight-composing-border: #0079a2;
+    --comment-highlight-complete: #2d414b;
+    --comment-highlight-complete-border: #00748d;
+    --comment-highlight-selected: #0079a2;
+    --comment-highlight-selected-border: #009cd3;
+  }
+}
+
 /* Placeholder in first line */
 p.tiptap-empty:first-child::before {
   color: #adb5bd;
@@ -234,4 +361,19 @@ h3 .tiptap-code {
   border-bottom-left-radius: 0;
   padding: 2px 6px;
   pointer-events: none;
+}
+
+/* Liveblocks UI component overrides */
+.lb-root {
+  --lb-accent: var(--color-accent);
+  --lb-accent-foreground: var(--color-surface);
+  --lb-background: var(--color-surface-elevated);
+}
+
+.lb-tooltip {
+  background: rgb(var(--color-gray-800));
+}
+
+.lb-portal {
+  z-index: var(--z-overlay);
 }

@@ -4,6 +4,8 @@ import { Providers } from "@/app/Providers";
 import { auth } from "@/auth";
 import "../styles/normalize.css";
 import "../styles/globals.css";
+import "../styles/text-editor.css";
+import "../styles/text-editor-comments.css";
 import "@liveblocks/react-ui/styles.css";
 import "@liveblocks/react-ui/styles/dark/attributes.css";
 
