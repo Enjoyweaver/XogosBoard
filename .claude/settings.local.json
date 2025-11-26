@@ -12,7 +12,12 @@
       "Bash(git push:*)",
       "Bash(cat:*)",
       "Bash(git fetch:*)",
+<<<<<<< Updated upstream
       "WebFetch(domain:www.histronics.com)"
+=======
+      "WebFetch(domain:www.histronics.com)",
+      "WebFetch(domain:www.xogosgaming.com)"
+>>>>>>> Stashed changes
     ],
     "deny": [],
     "ask": []
