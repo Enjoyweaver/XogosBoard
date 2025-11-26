@@ -10,9 +10,11 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(git fetch:*)"
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "model": "claude-sonnet-4-5-20250929"
 }
