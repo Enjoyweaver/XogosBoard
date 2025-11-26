@@ -1,6 +1,6 @@
 "use client";
 
-import { LiveList, LiveMap, LiveObject } from "@liveblocks/client";
+import { LiveMap } from "@liveblocks/client";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { DocumentHeader, DocumentHeaderSkeleton } from "@/components/Document";

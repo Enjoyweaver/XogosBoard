@@ -11,7 +11,6 @@ import { Button } from "@/primitives/Button";
 import { Skeleton } from "@/primitives/Skeleton";
 import { Tooltip } from "@/primitives/Tooltip";
 import { Document } from "@/types";
-import { Logo } from "../Logo";
 import { ShareDialog } from "../ShareDialog";
 import { DocumentHeaderAvatars } from "./DocumentHeaderAvatars";
 import { DocumentHeaderName } from "./DocumentHeaderName";
