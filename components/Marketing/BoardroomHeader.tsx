@@ -69,7 +69,7 @@ export function BoardroomHeader() {
               Tokenomics
             </Link>
             <Link
-              href="/board/market-insights"
+              href="/board/insights"
               className={`${styles.navLink} ${isActive("/board/insights") ? styles.active : ""}`}
             >
               Insights

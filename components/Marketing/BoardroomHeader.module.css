@@ -25,7 +25,9 @@
 .logoAndLinks {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .logoLink {
@@ -44,6 +46,7 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   letter-spacing: 1px;
+  white-space: nowrap;
 }
 
 .logoLink:hover {
@@ -59,7 +62,7 @@
 .navLinkContainer {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 1.75rem;
 }
 
 .navLink {
@@ -105,6 +108,8 @@
   display: flex;
   align-items: center;
   gap: 1.25rem;
+  margin-left: 2rem;
+  flex-shrink: 0;
 }
 
 .buttonGroup {
@@ -114,7 +119,6 @@
 }
 
 .backButton {
-  min-width: 140px;
   height: 44px;
   padding: 0 1.25rem;
   font-size: 0.95rem;
@@ -129,6 +133,8 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(229, 229, 229, 0.9);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .backButton:hover {

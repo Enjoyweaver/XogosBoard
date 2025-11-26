@@ -4,20 +4,20 @@ import { LiveList, LiveMap, LiveObject } from "@liveblocks/client";
 import { ClientSideSuspense } from "@liveblocks/react";
 import { nanoid } from "nanoid";
 import {
+  CSSProperties,
   ChangeEvent,
   FocusEvent,
   useCallback,
   useEffect,
   useState,
-  CSSProperties,
 } from "react";
 import {
+  AlignCenterIcon,
+  AlignLeftIcon,
+  AlignRightIcon,
   BoldIcon,
   ItalicIcon,
   PlusIcon,
-  AlignLeftIcon,
-  AlignCenterIcon,
-  AlignRightIcon,
 } from "@/icons";
 import {
   Cell,
@@ -211,12 +211,9 @@ function SpreadsheetEditor() {
     [cells]
   );
 
-  const handleCellSelect = useCallback(
-    (columnId: string, rowId: string) => {
-      setSelectedCell({ columnId, rowId });
-    },
-    []
-  );
+  const handleCellSelect = useCallback((columnId: string, rowId: string) => {
+    setSelectedCell({ columnId, rowId });
+  }, []);
 
   const toggleFormat = useCallback(
     (formatKey: keyof CellFormat) => {
