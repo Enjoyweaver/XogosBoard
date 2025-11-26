@@ -6,6 +6,7 @@ import "../styles/normalize.css";
 import "../styles/globals.css";
 import "../styles/text-editor.css";
 import "../styles/text-editor-comments.css";
+import "../styles/liveblocks-dark-theme.css";
 import "@liveblocks/react-ui/styles.css";
 import "@liveblocks/react-ui/styles/dark/attributes.css";
 

@@ -2,12 +2,14 @@ import { ClientSideSuspense } from "@liveblocks/react";
 import clsx from "clsx";
 import Link from "next/link";
 import { ComponentProps } from "react";
+import { DASHBOARD_URL } from "@/constants";
 import { InboxPopover } from "@/components/Inbox";
-import { ShareIcon } from "@/icons";
+import { ArrowLeftIcon, ShareIcon } from "@/icons";
 import { renameDocument } from "@/lib/actions";
 import { useInitialDocument } from "@/lib/hooks";
 import { Button } from "@/primitives/Button";
 import { Skeleton } from "@/primitives/Skeleton";
+import { Tooltip } from "@/primitives/Tooltip";
 import { Document } from "@/types";
 import { Logo } from "../Logo";
 import { ShareDialog } from "../ShareDialog";
@@ -25,9 +27,13 @@ export function DocumentHeader({ documentId, className, ...props }: Props) {
   return (
     <header className={clsx(className, styles.header)} {...props}>
       <div className={styles.logo}>
-        <Link href="/" className={styles.logoLink}>
-          <Logo />
-        </Link>
+        <Tooltip content="Back to documents">
+          <Link href={DASHBOARD_URL} className={styles.backLink}>
+            <Button icon={<ArrowLeftIcon />} variant="subtle">
+              Back
+            </Button>
+          </Link>
+        </Tooltip>
       </div>
       <div className={styles.document}>
         <ClientSideSuspense
@@ -77,8 +83,10 @@ export function DocumentHeaderSkeleton({
   return (
     <header className={clsx(className, styles.header)} {...props}>
       <div className={styles.logo}>
-        <Link href="/">
-          <Logo />
+        <Link href={DASHBOARD_URL} className={styles.backLink}>
+          <Button icon={<ArrowLeftIcon />} variant="subtle">
+            Back
+          </Button>
         </Link>
       </div>
       <div className={styles.document}>

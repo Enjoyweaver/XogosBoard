@@ -1,4 +1,5 @@
 import {
+  LiveList,
   LiveMap,
   LiveObject,
   ThreadData,
@@ -71,12 +72,44 @@ export type Note = LiveObject<{
 
 export type Notes = LiveMap<string, Note>;
 
+// Spreadsheet types
+export type CellFormat = {
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  textAlign?: "left" | "center" | "right";
+  textColor?: string;
+  bgColor?: string;
+};
+
+export type Cell = LiveObject<{
+  value: string;
+  format?: CellFormat;
+}>;
+
+export type Column = LiveObject<{
+  id: string;
+  width: number;
+}>;
+
+export type Row = LiveObject<{
+  id: string;
+  height: number;
+}>;
+
+export type SpreadsheetData = LiveObject<{
+  cells: LiveMap<string, Cell>;
+  columns: LiveList<Column>;
+  rows: LiveList<Row>;
+}>;
+
 // Optionally, Storage represents the shared document that persists in the
 // Room, even after all Users leave. Fields under Storage typically are
 // LiveList, LiveMap, LiveObject instances, for which updates are
 // automatically persisted and synced to all connected clients.
 type Storage = {
   notes: Notes;
+  spreadsheet?: SpreadsheetData;
 };
 
 export type UserInfo = Pick<User, "name" | "avatar" | "color">;

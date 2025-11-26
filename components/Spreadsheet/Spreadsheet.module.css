@@ -1,0 +1,260 @@
+/* Spreadsheet-specific dark theme variables */
+.container {
+  --spreadsheet-bg: #0d0d1a;
+  --spreadsheet-surface: #1a1a2e;
+  --spreadsheet-surface-elevated: #252540;
+  --spreadsheet-border: rgba(255, 255, 255, 0.15);
+  --spreadsheet-border-strong: rgba(255, 255, 255, 0.25);
+  --spreadsheet-text: #e5e5e5;
+  --spreadsheet-text-muted: rgba(229, 229, 229, 0.6);
+  --spreadsheet-accent: #ff3e3e;
+  --spreadsheet-accent-glow: rgba(255, 62, 62, 0.3);
+  --spreadsheet-header-bg: #12121f;
+  --spreadsheet-cell-bg: #1e1e32;
+  --spreadsheet-cell-hover: #2a2a45;
+  --spreadsheet-cell-focus: #303050;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, var(--spreadsheet-bg) 0%, var(--spreadsheet-surface) 100%);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-8);
+  background: var(--spreadsheet-header-bg);
+  border-bottom: 1px solid var(--spreadsheet-border-strong);
+  z-index: var(--z-above);
+  flex-wrap: wrap;
+}
+
+.toolbarGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.toolbarSeparator {
+  width: 1px;
+  height: 24px;
+  background: var(--spreadsheet-border-strong);
+  margin: 0 var(--space-2);
+}
+
+.toolbarButton {
+  padding: var(--space-2) var(--space-3) !important;
+  min-width: auto !important;
+  color: var(--spreadsheet-text-muted) !important;
+  background: transparent !important;
+  transition: all 0.15s ease !important;
+}
+
+.toolbarButton:hover:not(:disabled) {
+  color: var(--spreadsheet-text) !important;
+  background: var(--spreadsheet-cell-hover) !important;
+}
+
+.toolbarButton:disabled {
+  opacity: 0.4 !important;
+  cursor: not-allowed !important;
+}
+
+.toolbarButtonActive {
+  color: var(--spreadsheet-accent) !important;
+  background: var(--spreadsheet-accent-glow) !important;
+}
+
+.selectedCellInfo {
+  font-size: var(--size-sm);
+  color: var(--spreadsheet-text-muted);
+  padding: var(--space-2) var(--space-4);
+  background: var(--spreadsheet-cell-bg);
+  border-radius: var(--radius-sm);
+}
+
+.tableWrapper {
+  flex: 1;
+  overflow: auto;
+  padding: var(--space-6);
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--spreadsheet-cell-bg);
+  font-size: var(--size-sm);
+  min-width: 100%;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.headerCell {
+  background: var(--spreadsheet-header-bg);
+  border: 1px solid var(--spreadsheet-border-strong);
+  border-top: none;
+  padding: var(--space-3) var(--space-4);
+  font-weight: 600;
+  text-align: center;
+  min-width: 100px;
+  color: var(--spreadsheet-text-muted);
+  user-select: none;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-transform: uppercase;
+  font-size: var(--size-xs);
+  letter-spacing: 0.05em;
+}
+
+.headerCell:first-child {
+  border-left: none;
+}
+
+.rowHeader {
+  background: var(--spreadsheet-header-bg);
+  border: 1px solid var(--spreadsheet-border-strong);
+  border-left: none;
+  padding: var(--space-2) var(--space-3);
+  font-weight: 600;
+  text-align: center;
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
+  color: var(--spreadsheet-text-muted);
+  user-select: none;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  font-size: var(--size-xs);
+}
+
+.cornerCell {
+  background: var(--spreadsheet-header-bg);
+  border: 1px solid var(--spreadsheet-border-strong);
+  border-top: none;
+  border-left: none;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
+}
+
+.cell {
+  border: 1px solid var(--spreadsheet-border);
+  border-top: none;
+  border-left: none;
+  padding: 0;
+  min-width: 100px;
+  height: 36px;
+  position: relative;
+  background: var(--spreadsheet-cell-bg);
+  transition: background 0.15s ease;
+}
+
+.cell:hover {
+  background: var(--spreadsheet-cell-hover);
+}
+
+.cellSelected {
+  outline: 2px solid var(--spreadsheet-accent);
+  outline-offset: -2px;
+  background: var(--spreadsheet-cell-focus);
+}
+
+.cellInput {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--size-sm);
+  font-family: inherit;
+  background: transparent;
+  color: var(--spreadsheet-text);
+}
+
+.cellInput::placeholder {
+  color: var(--spreadsheet-text-muted);
+}
+
+.cellInput:focus {
+  outline: none;
+  background: var(--spreadsheet-cell-focus);
+  box-shadow: inset 0 0 0 2px var(--spreadsheet-accent), 0 0 12px var(--spreadsheet-accent-glow);
+}
+
+.cellInput[readonly] {
+  cursor: default;
+}
+
+.selectedBy {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  pointer-events: none;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+}
+
+.selectedByLabel {
+  position: absolute;
+  top: -20px;
+  left: -2px;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: white;
+  background: currentColor;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+
+/* First row styling */
+.table tbody tr:first-child .cell {
+  border-top: 1px solid var(--spreadsheet-border);
+}
+
+/* First column styling */
+.table tbody tr td:nth-child(2) {
+  border-left: 1px solid var(--spreadsheet-border);
+}
+
+/* Scrollbar styling for the spreadsheet */
+.tableWrapper::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.tableWrapper::-webkit-scrollbar-track {
+  background: var(--spreadsheet-bg);
+  border-radius: 5px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+  background: var(--spreadsheet-border-strong);
+  border-radius: 5px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.tableWrapper::-webkit-scrollbar-corner {
+  background: var(--spreadsheet-bg);
+}

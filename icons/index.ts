@@ -1,4 +1,5 @@
 export * from "./AlignCenter";
+export * from "./ArrowLeft";
 export * from "./AlignJustify";
 export * from "./AlignLeft";
 export * from "./AlignRight";

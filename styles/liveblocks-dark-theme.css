@@ -1,0 +1,430 @@
+/*
+ * Liveblocks Dark Theme - Xogos Gaming
+ * This file overrides the default Liveblocks styles with a dark theme
+ * that matches the Xogos brand colors
+ */
+
+/* ============================================
+   CSS Custom Properties for Liveblocks Theme
+   ============================================ */
+:root {
+  /* Dark theme base colors */
+  --lb-dark-bg: #0d0d1a;
+  --lb-dark-surface: #1a1a2e;
+  --lb-dark-surface-elevated: #252540;
+  --lb-dark-surface-hover: #2a2a45;
+  --lb-dark-border: rgba(255, 255, 255, 0.12);
+  --lb-dark-border-strong: rgba(255, 255, 255, 0.2);
+  --lb-dark-text: #e5e5e5;
+  --lb-dark-text-muted: rgba(229, 229, 229, 0.7);
+  --lb-dark-text-faint: rgba(229, 229, 229, 0.5);
+  --lb-dark-accent: #ff3e3e;
+  --lb-dark-accent-hover: #ff5555;
+  --lb-dark-accent-glow: rgba(255, 62, 62, 0.25);
+  --lb-dark-success: #4ade80;
+  --lb-dark-warning: #fbbf24;
+  --lb-dark-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --lb-dark-shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+
+  /* Override default color variables for dashboard/collaboration */
+  --color-surface: #0d0d1a;
+  --color-surface-elevated: #1a1a2e;
+  --color-surface-hover: #2a2a45;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-border-contrasted: rgba(255, 255, 255, 0.2);
+  --color-text: #e5e5e5;
+  --color-text-light: rgba(229, 229, 229, 0.85);
+  --color-text-lighter: rgba(229, 229, 229, 0.7);
+  --color-text-lightest: rgba(229, 229, 255, 0.5);
+  --color-accent: #ff3e3e;
+  --shadow-xs: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   Document Layout Overrides
+   ============================================ */
+
+/* Main document container */
+[class*="Document_container"] {
+  background: linear-gradient(135deg, var(--lb-dark-bg) 0%, var(--lb-dark-surface) 100%) !important;
+}
+
+/* Document header */
+[class*="Document_header"] {
+  background: var(--lb-dark-surface) !important;
+  border-bottom-color: var(--lb-dark-border-strong) !important;
+}
+
+/* ============================================
+   Text Editor Overrides
+   ============================================ */
+
+/* Editor container */
+[class*="TextEditor_container"] {
+  background: linear-gradient(135deg, var(--lb-dark-bg) 0%, var(--lb-dark-surface) 100%) !important;
+}
+
+/* Editor header/toolbar area */
+[class*="TextEditor_editorHeader"] {
+  background: var(--lb-dark-surface) !important;
+  border-bottom-color: var(--lb-dark-border-strong) !important;
+}
+
+/* Editor content area */
+[class*="TextEditor_editorContainer"] {
+  background: var(--lb-dark-surface-elevated) !important;
+  border-color: var(--lb-dark-border-strong) !important;
+  box-shadow: var(--lb-dark-shadow) !important;
+}
+
+/* Editor panel scrollable area */
+[class*="TextEditor_editorPanel"] {
+  background: transparent !important;
+}
+
+/* Bubble menu */
+[class*="TextEditor_bubbleMenuWrapper"] {
+  background: var(--lb-dark-surface-elevated) !important;
+  border-color: var(--lb-dark-border-strong) !important;
+  box-shadow: var(--lb-dark-shadow-lg) !important;
+}
+
+/* ============================================
+   Whiteboard Overrides
+   ============================================ */
+
+/* Whiteboard canvas */
+[class*="Whiteboard_canvas"] {
+  background: linear-gradient(135deg, var(--lb-dark-bg) 0%, var(--lb-dark-surface) 100%) !important;
+}
+
+/* Whiteboard toolbar */
+[class*="Whiteboard_toolbar"] {
+  background: var(--lb-dark-surface-elevated) !important;
+  border-color: var(--lb-dark-border-strong) !important;
+  box-shadow: var(--lb-dark-shadow-lg) !important;
+}
+
+/* Whiteboard notes */
+[class*="WhiteboardNote_note"] {
+  background: var(--lb-dark-surface-elevated) !important;
+  border-color: var(--lb-dark-border-strong) !important;
+  box-shadow: var(--lb-dark-shadow) !important;
+  color: var(--lb-dark-text) !important;
+}
+
+[class*="WhiteboardNote_note"] textarea {
+  color: var(--lb-dark-text) !important;
+  background: transparent !important;
+}
+
+[class*="WhiteboardNote_note"] textarea::placeholder {
+  color: var(--lb-dark-text-faint) !important;
+}
+
+/* ============================================
+   Document Header Overrides
+   ============================================ */
+
+[class*="DocumentHeader_header"] {
+  background: var(--lb-dark-surface) !important;
+}
+
+[class*="DocumentHeaderName"] input {
+  color: var(--lb-dark-text) !important;
+  background: transparent !important;
+}
+
+[class*="DocumentHeaderName"] input:focus {
+  background: var(--lb-dark-surface-elevated) !important;
+}
+
+/* ============================================
+   Toolbar Overrides
+   ============================================ */
+
+[class*="Toolbar_toolbar"] {
+  background: transparent !important;
+}
+
+[class*="Toolbar_toolbarSeparator"] {
+  background: var(--lb-dark-border-strong) !important;
+}
+
+[class*="Toolbar_toolbarPopover"] {
+  background: var(--lb-dark-surface-elevated) !important;
+  border-color: var(--lb-dark-border-strong) !important;
+  box-shadow: var(--lb-dark-shadow-lg) !important;
+}
+
+[class*="Toolbar_toolbarPopoverLabel"] {
+  color: var(--lb-dark-text-muted) !important;
+}
+
+/* ============================================
+   Thread List / Comments Overrides
+   ============================================ */
+
+[class*="ThreadList_thread"] {
+  background: var(--lb-dark-surface-elevated) !important;
+  border-color: var(--lb-dark-border-strong) !important;
+}
+
+[class*="ThreadList_emptyState"] {
+  color: var(--lb-dark-text-muted) !important;
+}
+
+/* ============================================
+   Word Count Overrides
+   ============================================ */
+
+[class*="WordCount_wordCount"] {
+  background: var(--lb-dark-surface) !important;
+  border-top-color: var(--lb-dark-border-strong) !important;
+  color: var(--lb-dark-text-faint) !important;
+}
+
+/* ============================================
+   Button Overrides for Liveblocks Context
+   ============================================ */
+
+/* Primary buttons in document context */
+[class*="Document_"] [class*="Button_button"][class*="primary"] {
+  background: var(--lb-dark-accent) !important;
+  color: white !important;
+}
+
+[class*="Document_"] [class*="Button_button"][class*="primary"]:hover {
+  background: var(--lb-dark-accent-hover) !important;
+}
+
+/* Subtle/secondary buttons */
+[class*="Document_"] [class*="Button_button"][class*="subtle"],
+[class*="TextEditor_"] [class*="Button_button"][class*="subtle"],
+[class*="Whiteboard_"] [class*="Button_button"][class*="subtle"] {
+  background: var(--lb-dark-surface-hover) !important;
+  color: var(--lb-dark-text-muted) !important;
+  border-color: transparent !important;
+}
+
+[class*="Document_"] [class*="Button_button"][class*="subtle"]:hover,
+[class*="TextEditor_"] [class*="Button_button"][class*="subtle"]:hover,
+[class*="Whiteboard_"] [class*="Button_button"][class*="subtle"]:hover {
+  background: var(--lb-dark-surface-elevated) !important;
+  color: var(--lb-dark-text) !important;
+}
+
+/* Active state for toolbar buttons */
+[class*="Button_button"][class*="active"] {
+  background: var(--lb-dark-accent-glow) !important;
+  color: var(--lb-dark-accent) !important;
+}
+
+/* ============================================
+   Select/Dropdown Overrides
+   ============================================ */
+
+[class*="Select_select"] {
+  background: var(--lb-dark-surface-hover) !important;
+  color: var(--lb-dark-text-muted) !important;
+  border-color: transparent !important;
+}
+
+[class*="Select_select"]:hover {
+  background: var(--lb-dark-surface-elevated) !important;
+  color: var(--lb-dark-text) !important;
+}
+
+[class*="Select_content"] {
+  background: var(--lb-dark-surface-elevated) !important;
+  border-color: var(--lb-dark-border-strong) !important;
+  box-shadow: var(--lb-dark-shadow-lg) !important;
+}
+
+[class*="Select_item"] {
+  color: var(--lb-dark-text-muted) !important;
+}
+
+[class*="Select_item"]:hover,
+[class*="Select_item"][data-highlighted] {
+  background: var(--lb-dark-surface-hover) !important;
+  color: var(--lb-dark-text) !important;
+}
+
+/* ============================================
+   Popover Overrides
+   ============================================ */
+
+[class*="Popover_content"] {
+  background: var(--lb-dark-surface-elevated) !important;
+  border-color: var(--lb-dark-border-strong) !important;
+  box-shadow: var(--lb-dark-shadow-lg) !important;
+}
+
+/* ============================================
+   Dialog Overrides
+   ============================================ */
+
+[class*="Dialog_content"] {
+  background: var(--lb-dark-surface-elevated) !important;
+  border-color: var(--lb-dark-border-strong) !important;
+  box-shadow: var(--lb-dark-shadow-lg) !important;
+}
+
+[class*="Dialog_header"] {
+  border-bottom-color: var(--lb-dark-border) !important;
+}
+
+[class*="Dialog_overlay"] {
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* ============================================
+   Input Overrides
+   ============================================ */
+
+[class*="Input_input"] {
+  background: var(--lb-dark-surface) !important;
+  border-color: var(--lb-dark-border-strong) !important;
+  color: var(--lb-dark-text) !important;
+}
+
+[class*="Input_input"]:focus {
+  border-color: var(--lb-dark-accent) !important;
+  box-shadow: 0 0 0 2px var(--lb-dark-accent-glow) !important;
+}
+
+[class*="Input_input"]::placeholder {
+  color: var(--lb-dark-text-faint) !important;
+}
+
+/* ============================================
+   Tooltip Overrides
+   ============================================ */
+
+[class*="Tooltip_content"] {
+  background: var(--lb-dark-surface-elevated) !important;
+  border-color: var(--lb-dark-border-strong) !important;
+  color: var(--lb-dark-text) !important;
+  box-shadow: var(--lb-dark-shadow) !important;
+}
+
+/* ============================================
+   Avatar Overrides
+   ============================================ */
+
+[class*="Avatar_avatar"] {
+  background: var(--lb-dark-surface-hover) !important;
+  color: var(--lb-dark-text-muted) !important;
+}
+
+[class*="AvatarStack_avatarStack"] [class*="Avatar_avatar"] {
+  box-shadow: 0 0 0 3px var(--lb-dark-surface) !important;
+}
+
+/* ============================================
+   Inbox Overrides
+   ============================================ */
+
+[class*="Inbox_inbox"] {
+  background: var(--lb-dark-surface) !important;
+  border-bottom-color: var(--lb-dark-border-strong) !important;
+}
+
+[class*="InboxPopover_popover"] {
+  background: var(--lb-dark-surface-elevated) !important;
+}
+
+/* ============================================
+   Share Dialog Overrides
+   ============================================ */
+
+[class*="ShareDialog"] {
+  color: var(--lb-dark-text) !important;
+}
+
+[class*="ShareDialogRows"] {
+  border-color: var(--lb-dark-border) !important;
+}
+
+/* ============================================
+   Cursor Overrides
+   ============================================ */
+
+[class*="Cursor_cursor"] {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+[class*="Cursor_label"] {
+  box-shadow: var(--lb-dark-shadow) !important;
+}
+
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+
+[class*="TextEditor_editorPanel"]::-webkit-scrollbar,
+[class*="Whiteboard_canvas"]::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[class*="TextEditor_editorPanel"]::-webkit-scrollbar-track,
+[class*="Whiteboard_canvas"]::-webkit-scrollbar-track {
+  background: var(--lb-dark-bg);
+}
+
+[class*="TextEditor_editorPanel"]::-webkit-scrollbar-thumb,
+[class*="Whiteboard_canvas"]::-webkit-scrollbar-thumb {
+  background: var(--lb-dark-border-strong);
+  border-radius: 5px;
+}
+
+[class*="TextEditor_editorPanel"]::-webkit-scrollbar-thumb:hover,
+[class*="Whiteboard_canvas"]::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   Liveblocks UI Component Overrides
+   ============================================ */
+
+.lb-root {
+  --lb-accent: var(--lb-dark-accent) !important;
+  --lb-accent-foreground: white !important;
+  --lb-background: var(--lb-dark-surface-elevated) !important;
+  --lb-foreground: var(--lb-dark-text) !important;
+  --lb-muted: var(--lb-dark-surface-hover) !important;
+  --lb-muted-foreground: var(--lb-dark-text-muted) !important;
+  --lb-border: var(--lb-dark-border-strong) !important;
+}
+
+/* Liveblocks comments */
+.lb-thread,
+.lb-comment {
+  background: var(--lb-dark-surface-elevated) !important;
+  border-color: var(--lb-dark-border-strong) !important;
+}
+
+.lb-composer {
+  background: var(--lb-dark-surface) !important;
+  border-color: var(--lb-dark-border-strong) !important;
+}
+
+.lb-button {
+  color: var(--lb-dark-text-muted) !important;
+}
+
+.lb-button:hover {
+  background: var(--lb-dark-surface-hover) !important;
+  color: var(--lb-dark-text) !important;
+}
+
+.lb-button[data-variant="primary"] {
+  background: var(--lb-dark-accent) !important;
+  color: white !important;
+}
+
+.lb-button[data-variant="primary"]:hover {
+  background: var(--lb-dark-accent-hover) !important;
+}

@@ -18,14 +18,14 @@
   place-content: flex-start;
 }
 
-.logoLink {
-  transition: opacity var(--transition);
+.backLink {
+  text-decoration: none;
   outline: none;
 }
 
-.logoLink:hover,
-.logoLink:focus-visible {
-  opacity: var(--opacity-hover);
+.backLink:hover,
+.backLink:focus-visible {
+  text-decoration: none;
 }
 
 .document {
