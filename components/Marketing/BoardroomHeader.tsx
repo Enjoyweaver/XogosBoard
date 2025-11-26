@@ -35,7 +35,7 @@ export function BoardroomHeader() {
       <Container className={styles.container}>
         <div className={styles.logoAndLinks}>
           <Link href="/" className={styles.logoLink}>
-            <span className={styles.logoText}>XOGOS BOARD</span>
+            <span className={styles.logoText}>Xogos Gaming</span>
           </Link>
           <div className={styles.navLinkContainer}>
             <Link
@@ -73,13 +73,6 @@ export function BoardroomHeader() {
               className={`${styles.navLink} ${isActive("/board/insights") ? styles.active : ""}`}
             >
               Insights
-            </Link>
-          </div>
-        </div>
-        <div className={styles.actionButtons}>
-          <div className={styles.buttonGroup}>
-            <Link href="/" className={styles.backButton}>
-              Back to Main Site
             </Link>
           </div>
         </div>
