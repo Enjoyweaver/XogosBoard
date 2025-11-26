@@ -82,22 +82,44 @@ export function MarketingFooter({
             <div className={styles.footerLinkColumn}>
               <h4 className={styles.footerLinkTitle}>Connect</h4>
               <Link
-                href="https://twitter.com/xogosgaming"
+                href="https://x.com/XogosEducation"
                 className={styles.footerLink}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Twitter
+                Twitter / X
               </Link>
               <Link
-                href="https://discord.gg/xogosgaming"
+                href="https://facebook.com/xogosgames"
                 className={styles.footerLink}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Discord
+                Facebook
               </Link>
               <Link
-                href="https://t.me/xogosgaming"
+                href="https://www.instagram.com/historicalconquest/"
                 className={styles.footerLink}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Telegram
+                Instagram
+              </Link>
+              <Link
+                href="https://www.pinterest.com/xogos_education"
+                className={styles.footerLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Pinterest
+              </Link>
+              <Link
+                href="https://www.youtube.com/@historicalconquest1473"
+                className={styles.footerLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                YouTube
               </Link>
             </div>
           </div>

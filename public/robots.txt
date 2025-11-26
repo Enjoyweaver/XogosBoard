@@ -1,0 +1,24 @@
+# Xogos Gaming Robots.txt
+# https://xogosgaming.com
+
+User-agent: *
+Allow: /
+
+# Disallow private/authenticated areas
+Disallow: /dashboard/
+Disallow: /text/
+Disallow: /whiteboard/
+Disallow: /signin
+Disallow: /api/
+Disallow: /board/
+
+# Allow all public pages
+Allow: /games
+Allow: /about
+Allow: /blog
+Allow: /docs
+Allow: /whitepaper
+Allow: /educational-philosophy
+
+# Sitemap
+Sitemap: https://xogosgaming.com/sitemap.xml
