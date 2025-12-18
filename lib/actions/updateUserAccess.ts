@@ -1,5 +1,6 @@
 "use server";
 
+import { RoomPermission } from "@liveblocks/node";
 import { auth } from "@/auth";
 import { getUser } from "@/lib/database/getUser";
 import {
@@ -117,10 +118,7 @@ export async function updateUserAccess({ userId, documentId, access }: Props) {
 
   // If room exists, create userAccesses element for new collaborator with passed access level
   const userAccess = documentAccessToRoomAccesses(access);
-  const usersAccesses: Record<
-    string,
-    ["room:write"] | ["room:read", "room:presence:write"] | null
-  > = {
+  const usersAccesses: Record<string, RoomPermission | null> = {
     [userId]: userAccess.length === 0 ? null : userAccess,
   };
 
@@ -128,7 +126,10 @@ export async function updateUserAccess({ userId, documentId, access }: Props) {
   let updatedRoom;
   try {
     updatedRoom = await liveblocks.updateRoom(documentId, {
-      usersAccesses,
+      usersAccesses: usersAccesses as Record<
+        string,
+        ["room:write"] | ["room:read", "room:presence:write"] | null
+      >,
     });
   } catch (err) {
     return {
