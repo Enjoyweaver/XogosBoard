@@ -15,7 +15,6 @@ import { Typography } from "@tiptap/extension-typography";
 import Youtube from "@tiptap/extension-youtube";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { EditorView } from "prosemirror-view";
 import { useEffect, useState } from "react";
 import * as Y from "yjs";
 import { useRoom, useSelf } from "@/liveblocks.config";
@@ -216,13 +215,3 @@ function TiptapEditor({ doc, provider }: EditorProps) {
     </div>
   );
 }
-
-// Prevents a matchesNode error on hot reloading
-EditorView.prototype.updateState = function updateState(state) {
-  // @ts-ignore
-  if (!this.docView) return;
-  // @ts-ignore
-  if (!this.state) return;
-  // @ts-ignore
-  this.updateStateInner(state, this.state.plugins != state.plugins);
-};
