@@ -222,5 +222,7 @@ EditorView.prototype.updateState = function updateState(state) {
   // @ts-ignore
   if (!this.docView) return;
   // @ts-ignore
+  if (!this.state) return;
+  // @ts-ignore
   this.updateStateInner(state, this.state.plugins != state.plugins);
 };
