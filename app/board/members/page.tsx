@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./BoardMembers.module.css"; // Import your CSS styles for this component
 import { MarketingLayout } from "@/layouts/Marketing";
+import styles from "./BoardMembers.module.css"; // Import your CSS styles for this component
 
 const BoardMembers: React.FC = () => {
   return (

@@ -1,5 +1,6 @@
 "use server";
 
+import { RoomPermission } from "@liveblocks/node";
 import { auth } from "@/auth";
 import { getGroup } from "@/lib/database/getGroup";
 import {
@@ -110,10 +111,7 @@ export async function updateGroupAccess({
 
   // If room exists, create groupsAccesses element for new collaborator with passed access level
   const groupAccess = documentAccessToRoomAccesses(access);
-  const groupsAccesses: Record<
-    string,
-    ["room:write"] | ["room:read", "room:presence:write"] | null
-  > = {
+  const groupsAccesses: Record<string, RoomPermission | null> = {
     [groupId]: groupAccess.length === 0 ? null : groupAccess,
   };
 
