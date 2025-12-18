@@ -1,5 +1,6 @@
 "use server";
 
+import { RoomPermission } from "@liveblocks/node";
 import { auth } from "@/auth";
 import {
   buildDocument,
@@ -82,13 +83,15 @@ export async function updateDefaultAccess({ documentId, access }: Props) {
   }
 
   // If room exists, create default access parameter for room
-  const defaultAccesses = documentAccessToRoomAccesses(access);
+  const defaultAccesses: RoomPermission = documentAccessToRoomAccesses(access);
 
   // Update the room with the new collaborators
   let updatedRoom;
   try {
     updatedRoom = await liveblocks.updateRoom(documentId, {
-      defaultAccesses,
+      defaultAccesses: defaultAccesses as
+        | ["room:write"]
+        | ["room:read", "room:presence:write"],
     });
   } catch (err) {
     return {
