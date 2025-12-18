@@ -125,7 +125,10 @@ export async function updateGroupAccess({
   let updatedRoom;
   try {
     updatedRoom = await liveblocks.updateRoom(documentId, {
-      groupsAccesses,
+      groupsAccesses: groupsAccesses as Record<
+        string,
+        ["room:write"] | ["room:read", "room:presence:write"] | null
+      >,
     });
   } catch (err) {
     return {
