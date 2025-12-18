@@ -234,9 +234,7 @@ export default function RSSFeedsPage() {
                   platform above
                 </li>
                 <li>Paste the RSS URL into your reader app</li>
-                <li>
-                  Enjoy automatic updates whenever we post new content!
-                </li>
+                <li>Enjoy automatic updates whenever we post new content!</li>
               </ol>
             </div>
           </div>
